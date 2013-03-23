@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 	version="2.0">
-	<namespace>http://giavacms.org/flower-faces</namespace>
-	<composite-library-name>ff</composite-library-name>
+	<namespace>http://twiliofaces.org/twiliofaces</namespace>
+	<composite-library-name>tf</composite-library-name>
 	<tag>
 		<tag-name>client</tag-name>
 		<description>The Dial verb's Client noun specifies a client identifier to dial.</description>
