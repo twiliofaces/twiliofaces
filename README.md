@@ -45,6 +45,10 @@ You can find the complete list of [annotations] (https://github.com/twiliofaces/
  - CallerName
  - CallSid
  - CallStatus
+ - DialSipCallId
+ - DialSipHeader
+ - DialSipResponseCode
+ - Digits
  - Direction
  - ForwardedFrom
  - From
@@ -52,11 +56,22 @@ You can find the complete list of [annotations] (https://github.com/twiliofaces/
  - FromCountry
  - FromState
  - FromZip
+ - RecordingDuration
+ - RecordingSid
+ - RecordingUrl
+ - SipCallId
+ - SipHeader
+ - SmsStatus
  - To
  - ToCity
  - ToCountry
  - ToState
  - ToZip
+ - TranscriptionSid
+ - TranscriptionStatus
+ - TranscriptionText
+ - TranscriptionUrl
+ - TwilioRequestParams
 
 Download 
 --------
