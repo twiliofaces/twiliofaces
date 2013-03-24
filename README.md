@@ -7,7 +7,7 @@ This library is designed to be used in [Openshift](https://www.openshift.com) [J
 
 Usage
 -----
-An exemplary usage of the client may look like the following:
+A simple usage of the client may look like the following:
 
 on xhtml page
 ```xml
@@ -28,6 +28,35 @@ on xhtml page
 	</tf:response>
 </f:view>
 ```
+
+In your java cdi beans you can inject twilio request params like the following:
+```java
+	
+	@Inject
+	@From
+	private String from;
+
+```
+You can find the complete list of [annotations] (https://github.com/twiliofaces/twiliofaces/tree/master/src/main/java/org/twiliofaces/annotations):
+
+
+ - AccountSid
+ - ApiVersion
+ - CallerName
+ - CallSid
+ - CallStatus
+ - Direction
+ - ForwardedFrom
+ - From
+ - FromCity
+ - FromCountry
+ - FromState
+ - FromZip
+ - To
+ - ToCity
+ - ToCountry
+ - ToState
+ - ToZip
 
 Download 
 --------
