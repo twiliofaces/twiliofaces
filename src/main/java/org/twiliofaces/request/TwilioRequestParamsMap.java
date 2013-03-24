@@ -3,7 +3,7 @@
  *
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
- */ 
+ */
 package org.twiliofaces.request;
 
 import java.io.Serializable;
@@ -33,8 +33,11 @@ public class TwilioRequestParamsMap implements Serializable {
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		for (String key : getValues().keySet()) {
-			if (key != null && !key.isEmpty())
-				buffer.append(key + ": " + getValues().get(key) + "\n");
+			if (key != null && !key.isEmpty()) {
+				String value = getValues().get(key);
+				if (value != null && !value.isEmpty())
+					buffer.append(key + ": " + getValues().get(key) + "\n");
+			}
 		}
 		return buffer.toString();
 	}
