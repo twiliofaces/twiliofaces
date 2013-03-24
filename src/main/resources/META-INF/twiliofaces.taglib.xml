@@ -266,7 +266,7 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 			<component-type>pause</component-type>
 		</component>
 		<attribute>
-			<name>lenght</name>
+			<name>length</name>
 			<required>false</required>
 			<description>Allowed Values:integer &#60; 0. Default Value:1 second</description>
 			<type>java.lang.String</type>
@@ -420,7 +420,7 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>method</name>
+			<name>language</name>
 			<description>Allowed Values:en, en-gb, es, fr, de, it. Default Value:en</description>
 			<required>false</required>
 			<type>java.lang.String</type>
