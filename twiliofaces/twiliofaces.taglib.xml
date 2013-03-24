@@ -1,0 +1,515 @@
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+	version="2.0">
+	<namespace>http://twiliofaces.org/twiliofaces</namespace>
+	<composite-library-name>tf</composite-library-name>
+	<tag>
+		<tag-name>client</tag-name>
+		<description>The Dial verb's Client noun specifies a client identifier to dial.</description>
+		<component>
+			<component-type>client</component-type>
+		</component>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET or POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<description>Allowed Values:any url. Default Value:none</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:jenny or tommy. You can wrap inside open and close tag.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>conference</tag-name>
+		<description>The Dial verb's Conference noun allows you to connect to a conference room.</description>
+		<component>
+			<component-type>conference</component-type>
+		</component>
+		<attribute>
+			<name>muted</name>
+			<required>false</required>
+			<description>Allowed Values:true,false. Default Value:false</description>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>beep</name>
+			<description>Allowed Values:true, false. Default Value:true</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>startConferenceOnEnter</name>
+			<description>Allowed Values:true, false. Default Value:true</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>endConferenceOnExit</name>
+			<description>Allowed Values:true, false. Default Value:false</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>waitUrl</name>
+			<description>Allowed Values:TwiML url, empty string. Default Value:default Twilio hold music</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>waitMethod</name>
+			<description>Allowed Values:GET or POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>maxParticipants</name>
+			<description>Allowed Values:positive integer &#60;&#61; 40. Default Value:40</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:moderated-conference-room or Room 1234. You can wrap inside open and close tag.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>dial</tag-name>
+		<description>The Dial verb connects the current caller to another phone.</description>
+		<component>
+			<component-type>dial</component-type>
+		</component>
+		<attribute>
+			<name>action</name>
+			<required>false</required>
+			<description>Allowed Values:relative or absolute URL. Default Value:no default action for Dial</description>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>timeout</name>
+			<description>Allowed Values:positive integer. Default Value:30 seconds</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>hangupOnStar</name>
+			<description>Allowed Values:true, false. Default Value:false</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>timeLimit</name>
+			<description>Allowed Values:positive integer (seconds). Default Value:14400 seconds (4 hours)</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>callerId</name>
+			<description>Allowed Values:a valid phone number, or client identifier if you are dialing a Client. Default Value:Caller's callerId</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>record</name>
+			<description>Allowed Values:true, false. Default Value:false</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example: 415-123-4567. You can wrap inside open and close tag.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>enqueue</tag-name>
+		<description>The Enqueue verb enqueues the current call in a call queue.</description>
+		<component>
+			<component-type>enqueue</component-type>
+		</component>
+		<attribute>
+			<name>action</name>
+			<description>Allowed Values:relative or absolute URL. Default Value:none</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>waitUrl</name>
+			<description>Allowed Values:relative or absolute URL. Default Value:http://s3.amazonaws.com/com.twilio.sounds.music/index.xml.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>waitUrlMethod</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:support. You can wrap inside open and close tag.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>gather</tag-name>
+		<description>The Gather verb collects digits that a caller enters into his or her telephone keypad.</description>
+		<component>
+			<component-type>dial</component-type>
+		</component>
+		<attribute>
+			<name>action</name>
+			<required>false</required>
+			<description>Allowed Values:relative or absolute URL. Default Value:no default action for Dial</description>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>timeout</name>
+			<description>Allowed Values:positive integer. Default Value:30 seconds</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>finishOnKey</name>
+			<description>Allowed Values:any digit,#,*. Default Value:#</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>numDigits</name>
+			<description>Allowed Values: integer &#60;&#61; 1. Default Value:unlimited</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>hangup</tag-name>
+		<description>The Hangup verb ends a call.</description>
+		<component>
+			<component-type>hangup</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>leave</tag-name>
+		<description>The Leave verb transfers control of a call that is in a queue so that the caller exits the queue and execution continues with the next verb after the original Enqueue</description>
+		<component>
+			<component-type>leave</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>number</tag-name>
+		<description>The Dial verb's Number noun specifies a phone number to dial. </description>
+		<component>
+			<component-type>number</component-type>
+		</component>
+		<attribute>
+			<name>sendDigits</name>
+			<description>Allowed Values:any digits. Default Value:none. If you want to wait before sending the extension, so you add a few leading 'w' characters. Each 'w' character tells Twilio to wait 0.5 seconds instead of playing a digit.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<description>Allowed Values:any url. Default Value:none</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET or POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:415-123-4567. You can wrap inside open and close tag.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>pause</tag-name>
+		<description>The Pause verb waits silently for a specific number of seconds.</description>
+		<component>
+			<component-type>pause</component-type>
+		</component>
+		<attribute>
+			<name>lenght</name>
+			<required>false</required>
+			<description>Allowed Values:integer &#60; 0. Default Value:1 second</description>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<tag-name>play</tag-name>
+		<description>The Play verb plays an audio file back to the caller. Twilio retrieves the file from a URL that you provide.</description>
+		<component>
+			<component-type>play</component-type>
+		</component>
+		<attribute>
+			<name>loop</name>
+			<description>Allowed Values:integer &#60;&#61; 0. Default Value:1</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:https://api.twilio.com/cowbell.mp3. You can wrap inside open and close tag.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<tag-name>queue</tag-name>
+		<description>The Dial verb's Queue noun specifies a queue to dial.</description>
+		<component>
+			<component-type>queue</component-type>
+		</component>
+		<attribute>
+			<name>url</name>
+			<description>Allowed Values:relative or absolute URL. Default Value:none</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:support. You can wrap inside open and close tag.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<tag-name>record</tag-name>
+		<description>The Record verb records the caller's voice and returns to you the URL of a file containing the audio recording.</description>
+		<component>
+			<component-type>record</component-type>
+		</component>
+		<attribute>
+			<name>action</name>
+			<required>false</required>
+			<description>Allowed Values:relative or absolute URL. Default Value:current document URL</description>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>timeout</name>
+			<description>Allowed Values:positive integer. Default Value:5 seconds</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>finishOnKey</name>
+			<description>Allowed Values:any digit,#,*. Default Value:1234567890*#</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>maxLength</name>
+			<description>Allowed Values:integer &#60; 1. Default Value:3600 (1 hour)</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>transcribe</name>
+			<description>Allowed Values:relative or absolute URL. Default Value:none</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>playBeep</name>
+			<description>Allowed Values:true, false. Default Value:true</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>redirect</tag-name>
+		<description>The Redirect verb transfers control of a call to the TwiML at a different URL.</description>
+		<component>
+			<component-type>record</component-type>
+		</component>
+		<attribute>
+			<name>method</name>
+			<required>false</required>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:http://pigeons.com/twiml.xml. You can wrap inside open and close tag.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>reject</tag-name>
+		<description>The Reject verb rejects an incoming call to your Twilio number without billing you.</description>
+		<component>
+			<component-type>reject</component-type>
+		</component>
+		<attribute>
+			<name>reason</name>
+			<required>false</required>
+			<description>Allowed Values:rejected, busy. Default Value:rejected</description>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>response</tag-name>
+		<description>The root element of Twilio's XML Markup is the Response element.</description>
+		<component>
+			<component-type>response</component-type>
+		</component>
+	</tag>
+	<tag>
+		<tag-name>say</tag-name>
+		<description>The Say verb converts text to speech that is read back to the caller. Say is useful for development or saying dynamic text that is difficult to pre-record.</description>
+		<component>
+			<component-type>say</component-type>
+		</component>
+		<attribute>
+			<name>voice</name>
+			<description>Allowed Values:man, woman. Default Value:man</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:en, en-gb, es, fr, de, it. Default Value:en</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>loop</name>
+			<description>Allowed Values:integer &#60;&#61; 0. Default Value:1</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:Chapeau! You can wrap inside open and close tag.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>sip</tag-name>
+		<description>The Dial verb's Sip noun lets you set up VoIP sessions by using SIP - Session Initiation Protocol.</description>
+		<component>
+			<component-type>sms</component-type>
+		</component>
+		<attribute>
+			<name>url</name>
+			<description>Allowed Values:call screening url. Default Value:none.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>username</name>
+			<description>Username for SIP authentication</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>passowrd</name>
+			<description>Password for SIP authentication.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>sms</tag-name>
+		<description>The Sms verb sends an SMS message to a phone number during a phone call.</description>
+		<component>
+			<component-type>sms</component-type>
+		</component>
+		<attribute>
+			<name>to</name>
+			<description>Allowed Values:phone number.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>from</name>
+			<description>Allowed Values:phone number.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>action</name>
+			<description>Allowed Values:relative or absolute URL. Default Value:none.</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<description>Allowed Values:GET, POST. Default Value:POST</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>statusCallback</name>
+			<description>Allowed Values:relative or absolute URL. Default Value:none</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<description>Example:The king stay the king. You can wrap inside open and close tag.</description>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+</facelet-taglib>
