@@ -8,24 +8,46 @@ package org.twiliofaces.enums;
 
 
 public enum TwilioRequestParamsEnum {
-	CallSid, 
 	AccountSid, 
-	From, 
-	To, 
-	CallStatus, 
 	ApiVersion, 
+	CallerName,
+	CallSid, 
+	CallStatus, 
+	
+	DialSipCallId,
+	DialSipResponseCode,
+	DialSipHeader,
+	DialSipHeader_,
+	Digits,
 	Direction, 
 	ForwardedFrom, 
-	CallerName,
-	
+	From, 
 	FromCity, 
+	FromCountry,
 	FromState, 
 	FromZip, 
-	FromCountry, 
+	 
+	
+	RecordingDuration,
+	RecordingSid,
+	RecordingUrl,
+	
+	SipCallId,
+	SipHeader,
+	
+	SmsStatus,
+
+	To, 
+	ToCountry,
 	ToCity, 
 	ToState, 
 	ToZip, 
-	ToCountry;
+	TranscriptionSid,
+	TranscriptionText,
+	TranscriptionStatus,
+	TranscriptionUrl;
+	
+	
 	public String toProperty(){
 		return Character.toLowerCase(
 				this.name().charAt(0)) + (this.name().length() > 1 ? this.name().substring(1) : "");
