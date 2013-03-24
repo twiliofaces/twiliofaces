@@ -3,7 +3,7 @@
  *
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
- */ 
+ */
 package org.twiliofaces.component;
 
 import static org.twiliofaces.util.TagUtils.end;
@@ -22,8 +22,12 @@ import org.twiliofaces.component.api.Component;
 public class Response extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeBegin(FacesContext context) throws IOException {
 		start(context, Response.name());
+	}
+
+	@Override
+	public void encodeEnd(FacesContext context) throws IOException {
 		end(context, Response.name());
 	}
 
