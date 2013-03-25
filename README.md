@@ -1,4 +1,4 @@
-Twiliofaces - how use  [twilio](http://www.twilio.com) services with Java EE 6 Technologies (jsf, cdi)
+Twiliofaces - how to use  [twilio](http://www.twilio.com) services with Java EE 6 Technologies (jsf, cdi)
 =============================
 
 
