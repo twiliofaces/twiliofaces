@@ -3,7 +3,7 @@
  *
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
- */ 
+ */
 package org.twiliofaces.component;
 
 import static org.twiliofaces.util.NounAttributes.beep;
@@ -32,7 +32,7 @@ import org.twiliofaces.component.api.Component;
 public class Conference extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeBegin(FacesContext context) throws IOException {
 		start(context, Conference.name());
 		addAttribute(context, getAttributes(), muted.name());
 		addAttribute(context, getAttributes(), beep.name());
@@ -42,6 +42,10 @@ public class Conference extends Component {
 		addAttribute(context, getAttributes(), waitMethod.name());
 		addAttribute(context, getAttributes(), maxParticipants.name());
 		addText(context, getAttributes(), value.name());
+	}
+
+	@Override
+	public void encodeEnd(FacesContext context) throws IOException {
 		end(context, Conference.name());
 	}
 }

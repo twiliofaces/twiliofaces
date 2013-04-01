@@ -161,13 +161,13 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 		<attribute>
 			<name>waitUrl</name>
 			<description>Allowed Values:relative or absolute URL. Default Value:http://s3.amazonaws.com/com.twilio.sounds.music/index.xml.</description>
-			<required>true</required>
+			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>waitUrlMethod</name>
 			<description>Allowed Values:GET, POST. Default Value:POST</description>
-			<required>true</required>
+			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>

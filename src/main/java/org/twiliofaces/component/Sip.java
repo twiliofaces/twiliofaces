@@ -3,7 +3,7 @@
  *
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
- */ 
+ */
 package org.twiliofaces.component;
 
 import static org.twiliofaces.util.NounAttributes.method;
@@ -29,13 +29,17 @@ import org.twiliofaces.component.api.Component;
 public class Sip extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeBegin(FacesContext context) throws IOException {
 		start(context, Sip.name());
 		addAttribute(context, getAttributes(), url.name());
 		addAttribute(context, getAttributes(), method.name());
 		addAttribute(context, getAttributes(), username.name());
 		addAttribute(context, getAttributes(), password.name());
 		addText(context, getAttributes(), value.name());
+	}
+
+	@Override
+	public void encodeEnd(FacesContext context) throws IOException {
 		end(context, Sip.name());
 	}
 
