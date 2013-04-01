@@ -3,7 +3,7 @@
  *
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
- */ 
+ */
 package org.twiliofaces.component;
 
 import static org.twiliofaces.util.NounAttributes.action;
@@ -30,7 +30,7 @@ import org.twiliofaces.component.api.Component;
 public class Sms extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeBegin(FacesContext context) throws IOException {
 		start(context, Sms.name());
 		addAttribute(context, getAttributes(), action.name());
 		addAttribute(context, getAttributes(), method.name());
@@ -38,6 +38,10 @@ public class Sms extends Component {
 		addAttribute(context, getAttributes(), from.name());
 		addAttribute(context, getAttributes(), statusCallBack.name());
 		addText(context, getAttributes(), value.name());
+	}
+
+	@Override
+	public void encodeEnd(FacesContext context) throws IOException {
 		end(context, Sms.name());
 	}
 
