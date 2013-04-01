@@ -181,7 +181,7 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 		<tag-name>gather</tag-name>
 		<description>The Gather verb collects digits that a caller enters into his or her telephone keypad.</description>
 		<component>
-			<component-type>dial</component-type>
+			<component-type>gather</component-type>
 		</component>
 		<attribute>
 			<name>action</name>
@@ -372,7 +372,7 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 		<tag-name>redirect</tag-name>
 		<description>The Redirect verb transfers control of a call to the TwiML at a different URL.</description>
 		<component>
-			<component-type>record</component-type>
+			<component-type>redirect</component-type>
 		</component>
 		<attribute>
 			<name>method</name>
@@ -442,7 +442,7 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 		<tag-name>sip</tag-name>
 		<description>The Dial verb's Sip noun lets you set up VoIP sessions by using SIP - Session Initiation Protocol.</description>
 		<component>
-			<component-type>sms</component-type>
+			<component-type>sip</component-type>
 		</component>
 		<attribute>
 			<name>url</name>
