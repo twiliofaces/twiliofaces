@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.twiliofaces</groupId>
 	<artifactId>twiliofaces</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<name>twiliofaces</name>
 	<url>http://twiliofaces.org</url>
 	<properties>

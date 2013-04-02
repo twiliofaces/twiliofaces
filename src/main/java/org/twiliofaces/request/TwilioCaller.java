@@ -41,4 +41,20 @@ public class TwilioCaller {
 		}
 
 	}
+
+	public String callWithResult(String twilioNumber, String to, String sid,
+			String token, String twilioUrl, Map<String, String> callParams) throws Exception {
+		TwilioRestClient client = new TwilioRestClient(sid, token);
+		Account mainAccount = client.getAccount();
+		CallFactory callFactory = mainAccount.getCallFactory();
+		// Map<String, String> callParams = new HashMap<String, String>();
+		// callParams.put("To", to);
+		// callParams.put("From", twilioNumber);// twilioNumber
+		// callParams.put("Url", twilioUrl);
+		Call call = callFactory.create(callParams);
+		// Print the call SID (a 32 digit hex like CA123..)
+		System.out.println(call.getSid());
+		return call.getSid();
+
+	}
 }

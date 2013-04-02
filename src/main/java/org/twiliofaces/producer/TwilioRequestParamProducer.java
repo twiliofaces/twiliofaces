@@ -12,41 +12,42 @@ import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import org.twiliofaces.annotations.AccountSid;
-import org.twiliofaces.annotations.ApiVersion;
-import org.twiliofaces.annotations.CallSid;
-import org.twiliofaces.annotations.CallerName;
-import org.twiliofaces.annotations.DialSipCallId;
-import org.twiliofaces.annotations.DialSipHeader;
-import org.twiliofaces.annotations.DialSipHeader_;
-import org.twiliofaces.annotations.DialSipResponseCode;
-import org.twiliofaces.annotations.Digits;
-import org.twiliofaces.annotations.Direction;
-import org.twiliofaces.annotations.ForwardedFrom;
-import org.twiliofaces.annotations.From;
-import org.twiliofaces.annotations.FromCity;
-import org.twiliofaces.annotations.FromCountry;
-import org.twiliofaces.annotations.FromState;
-import org.twiliofaces.annotations.RecordingDuration;
-import org.twiliofaces.annotations.RecordingSid;
-import org.twiliofaces.annotations.RecordingUrl;
-import org.twiliofaces.annotations.SipCallId;
-import org.twiliofaces.annotations.SipHeader;
-import org.twiliofaces.annotations.SmsStatus;
-import org.twiliofaces.annotations.To;
-import org.twiliofaces.annotations.ToCity;
-import org.twiliofaces.annotations.ToCountry;
-import org.twiliofaces.annotations.ToState;
-import org.twiliofaces.annotations.ToZip;
-import org.twiliofaces.annotations.TranscriptionSid;
-import org.twiliofaces.annotations.TranscriptionStatus;
-import org.twiliofaces.annotations.TranscriptionText;
-import org.twiliofaces.annotations.TranscriptionUrl;
+import org.twiliofaces.annotations.configuration.ApiVersion;
+import org.twiliofaces.annotations.notification.AccountSid;
+import org.twiliofaces.annotations.notification.CallSid;
+import org.twiliofaces.annotations.notification.CallerName;
+import org.twiliofaces.annotations.notification.Digits;
+import org.twiliofaces.annotations.notification.Direction;
+import org.twiliofaces.annotations.notification.ForwardedFrom;
+import org.twiliofaces.annotations.notification.From;
+import org.twiliofaces.annotations.notification.FromCity;
+import org.twiliofaces.annotations.notification.FromCountry;
+import org.twiliofaces.annotations.notification.FromState;
+import org.twiliofaces.annotations.notification.RecordingDuration;
+import org.twiliofaces.annotations.notification.RecordingSid;
+import org.twiliofaces.annotations.notification.RecordingUrl;
+import org.twiliofaces.annotations.notification.SmsStatus;
+import org.twiliofaces.annotations.notification.To;
+import org.twiliofaces.annotations.notification.ToCity;
+import org.twiliofaces.annotations.notification.ToCountry;
+import org.twiliofaces.annotations.notification.ToState;
+import org.twiliofaces.annotations.notification.ToZip;
+import org.twiliofaces.annotations.notification.TranscriptionSid;
+import org.twiliofaces.annotations.notification.TranscriptionStatus;
+import org.twiliofaces.annotations.notification.TranscriptionText;
+import org.twiliofaces.annotations.notification.TranscriptionUrl;
+import org.twiliofaces.annotations.sip.DialSipCallId;
+import org.twiliofaces.annotations.sip.DialSipHeader;
+import org.twiliofaces.annotations.sip.DialSipHeader_;
+import org.twiliofaces.annotations.sip.DialSipResponseCode;
+import org.twiliofaces.annotations.sip.SipCallId;
+import org.twiliofaces.annotations.sip.SipHeader;
 import org.twiliofaces.enums.TwilioRequestParamsEnum;
 
 public class TwilioRequestParamProducer implements Serializable {
 
-	private static final long serialVersionUID = -4260202951977249652L;
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	FacesContext facesContext;
 
