@@ -22,8 +22,8 @@ import com.twilio.sdk.resource.instance.Call;
 @RequestScoped
 public class TwilioCaller {
 
-	public void call(String twilioNumber, String to, String sid, String token,
-			String twilioUrl) {
+	public void simpleCall(String twilioNumber, String to, String sid,
+			String token, String twilioUrl) {
 		try {
 			TwilioRestClient client = new TwilioRestClient(sid, token);
 			Account mainAccount = client.getAccount();
@@ -42,19 +42,14 @@ public class TwilioCaller {
 
 	}
 
-	public String callWithResult(String twilioNumber, String to, String sid,
-			String token, String twilioUrl, Map<String, String> callParams) throws Exception {
+	/*
+	 * insert all params inside Map (like From,To, url)
+	 */
+	public Call call(String sid, String token, Map<String, String> callParams)
+			throws TwilioRestException {
 		TwilioRestClient client = new TwilioRestClient(sid, token);
 		Account mainAccount = client.getAccount();
 		CallFactory callFactory = mainAccount.getCallFactory();
-		// Map<String, String> callParams = new HashMap<String, String>();
-		// callParams.put("To", to);
-		// callParams.put("From", twilioNumber);// twilioNumber
-		// callParams.put("Url", twilioUrl);
-		Call call = callFactory.create(callParams);
-		// Print the call SID (a 32 digit hex like CA123..)
-		System.out.println(call.getSid());
-		return call.getSid();
-
+		return callFactory.create(callParams);
 	}
 }
