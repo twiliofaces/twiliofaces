@@ -21,7 +21,14 @@ import com.twilio.sdk.resource.instance.Call;
 @Named
 @RequestScoped
 public class TwilioCaller {
-
+	/**
+	 * 
+	 * @param twilioNumber
+	 * @param to
+	 * @param sid
+	 * @param token
+	 * @param twilioUrl
+	 */
 	public void simpleCall(String twilioNumber, String to, String sid,
 			String token, String twilioUrl) {
 		try {
