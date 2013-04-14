@@ -1,7 +1,6 @@
 package org.twiliofaces.filter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -29,7 +28,6 @@ public class TwimlFilter implements Filter {
 				(HttpServletResponse) response);
 		chain.doFilter(request, twimlWrapper);
 
-		// I just want the output on stdout at the moment...
 		response.getWriter().write(twimlWrapper.getTwiml());
 		twimlEventProducer.fire(new TwimlEvent(twimlWrapper.getTwiml()));
 	}
@@ -41,5 +39,4 @@ public class TwimlFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 
 	}
-
 }

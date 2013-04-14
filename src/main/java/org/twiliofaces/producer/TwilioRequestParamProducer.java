@@ -36,6 +36,7 @@ import org.twiliofaces.annotations.notification.TranscriptionSid;
 import org.twiliofaces.annotations.notification.TranscriptionStatus;
 import org.twiliofaces.annotations.notification.TranscriptionText;
 import org.twiliofaces.annotations.notification.TranscriptionUrl;
+import org.twiliofaces.annotations.notification.TwilioSignature;
 import org.twiliofaces.annotations.sip.DialSipCallId;
 import org.twiliofaces.annotations.sip.DialSipHeader;
 import org.twiliofaces.annotations.sip.DialSipHeader_;
@@ -266,6 +267,13 @@ public class TwilioRequestParamProducer implements Serializable {
 	public String getTranscriptionUrl() {
 		return facesContext.getExternalContext().getRequestParameterMap()
 				.get(TwilioRequestParamsEnum.TranscriptionUrl.name());
+	}
+
+	@Produces
+	@TwilioSignature
+	public String getTwilioSignature() {
+		return facesContext.getExternalContext().getRequestHeaderMap()
+				.get("X-Twilio-Signature");
 	}
 
 }
