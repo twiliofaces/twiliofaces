@@ -1,14 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.twiliofaces</groupId>
 	<artifactId>twiliofaces</artifactId>
 	<version>1.2.0-SNAPSHOT</version>
 	<name>twiliofaces</name>
 	<url>http://twiliofaces.org</url>
+	<description>Twiliofaces - how to use twilio services with Java EE 6 Technologies (jsf, cdi)</description>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License version 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>fiorenzino</id>
+			<name>Fiorenzo Pizza</name>
+			<email>fiorenzino@gmail.com</email>
+		</developer>
+		<developer>
+			<id>pisi79</id>
+			<name>Samuele Pasini</name>
+			<email>samuele.pasini@gmail.com</email>
+		</developer>
+	</developers>
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
 
 	<scm>
 		<connection>scm:git:git://github.com/twiliofaces/twiliofaces.git</connection>
