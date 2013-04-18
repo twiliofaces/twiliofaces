@@ -1,0 +1,21 @@
+= Twiliofaces
+Fiorenzo Pizza
+
+http://twiliofaces.org[Twiliofaces] how use twilio services with Java EE 6 Technologies.
+
+== Simple to Use
+
+you can use in java ee projects, using maven dependencies
+
+Now you are ready to start using Asciidoctor!
+
+== Benefits
+
+Twiliofaces is:
+
+* simply
+* fast
+* secure
+* stable
+
+'Give it a try!'
