@@ -6,6 +6,7 @@ import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.twiliofaces.annotations.configuration.ApplicationSid;
 import org.twiliofaces.annotations.configuration.TwilioNumber;
 import org.twiliofaces.annotations.configuration.TwilioSid;
 import org.twiliofaces.annotations.configuration.TwilioToken;
@@ -36,5 +37,12 @@ public class TwilioConfigurationProducer implements Serializable {
 	public String getTwilioToken() {
 		return facesContext.getExternalContext().getInitParameter(
 				TwilioConfigurationEnum.TWILIO_TOKEN.name());
+	}
+
+	@Produces
+	@ApplicationSid
+	public String getApplicationSid() {
+		return facesContext.getExternalContext().getInitParameter(
+				TwilioConfigurationEnum.APPLICATION_SID.name());
 	}
 }
