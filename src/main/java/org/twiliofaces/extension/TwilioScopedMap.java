@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class CachingBeanStore implements Serializable {
+public class TwilioScopedMap implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Map<String, Object> beanStore = new HashMap<String, Object>();
+	private Map<String, Object> beanStore = new ConcurrentHashMap<String, Object>();
 
 	public synchronized void put(String name, Object instance) {
 		beanStore.put(name, instance);
@@ -41,6 +42,7 @@ public class CachingBeanStore implements Serializable {
 
 	public synchronized void remove(String name) {
 		if (beanStore.containsKey(name)) {
+			System.out.println("REMOVE: " + name);
 			beanStore.remove(name);
 		}
 	}
