@@ -20,7 +20,6 @@ import org.twiliofaces.annotations.notification.ForwardedFrom;
 import org.twiliofaces.annotations.notification.From;
 import org.twiliofaces.annotations.notification.To;
 import org.twiliofaces.event.StatusCallbackEvent;
-import org.twiliofaces.event.TwimlEvent;
 
 @WebServlet(value = "/hello", name = "hello-servlet")
 public class TwilioStatusCallbackServlet extends HttpServlet {

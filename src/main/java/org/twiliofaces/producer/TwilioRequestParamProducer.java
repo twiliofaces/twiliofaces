@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import org.twiliofaces.annotations.configuration.ApiVersion;
 import org.twiliofaces.annotations.notification.AccountSid;
 import org.twiliofaces.annotations.notification.CallSid;
+import org.twiliofaces.annotations.notification.CallStatus;
 import org.twiliofaces.annotations.notification.CallerName;
 import org.twiliofaces.annotations.notification.Digits;
 import org.twiliofaces.annotations.notification.Direction;
@@ -81,7 +82,7 @@ public class TwilioRequestParamProducer implements Serializable {
 	}
 
 	@Produces
-	@To
+	@CallStatus
 	public String getCallStatus() {
 		return facesContext.getExternalContext().getRequestParameterMap()
 				.get(TwilioRequestParamsEnum.CallStatus.name());
