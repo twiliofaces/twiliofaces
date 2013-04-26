@@ -1,14 +1,12 @@
-package org.twiliofaces.servlet;
+package org.twiliofaces.controller;
 
-import java.io.IOException;
+import java.io.Serializable;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.twiliofaces.annotations.configuration.ApiVersion;
 import org.twiliofaces.annotations.notification.AccountSid;
@@ -19,10 +17,14 @@ import org.twiliofaces.annotations.notification.Direction;
 import org.twiliofaces.annotations.notification.ForwardedFrom;
 import org.twiliofaces.annotations.notification.From;
 import org.twiliofaces.annotations.notification.To;
+import org.twiliofaces.enums.TwilioRequestParamsEnum;
 import org.twiliofaces.event.StatusCallbackEvent;
 
-@WebServlet(value = "/hello", name = "hello-servlet")
-public class TwilioStatusCallbackServlet extends HttpServlet {
+@RequestScoped
+@Named
+public class TwilioStatusCallback implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	@CallSid
@@ -55,23 +57,29 @@ public class TwilioStatusCallbackServlet extends HttpServlet {
 	@Inject
 	Event<StatusCallbackEvent> statusCallbackEventProducer;
 
-	@Override
-	protected void doGet(HttpServletRequest arg0, HttpServletResponse arg1)
-			throws ServletException, IOException {
-		createEvent();
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest arg0, HttpServletResponse arg1)
-			throws ServletException, IOException {
-		createEvent();
-	}
-
-	private void createEvent() {
+	public void evaluate() {
 		StatusCallbackEvent statusCallbackEvent = new StatusCallbackEvent(
 				callSid, accountSid, from, to, callStatus, apiVersion,
 				direction, forwardedFrom, callerName);
 		System.out.println(statusCallbackEvent.toString());
 		statusCallbackEventProducer.fire(statusCallbackEvent);
+	}
+
+	private void valorizeParameters(HttpServletRequest request) {
+		callSid = request.getParameter(TwilioRequestParamsEnum.CallSid.name());
+		accountSid = request.getParameter(TwilioRequestParamsEnum.AccountSid
+				.name());
+		from = request.getParameter(TwilioRequestParamsEnum.From.name());
+		to = request.getParameter(TwilioRequestParamsEnum.To.name());
+		callStatus = request.getParameter(TwilioRequestParamsEnum.CallStatus
+				.name());
+		apiVersion = request.getParameter(TwilioRequestParamsEnum.ApiVersion
+				.name());
+		direction = request.getParameter(TwilioRequestParamsEnum.Direction
+				.name());
+		forwardedFrom = request
+				.getParameter(TwilioRequestParamsEnum.ForwardedFrom.name());
+		callerName = request.getParameter(TwilioRequestParamsEnum.CallerName
+				.name());
 	}
 }

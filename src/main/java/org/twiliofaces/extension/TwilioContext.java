@@ -1,133 +1,119 @@
 package org.twiliofaces.extension;
 
 import java.lang.annotation.Annotation;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.Contextual;
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.event.Observes;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
 
 import org.twiliofaces.annotations.TwilioScope;
-import org.twiliofaces.event.StatusCallbackEvent;
 
 public class TwilioContext implements Context {
 
-	private final static String COMPONENT_MAP_NAME = "org.twiliofaces.extension.twilioscope.componentInstanceMap";
-	private final static String CREATIONAL_MAP_NAME = "org.twiliofaces.extension.twilioscope.creationalInstanceMap";
+	private final BeanManager beanManager;
 
-	@SuppressWarnings("unchecked")
-	public <T> T get(final Contextual<T> component) {
-		assertActive();
-		T instance = (T) getComponentInstanceMap().get(component);
-		if (instance instanceof TwilioScoped) {
-			TwilioScoped twScoped = (TwilioScoped) instance;
-			if (twScoped != null)
-				System.out.println(twScoped.getCallSid());
-		}
-		return instance;
+	public TwilioContext(BeanManager beanManager) {
+		this.beanManager = beanManager;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(final Contextual<T> component,
+	public <T> T get(final Contextual<T> contextual) {
+		Bean<T> bean = (Bean<T>) contextual;
+		String variableName = bean.getName();
+		System.out.println("get VAR NAME: " + variableName);
+		String sid = getCallSid(bean);
+		Object variable = null;
+		if (sid != null) {
+			variable = getTwilioManager().getVariable(sid);
+		}
+		if (variable != null) {
+			System.out.println("get VALUE VAR: " + variable);
+			describe(variable, "GET SIMPLE ");
+			return (T) variable;
+		} else {
+			System.out.println("GET NULL");
+			return null;
+		}
+	}
+
+	private TwilioManager getTwilioManager() {
+		Bean phBean = (Bean) beanManager.getBeans(TwilioManager.class)
+				.iterator().next();
+		CreationalContext cc = beanManager.createCreationalContext(phBean);
+		TwilioManager bean = (TwilioManager) beanManager.getReference(phBean,
+				TwilioManager.class, cc);
+		return bean;
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	public <T> T get(final Contextual<T> contextual,
 			final CreationalContext<T> creationalContext) {
+		System.out.println("getcontextual: " + contextual.toString() + " - "
+				+ creationalContext.toString());
 		assertActive();
 
-		T instance = get(component);
-		if (instance == null && instance instanceof TwilioScoped) {
-			if (creationalContext != null) {
-				Map<Contextual<?>, Object> componentInstanceMap = getComponentInstanceMap();
-				Map<Contextual<?>, CreationalContext<?>> creationalContextMap = getCreationalInstanceMap();
+		Bean<T> bean = (Bean<T>) contextual;
 
-				synchronized (componentInstanceMap) {
-					instance = (T) componentInstanceMap.get(component);
-					if (instance == null) {
-						instance = component.create(creationalContext);
-						if (instance != null) {
-							componentInstanceMap.put(component, instance);
-							creationalContextMap.put(component,
-									creationalContext);
-						}
-					}
-				}
-			}
+		String variableName = bean.getName();
+		System.out.println("getcontextual VAR NAME: " + variableName);
+		String sid = getCallSid(bean);
+		Object variable = null;
+		if (sid != null) {
+			variable = getTwilioManager().getVariable(sid);
+		}
+		if (variable != null) {
+			System.out.println("getcontextual EXISTENT VALUE VAR: " + variable);
+			describe(variable, "contestuale DA mappa: ");
+			return (T) variable;
+		} else {
+			T beanInstance = bean.create(creationalContext);
+			describe(beanInstance, "contestuale PER mappa: ");
+			getTwilioManager().setVariable(getCallSid(beanInstance),
+					beanInstance);
+			System.out.println("getcontextual NEW VALUE VAR: " + beanInstance);
+			return beanInstance;
 		}
 
-		return instance;
+	}
+
+	private String getCallSid(Object instance) {
+		try {
+			TwilioScoped twScoped = (TwilioScoped) instance;
+			if (twScoped != null && twScoped.getCallSid() != null) {
+				return twScoped.getCallSid();
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
+	private void describe(Object instance, String before) {
+		try {
+			TwilioScoped twScoped = (TwilioScoped) instance;
+			if (twScoped != null && twScoped.getCallSid() != null) {
+				System.out.println(before + "describe: " + twScoped);
+				System.out.println(before + "describe: CALL SID "
+						+ twScoped.getCallSid());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Class<? extends Annotation> getScope() {
+		System.out.println("getScope TwilioScope.class");
 		return TwilioScope.class;
 	}
 
 	@Override
 	public boolean isActive() {
-		return getViewRoot() != null;
-	}
-
-	@SuppressWarnings("unchecked")
-	private Map<Contextual<?>, Object> getComponentInstanceMap() {
-		Map<String, Object> viewMap = getViewMap();
-		Map<Contextual<?>, Object> map = (ConcurrentHashMap<Contextual<?>, Object>) viewMap
-				.get(COMPONENT_MAP_NAME);
-
-		if (map == null) {
-			map = new ConcurrentHashMap<Contextual<?>, Object>();
-			viewMap.put(COMPONENT_MAP_NAME, map);
-		}
-
-		return map;
-	}
-
-	@SuppressWarnings("unchecked")
-	private Map<Contextual<?>, CreationalContext<?>> getCreationalInstanceMap() {
-		Map<String, Object> viewMap = getViewMap();
-		Map<Contextual<?>, CreationalContext<?>> map = (Map<Contextual<?>, CreationalContext<?>>) viewMap
-				.get(CREATIONAL_MAP_NAME);
-
-		if (map == null) {
-			map = new ConcurrentHashMap<Contextual<?>, CreationalContext<?>>();
-			viewMap.put(CREATIONAL_MAP_NAME, map);
-		}
-
-		return map;
-	}
-
-	/*
-	 * TODO: COME RIAGGANCIO LA SINGOLA ISTANZA DA DISTRUGGERE? DATO IL SID!!!
-	 */
-	@SuppressWarnings("unchecked")
-	public void processEvent(@Observes StatusCallbackEvent event) {
-		if (event instanceof StatusCallbackEvent) {
-			Map<Contextual<?>, Object> componentInstanceMap = getComponentInstanceMap();
-			Map<Contextual<?>, CreationalContext<?>> creationalContextMap = getCreationalInstanceMap();
-
-			if (componentInstanceMap != null) {
-				for (Entry<Contextual<?>, Object> componentEntry : componentInstanceMap
-						.entrySet()) {
-					Contextual contextual = componentEntry.getKey();
-					Object instance = componentEntry.getValue();
-					if (instance instanceof TwilioScoped) {
-						TwilioScoped twScoped = (TwilioScoped) instance;
-						if (twScoped.getCallSid() != null
-								&& twScoped.getCallSid().equals(
-										event.getCallSid())) {
-							CreationalContext creational = creationalContextMap
-									.get(contextual);
-
-							contextual.destroy(instance, creational);
-						}
-					}
-
-				}
-			}
-		}
+		System.out.println("isActive ");
+		return true;
 	}
 
 	private void assertActive() {
@@ -135,34 +121,6 @@ public class TwilioContext implements Context {
 			throw new ContextNotActiveException(
 					"Twilio context with scope annotation @TwilioScope is not active with respect to the current thread");
 		}
-	}
-
-	public boolean isListenerForSource(final Object source) {
-		if (source instanceof UIViewRoot) {
-			return true;
-		}
-
-		return false;
-	}
-
-	protected UIViewRoot getViewRoot() {
-		FacesContext context = FacesContext.getCurrentInstance();
-
-		if (context != null) {
-			return context.getViewRoot();
-		}
-
-		return null;
-	}
-
-	protected Map<String, Object> getViewMap() {
-		UIViewRoot viewRoot = getViewRoot();
-
-		if (viewRoot != null) {
-			return viewRoot.getViewMap(true);
-		}
-
-		return null;
 	}
 
 }

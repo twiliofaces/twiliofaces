@@ -11,11 +11,13 @@ import org.twiliofaces.annotations.TwilioScope;
 public class TwilioContextExtension implements Extension {
 	public void afterBeanDiscovery(@Observes AfterBeanDiscovery event,
 			BeanManager manager) {
-		event.addContext(new TwilioContext());
+		System.out.println("afterBeanDiscovery: " + event.toString());
+		event.addContext(new TwilioContext(manager));
 	}
 
 	public void addScope(@Observes final BeforeBeanDiscovery event) {
 		event.addScope(TwilioScope.class, true, true);
+		System.out.println("addScope: " + event.toString());
 	}
 
 }
