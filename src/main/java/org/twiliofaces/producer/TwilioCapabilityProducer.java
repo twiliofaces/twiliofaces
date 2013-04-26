@@ -1,7 +1,11 @@
 package org.twiliofaces.producer;
 
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
+import javax.el.ValueExpression;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -27,9 +31,21 @@ public class TwilioCapabilityProducer {
 	@ApplicationSid
 	String applicationSid;
 
+	@TwilioClientToken(client = "#{params.name}")
+	String flowerToken;
+
 	@Produces
-	@TwilioClientToken
+	@TwilioClientToken(client = "")
 	public String getTwilioClientToken(InjectionPoint injectionPoint) {
+		Application app = facesContext.getApplication();
+		facesContext.getViewRoot();
+		ExpressionFactory exprFactory = app.getExpressionFactory();
+		ELContext elContext = facesContext.getELContext();
+		// creating value expression with the help of the expression factory and
+		// the ELContext
+		ValueExpression valExpr = exprFactory.createValueExpression(elContext,
+				"#{params.name}", Object.class);
+		Boolean developmentMode = (Boolean) valExpr.getValue(elContext);
 		TwilioCapability capability = new TwilioCapability(twilioSid,
 				twilioToken);
 		if (applicationSid != null && !applicationSid.isEmpty())
