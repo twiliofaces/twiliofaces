@@ -13,10 +13,12 @@ public class TwilioScopedMap implements Serializable {
 	private Map<String, Object> beanStore = new ConcurrentHashMap<String, Object>();
 
 	public synchronized void put(String name, Object instance) {
+		System.out.println("put: " + name);
 		beanStore.put(name, instance);
 	}
 
 	public Object getContextualInstance(String name) {
+		System.out.println("get: " + name);
 		return beanStore.get(name);
 	}
 

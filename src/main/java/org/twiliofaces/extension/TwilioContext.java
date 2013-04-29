@@ -21,18 +21,55 @@ public class TwilioContext implements Context {
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(final Contextual<T> contextual) {
+		return null;
+		// Bean<T> bean = (Bean<T>) contextual;
+		// String variableName = bean.getName();
+		// describe(bean, "FIND SIMPLE SID: ");
+		// System.out.println("get VAR NAME: " + variableName);
+		// Object variable = getTwilioManager().getVariable(variableName);
+		// if (variable != null) {
+		// describe(variable, "FOUND SIMPLE ");
+		// return (T) variable;
+		// } else {
+		// return null;
+		// }
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	public <T> T get(final Contextual<T> contextual,
+			final CreationalContext<T> creationalContext) {
+		System.out.println("getcontextual: " + contextual.toString() + " - "
+				+ creationalContext.toString());
+		assertActive();
+
 		Bean<T> bean = (Bean<T>) contextual;
-		System.out.println("bean: " + bean.getName());
-		String sid = getCallSid(bean);
-		Object variable = null;
-		if (sid != null) {
-			variable = getTwilioManager().getVariable(sid);
+		// VEDIAMO
+		T beanInstance = bean.create(creationalContext);
+		describe(beanInstance, "CREATE TEMPORAL CONTESTUAL: ");
+		String callSid = getCallSid(beanInstance);
+		T toReturn = getTwilioManager().getOrCreate(callSid, beanInstance);
+		describe(toReturn, "REAL CONTESTUAL: ");
+		if (!toReturn.equals(beanInstance)) {
+			System.out.println("REMOVE TEMPORAL!!!");
+			contextual.destroy(beanInstance, creationalContext);
 		}
-		if (variable != null) {
-			return (T) variable;
-		} else {
-			return null;
-		}
+		return toReturn;
+		// describe(bean, "FIND CONTEXTUAL SID: ");
+		//
+		// String variableName = bean.getName();
+		// System.out.println("FIND: " + variableName);
+		// Object variable = getTwilioManager().getVariable(variableName);
+		//
+		// if (variable != null) {
+		// describe(variable, "FOUND CONTESTUAL: ");
+		// return (T) variable;
+		// } else {
+		// T beanInstance = bean.create(creationalContext);
+		// describe(beanInstance, "CREATE CONTESTUAL: ");
+		// getTwilioManager().setVariable(bean.getName(), beanInstance);
+		// return beanInstance;
+		// }
+
 	}
 
 	private TwilioManager getTwilioManager() {
@@ -44,39 +81,32 @@ public class TwilioContext implements Context {
 		return bean;
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	public <T> T get(final Contextual<T> contextual,
-			final CreationalContext<T> creationalContext) {
-		assertActive();
-
-		Bean<T> bean = (Bean<T>) contextual;
-		System.out.println("bean: " + bean.getName());
-		String sid = getCallSid(bean);
-		Object variable = null;
-		if (sid != null) {
-			variable = getTwilioManager().getVariable(sid);
-		}
-		if (variable != null) {
-			return (T) variable;
-		} else {
-			T beanInstance = bean.create(creationalContext);
-			getTwilioManager().setVariable(getCallSid(beanInstance),
-					beanInstance);
-			return beanInstance;
-		}
-
-	}
-
 	private String getCallSid(Object instance) {
 		try {
-			TwilioScoped twScoped = (TwilioScoped) instance;
-			if (twScoped != null && twScoped.getCallSid() != null) {
-				return twScoped.getCallSid();
+			if (TwilioScoped.class.isAssignableFrom(instance.getClass())) {
+				TwilioScoped twScoped = (TwilioScoped) instance;
+				if (twScoped != null && twScoped.getCallSid() != null) {
+					return twScoped.getCallSid();
+				}
 			}
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private void describe(Object instance, String before) {
+		try {
+			if (TwilioScoped.class.isAssignableFrom(instance.getClass())) {
+				TwilioScoped twScoped = (TwilioScoped) instance;
+				if (twScoped != null && twScoped.getCallSid() != null) {
+					System.out.println(before + ": " + twScoped
+							+ " - CALL SID: " + twScoped.getCallSid());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -87,10 +117,8 @@ public class TwilioContext implements Context {
 
 	@Override
 	public boolean isActive() {
-		if (getTwilioManager() != null
-				&& getTwilioManager().getTwilioScopedMap() != null)
-			return true;
-		return false;
+		System.out.println("isActive ");
+		return true;
 	}
 
 	private void assertActive() {

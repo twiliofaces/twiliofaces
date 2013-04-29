@@ -30,7 +30,7 @@ public class StatusCallbackEvent {
 
 	@Override
 	public String toString() {
-		return "StatusCallbackEvent [callSid=" + callSid + ", accountSid="
+		return "StatusCallbackEvent" + " [callSid=" + callSid + ", accountSid="
 				+ accountSid + ", from=" + from + ", to=" + to
 				+ ", callStatus=" + callStatus + ", apiVersion=" + apiVersion
 				+ ", direction=" + direction + ", forwardedFrom="

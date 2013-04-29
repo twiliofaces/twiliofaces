@@ -17,7 +17,7 @@ public class TwilioManager implements Serializable {
 	}
 
 	public void processEvent(@Observes StatusCallbackEvent event) {
-		System.out.println("processEvent: " + event.toString());
+		System.out.println(getTwilioScopedMap().getAll().size());
 		if (event instanceof StatusCallbackEvent) {
 			getTwilioScopedMap().remove(event.getCallSid());
 		}
@@ -31,6 +31,20 @@ public class TwilioManager implements Serializable {
 			return (T) value;
 		}
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T getOrCreate(String callSid, Object instance) {
+		Object value = null;
+		if (getTwilioScopedMap().holdsValue(callSid)) {
+			System.out.println("EXISTENT SID:" + callSid);
+			value = getTwilioScopedMap().getContextualInstance(callSid);
+			return (T) value;
+		} else {
+			System.out.println("CREATED SID:" + callSid);
+			getTwilioScopedMap().put(callSid, instance);
+			return (T) instance;
+		}
 	}
 
 	public void setVariable(String variableName, Object value) {
