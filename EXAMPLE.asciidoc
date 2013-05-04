@@ -1,13 +1,32 @@
 = Twiliofaces
-Fiorenzo Pizza
+Fiorenzo Pizza<fiorenzo.pizza@gmail.com>
+:imagesdir: assets
+:homepage: http://twiliofaces.org
 
-http://twiliofaces.org[Twiliofaces] how use twilio services with Java EE 6 Technologies.
+http://twiliofaces.org[Twiliofaces] Come usare Twilio nelle tue applicazione java ee!
 
-== Simple to Use
+Da poco meno di un anno anche un italia è sbarcata Twilio<http://twilio.com>, compagnia americana che offre servizi telefonici in cloud 
+tramite l'uso di semplici api. La semplicita d'uso delle sue api coinsente agevolmente di gestire servizi vocali e 
+di messaggistica direttamente integrabili in applicazioni pre-esistenti.
+Non serve avere server voip dedicato, basta avere un indirizzo pubblico raggiungibile dai
+server twilio, crerare un account e iniziare a sperimentare.
+L'account gratuito consente di scegliere un numero telefonico della numerazione italiana, permette
+di abilitare un numero pre-esistente per testare l'interazione coi servizi twilio.
+Le api per utilizzare i servizi twilio, scariucabili gratuitamente da 
+github[http://github.com/twilio], sono manutenute dalla societa' e coprono i principali linguaggi di programmazione 
+tra cui java.
 
-you can use in java ee projects, using maven dependencies
+Cosa vedrete in questo articolo
+- Come usate le api java twilio
+- Come usare twiliofaces
+- Come verificare il vs twiml
+- Come contribuire al progetto twiliofaces
 
-Now you are ready to start using Asciidoctor!
+toc::[]
+
+== Per iniziare scarichiamo twilio-sdk
+
+Scaricato l'sdk ufficiale iniziamo a guardare gli esempi.
 
 == Benefits
 
