@@ -22,8 +22,6 @@ Cosa vedrete in questo articolo
 . Come usate le api java twilio e twiliofaces
 . Come verificare il vs twiml  e come testare le vs applicazioni
 
-toc::[]
-
 == twilio in breve
 
 Quando qualcuno chiama il vs numero, twilio effettua una chiamata al link che avete configurato nella sezione numeri 
@@ -100,12 +98,70 @@ Di seguito vedremo quali vantaggi si hanno nell'utilizzare twiliofaces, invece d
 
 == Come generare twiml usando twilio-sdk ed usando twiliofaces tramite tag jsf
 
+*caso d'uso1: hangup*
+
 Immaginiamo di aver configurato il nostro numero per rifiutare tutte le chiamate che riceviamo.
-Usando twilio-sdk:
+Usando twilio-sdk, generiamo la index.jsp:
+
+----
+<%@ page import="it.ictgroup.test.TwimlGenerator" %>
+<%@page contentType="text/xml" %>
+<%=	TwimlGenerator.hangup(); %>
+----
+ed il nostro TwimlGenerator:
+
+----
+package it.ictgroup.test;
+
+import com.twilio.sdk.verbs.*;
+
+public class TwimlGenerator {
+
+	public static String hangup(){
+	    TwiMLResponse response = new TwiMLResponse();
+            try {
+	       Hangup hangup = new Hangup();
+	       response.append(hangup);
+            } catch (TwiMLException e) {
+               e.printStackTrace();
+            }
+            return(response.toXML());
+      }
+}
+----
+
+Bene utilizzando twiliofaces, basta:
+
+- aggiungere un file faces-config.xml
+
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+    version="2.1">
+</faces-config>
+----
+
+- creare la pagina index.xhtml:
 
 ----
 
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<tf:response>
+		<tf:hangup />
+	</tf:response>
+</f:view>
+
 ----
+
+Non e' piu' semplice?
+
+==
 
 
 Tutto parte da qui: se in jsf si produce xhtml usando facelets e tag jsf, perche' non fare la stessa cosa con twilio?
