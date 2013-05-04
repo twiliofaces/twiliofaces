@@ -3,30 +3,76 @@ Fiorenzo Pizza<fiorenzo.pizza@gmail.com>
 :imagesdir: assets
 :homepage: http://twiliofaces.org
 
-http://twiliofaces.org[Twiliofaces] Come usare Twilio nelle tue applicazione java ee!
+== http://twiliofaces.org[Twiliofaces] Come usare Twilio nelle tue applicazione java ee!
 
-Da poco meno di un anno anche un italia è sbarcata Twilio<http://twilio.com>, compagnia americana che offre servizi telefonici in cloud 
-tramite l'uso di semplici api. La semplicita d'uso delle sue api coinsente agevolmente di gestire servizi vocali e 
+Da poco meno di un anno anche un italia è sbarcata http://twilio.com[Twilio], compagnia americana che offre servizi telefonici in cloud 
+tramite l'uso di semplici api. La semplicita d'uso delle sue api consente agevolmente di gestire servizi vocali e 
 di messaggistica direttamente integrabili in applicazioni pre-esistenti.
 Non serve avere server voip dedicato, basta avere un indirizzo pubblico raggiungibile dai
 server twilio, crerare un account e iniziare a sperimentare.
 L'account gratuito consente di scegliere un numero telefonico della numerazione italiana, permette
 di abilitare un numero pre-esistente per testare l'interazione coi servizi twilio.
 Le api per utilizzare i servizi twilio, scariucabili gratuitamente da 
-github[http://github.com/twilio], sono manutenute dalla societa' e coprono i principali linguaggi di programmazione 
+https://github.com/twilio[twilio@github], sono manutenute dalla societa' e coprono i principali linguaggi di programmazione 
 tra cui java.
 
 Cosa vedrete in questo articolo
-- Come usate le api java twilio
-- Come usare twiliofaces
-- Come verificare il vs twiml
-- Come contribuire al progetto twiliofaces
+
+. Come funziona twilio
+. Come usate le api java twilio e twiliofaces
+. Come verificare il vs twiml  e come testare le vs applicazioni
 
 toc::[]
 
-== Creaimo un progetto maven ed includiamo twilio-sdk
+== twilio in breve
 
-Scaricato l'sdk ufficiale iniziamo a guardare gli esempi.
+Quando qualcuno chiama il vs numero, twilio effettua una chiamata al link che avete configurato nella sezione numeri 
+del vs dashboard. Twilio effettua una request post o get (a seconda di come configurato) all'url (che puo' 
+essere http/https con o senza username/password, trasmettendo una serie di parametri (vd questo link per maggiori 
+informazioni).
+La ns applicazione deve produrre TwiML (un dialetto xml - le cui regole sono descritte qui) contenente una serie 
+di "istruzioni" (chiamati verbi - l'intero set di verbi/parametri e' descritto nella coumentazione twilio.) che 
+dicono a twilio cosa fare, ad esempio:
+
+- http://www.twilio.com/docs/api/2010-04-01/twiml/hangup[rifiutare una chiamata]:
+....
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Hangup/>
+</Response>
+....
+- http://www.twilio.com/docs/api/twiml/play[suonare un mp3]:
+....
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Play loop="10">https://api.twilio.com/cowbell.mp3</Play>
+</Response>
+....
+- http://www.twilio.com/docs/api/2010-04-01/twiml/gather[richiedere l'inserimento di numeri]:
+....
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Gather timeout="10" finishOnKey="*">
+        <Say>Please enter your pin number and then press star.</Say>
+    </Gather>
+</Response>
+....
+- http://www.twilio.com/docs/api/twiml/record[registrare una chiamata]:
+....
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Record timeout="10" transcribe="true" />
+</Response>
+....
+
+== per iniziare:
+
+. Create un nuovo account twilio: https://www.twilio.com/try-twilio
+. Scegliete un numero di telefono e fornite un vs numero con il quale farete le chiamate di test (twilio permette di effettuare e ricevere chiamate soltanto verso/da un numero verificato)
+. Per creare un applicazione con le api twilio, dovete copiare dalla dashboard:
+.. Account Sid
+.. App SID
+.. Auth Token
 
 == Aggiungiamo twiliofaces nel pom.xml
 
