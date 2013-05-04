@@ -24,17 +24,26 @@ Cosa vedrete in questo articolo
 
 toc::[]
 
-== Per iniziare scarichiamo twilio-sdk
+== Creaimo un progetto maven ed includiamo twilio-sdk
 
 Scaricato l'sdk ufficiale iniziamo a guardare gli esempi.
 
-== Benefits
+== Aggiungiamo twiliofaces nel pom.xml
 
-Twiliofaces is:
+Vediamo *come cambia la musica*
 
-* simply
-* fast
-* secure
-* stable
+== Come generare twiml usando tag jsf
 
-'Give it a try!'
+Tutto parte da qui: se in jsf si produce xhtml usando facelets e tag jsf, perche' non fare la stessa cosa con twilio?
+
+== Come creare jsf Controller con @TwilioScope
+
+Un controller in jsf/cdi ha un ciclo di vita che spazia dalla request/sessione/applicazione. Nel caso di twilio e' 
+comodo avere dei controller che vivono perl'intera telefonata.
+ogni telefoanata ha un suo CallSid (identificativo unico di chiamata) e alla fine di ogni chiamata twilio ci notifica
+tutte le infomazioni su un link callback link.
+
+== Cosa manca a twiliofaces
+
+manca il twilio client javascript in tag jsf e api piu fluenti sia per sms che per effettuare le chiamate.
+
