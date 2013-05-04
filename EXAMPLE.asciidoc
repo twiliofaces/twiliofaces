@@ -161,19 +161,51 @@ Bene utilizzando twiliofaces, basta:
 
 Non e' piu' semplice?
 
-==
+*caso d'uso2: riconosciamo il chiamante e richiediamo nome/cognome la prima volta, altrimenti rifiutiamo la chiamata*
+
+Con twiliofaces, creiamo un controller con scope di request e iniettiamoci il parametro From. 
+Se From non corrisponde al numero che conosciamo, generiamo una voce che richiede nome e cognome (usando il verbo Say),
+registriamo il messaggio vocale (usando il verbo Record), infine salutiamo il nuovo registrato.
+Se invece corrisponde ad un numero noto, generiamo un hangup.
+
+pagina jsf che decide cosa fare:
+
+----
+
+----
+
+java controller che registra i chiamanti e decide cosa fare:
+
+----
+
+----
 
 
-Tutto parte da qui: se in jsf si produce xhtml usando facelets e tag jsf, perche' non fare la stessa cosa con twilio?
+*caso d'uso3: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere*
 
-== Come creare jsf Controller con @TwilioScope
+pagina jsf per raccolta informazioni:
 
-Un controller in jsf/cdi ha un ciclo di vita che spazia dalla request/sessione/applicazione. Nel caso di twilio e' 
-comodo avere dei controller che vivono perl'intera telefonata.
-ogni telefoanata ha un suo CallSid (identificativo unico di chiamata) e alla fine di ogni chiamata twilio ci notifica
-tutte le infomazioni su un link callback link.
+----
 
-== Cosa manca a twiliofaces
+----
 
-manca il twilio client javascript in tag jsf e api piu fluenti sia per sms che per effettuare le chiamate.
+java controller che effettua la chiamata:
 
+----
+
+----
+
+
+
+== Conclusioni
+
+- twilio pompa di brutto!!
+- con twiliofaces l'integrazione e' semplice!
+
+
+==  Riferimenti
+- twilio signup
+- twilio tutorial/howto's
+- twiliofaces source code
+
+*tutorial generato usando asciidoc/asciidoctor*
