@@ -74,11 +74,39 @@ dicono a twilio cosa fare, ad esempio:
 .. App SID
 .. Auth Token
 
-== Aggiungiamo twiliofaces nel pom.xml
+=== Creiamo un progetto Maven e aggiungiamo twilio.sdk e twiliofaces tra le dipendenze del pom.xml
 
-Vediamo *come cambia la musica*
+----
+...
+<dependencies>
+  <dependency>
+   	<groupId>com.twilio.sdk</groupId>
+	<artifactId>twilio-java-sdk</artifactId>
+	<version>${twilio.sdk.version}</version>
+	<scope>compile</scope>
+  </dependency>
+  <dependency>
+	<groupId>org.twiliofaces</groupId>
+	<artifactId>twiliofaces</artifactId>
+	<version>${twiliofaces.version}</version>
+	<scope>compile</scope>
+  </dependency>
+</dependencies>
+...
+----
 
-== Come generare twiml usando tag jsf
+Di seguito vedremo quali vantaggi si hanno nell'utilizzare twiliofaces, invece della libreria java twilio-sdk.
+
+
+== Come generare twiml usando twilio-sdk ed usando twiliofaces tramite tag jsf
+
+Immaginiamo di aver configurato il nostro numero per rifiutare tutte le chiamate che riceviamo.
+Usando twilio-sdk:
+
+----
+
+----
+
 
 Tutto parte da qui: se in jsf si produce xhtml usando facelets e tag jsf, perche' non fare la stessa cosa con twilio?
 
