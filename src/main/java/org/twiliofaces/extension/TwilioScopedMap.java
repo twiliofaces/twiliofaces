@@ -18,7 +18,7 @@ public class TwilioScopedMap implements Serializable {
 	}
 
 	public Object getContextualInstance(String name) {
-		System.out.println("get: " + name);
+//		System.out.println("get: " + name);
 		return beanStore.get(name);
 	}
 

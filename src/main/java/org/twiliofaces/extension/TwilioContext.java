@@ -29,8 +29,8 @@ public class TwilioContext implements Context {
 	@SuppressWarnings({ "unchecked" })
 	public <T> T get(final Contextual<T> contextual,
 			final CreationalContext<T> creationalContext) {
-		System.out.println("getcontextual: " + contextual.toString() + " - "
-				+ creationalContext.toString());
+		// System.out.println("getcontextual: " + contextual.toString() + " - "
+		// + creationalContext.toString());
 		assertActive();
 
 		Bean<T> bean = (Bean<T>) contextual;
@@ -124,13 +124,13 @@ public class TwilioContext implements Context {
 
 	@Override
 	public Class<? extends Annotation> getScope() {
-		System.out.println("getScope TwilioScope.class");
+		// System.out.println("getScope TwilioScope.class");
 		return TwilioScope.class;
 	}
 
 	@Override
 	public boolean isActive() {
-		System.out.println("isActive ");
+		// System.out.println("isActive ");
 		return true;
 	}
 
