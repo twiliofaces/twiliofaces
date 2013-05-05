@@ -98,8 +98,7 @@ Di seguito vedremo quali vantaggi si hanno nell'utilizzare twiliofaces, invece d
 
 == Come generare twiml usando twilio-sdk ed usando twiliofaces tramite tag jsf
 
-*caso d'uso1: hangup*
-
+*Per mostrare la semplicita' d'uso di twiliofaces rispetto alle api standard twilio, gestiamo un semplice hangup*.
 Immaginiamo di aver configurato il nostro numero per rifiutare tutte le chiamate che riceviamo.
 Usando twilio-sdk, generiamo la index.jsp:
 
@@ -130,9 +129,24 @@ public class TwimlGenerator {
 }
 ----
 
-Bene utilizzando twiliofaces, basta:
+Bene utilizzando twiliofaces, basta creare un progetto web contenente:
 
-- aggiungere un file faces-config.xml
+- aggiungere un file *WEB-INF/beans.xml*:
+
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+      http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
+   <alternatives/>
+   <decorators/>
+   <interceptors/>
+</beans>
+
+----
+
+- aggiungere un file *WEB-INF/faces-config.xml*:
 
 ----
 <?xml version="1.0" encoding="UTF-8"?>
@@ -144,7 +158,7 @@ Bene utilizzando twiliofaces, basta:
 </faces-config>
 ----
 
-- creare la pagina index.xhtml:
+e infine creare la pagina *index.xhtml*:
 
 ----
 
@@ -160,8 +174,10 @@ Bene utilizzando twiliofaces, basta:
 ----
 
 Non e' piu' semplice?
+Facciamo qualche esempio piu' complesso.
+*Caso d'uso: riconosciamo il chiamante e richiediamo nome/cognome la prima volta, altrimenti rifiutiamo la chiamata*
 
-*caso d'uso2: riconosciamo il chiamante e richiediamo nome/cognome la prima volta, altrimenti rifiutiamo la chiamata*
+https://github.com/twiliofaces/twilioscope-example[vedi esempio completo]
 
 Con twiliofaces, creiamo un controller con scope di request e iniettiamoci il parametro From. 
 Se From non corrisponde al numero che conosciamo, generiamo una voce che richiede nome e cognome (usando il verbo Say),
@@ -307,7 +323,7 @@ public class UserController implements TwilioScoped, Serializable {
 ----
 
 
-*caso d'uso3: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere*
+*Caso d'uso: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere*
 
 pagina jsf per raccolta informazioni:
 
