@@ -44,7 +44,7 @@ public class TwilioScopedMap implements Serializable {
 
 	public synchronized void remove(String name) {
 		if (beanStore.containsKey(name)) {
-			System.out.println("REMOVE: " + name);
+			System.out.println("remove: " + name);
 			beanStore.remove(name);
 		}
 	}

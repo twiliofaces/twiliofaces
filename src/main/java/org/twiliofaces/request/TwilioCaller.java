@@ -21,52 +21,107 @@ import com.twilio.sdk.resource.instance.Call;
 
 @Named
 @RequestScoped
-public class TwilioCaller
-{
+public class TwilioCaller {
 
-   Logger logger = Logger.getLogger(getClass().getName());
+	Logger logger = Logger.getLogger(getClass().getName());
 
-   /**
-    * 
-    * @param twilioNumber
-    * @param to
-    * @param sid
-    * @param token
-    * @param twilioUrl
-    */
-   public void simpleCall(String twilioNumber, String to, String sid,
-            String token, String twilioUrl)
-   {
-      try
-      {
-         TwilioRestClient client = new TwilioRestClient(sid, token);
-         Account mainAccount = client.getAccount();
-         CallFactory callFactory = mainAccount.getCallFactory();
-         Map<String, String> callParams = new HashMap<String, String>();
-         callParams.put("To", to);
-         callParams.put("From", twilioNumber);// twilioNumber
-         callParams.put("Url", twilioUrl);
-         Call call = callFactory.create(callParams);
-         // Print the call SID (a 32 digit hex like CA123..)
-         logger.info("call SID: " + call.getSid());
-      }
-      catch (TwilioRestException e)
-      {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
+	private String from;
+	private String to;
+	private String accountSid;
+	private String authToken;
+	private String endpoint;
 
-   }
+	private Map<String, String> callParams;
 
-   /*
-    * insert all params inside Map (like From,To, url)
-    */
-   public Call call(String sid, String token, Map<String, String> callParams)
-            throws TwilioRestException
-   {
-      TwilioRestClient client = new TwilioRestClient(sid, token);
-      Account mainAccount = client.getAccount();
-      CallFactory callFactory = mainAccount.getCallFactory();
-      return callFactory.create(callParams);
-   }
+	public String simpleCall(String from, String to, String accountSid,
+			String authToken, String endpoint) {
+		setFrom(from).setTo(to).setAuthToken(authToken)
+				.setAccountSid(accountSid);
+		return call();
+	}
+
+	public String call() {
+		try {
+			TwilioRestClient client = new TwilioRestClient(getAccountSid(),
+					getAuthToken());
+			Account mainAccount = client.getAccount();
+			CallFactory callFactory = mainAccount.getCallFactory();
+			getCallParams().put("To", getTo());
+			getCallParams().put("From", getFrom());// twilioNumber
+			getCallParams().put("Url", getEndpoint());
+			Call call = callFactory.create(callParams);
+			return call.getSid();
+		} catch (TwilioRestException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public Call call(String accountSid, String authToken,
+			Map<String, String> callParams) throws TwilioRestException {
+		setAuthToken(authToken).setAccountSid(accountSid).setCallParams(
+				callParams);
+		TwilioRestClient client = new TwilioRestClient(getAccountSid(),
+				getAuthToken());
+		Account mainAccount = client.getAccount();
+		CallFactory callFactory = mainAccount.getCallFactory();
+		return callFactory.create(getCallParams());
+	}
+
+	public Map<String, String> getCallParams() {
+		if (callParams == null)
+			this.callParams = new HashMap<String, String>();
+		return callParams;
+	}
+
+	public TwilioCaller setCallParams(Map<String, String> callParams) {
+		this.callParams = callParams;
+		return this;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public TwilioCaller setFrom(String from) {
+		this.from = from;
+		return this;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public TwilioCaller setTo(String to) {
+		this.to = to;
+		return this;
+	}
+
+	public String getAccountSid() {
+		return accountSid;
+	}
+
+	public TwilioCaller setAccountSid(String accountSid) {
+		this.accountSid = accountSid;
+		return this;
+	}
+
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public TwilioCaller setAuthToken(String authToken) {
+		this.authToken = authToken;
+		return this;
+	}
+
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public TwilioCaller setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+		return this;
+	}
 }

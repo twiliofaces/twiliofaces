@@ -1,6 +1,7 @@
 package org.twiliofaces.extension;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
 import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.spi.Context;
@@ -10,6 +11,7 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 
 import org.twiliofaces.annotations.TwilioScope;
+import org.twiliofaces.annotations.notification.CallSid;
 
 public class TwilioContext implements Context {
 
@@ -22,17 +24,6 @@ public class TwilioContext implements Context {
 	@SuppressWarnings("unchecked")
 	public <T> T get(final Contextual<T> contextual) {
 		return null;
-		// Bean<T> bean = (Bean<T>) contextual;
-		// String variableName = bean.getName();
-		// describe(bean, "FIND SIMPLE SID: ");
-		// System.out.println("get VAR NAME: " + variableName);
-		// Object variable = getTwilioManager().getVariable(variableName);
-		// if (variable != null) {
-		// describe(variable, "FOUND SIMPLE ");
-		// return (T) variable;
-		// } else {
-		// return null;
-		// }
 	}
 
 	@SuppressWarnings({ "unchecked" })
@@ -45,12 +36,12 @@ public class TwilioContext implements Context {
 		Bean<T> bean = (Bean<T>) contextual;
 		// VEDIAMO
 		T beanInstance = bean.create(creationalContext);
-		describe(beanInstance, "CREATE TEMPORAL CONTESTUAL: ");
+		// describe(beanInstance, "CREATE TEMPORAL CONTESTUAL: ");
 		String callSid = getCallSid(beanInstance);
 		T toReturn = getTwilioManager().getOrCreate(callSid, beanInstance);
-		describe(toReturn, "REAL CONTESTUAL: ");
+		// describe(toReturn, "REAL CONTESTUAL: ");
 		if (!toReturn.equals(beanInstance)) {
-			System.out.println("REMOVE TEMPORAL!!!");
+			// System.out.println("REMOVE TEMPORAL!!!");
 			contextual.destroy(beanInstance, creationalContext);
 		}
 		return toReturn;
@@ -83,6 +74,28 @@ public class TwilioContext implements Context {
 
 	private String getCallSid(Object instance) {
 		try {
+			// System.out.println("class: " + instance.getClass());
+			// System.out.println("superclass: "
+			// + instance.getClass().getSuperclass());
+			Field[] fields = instance.getClass().getSuperclass()
+					.getDeclaredFields();
+			for (Field field : fields) {
+				field.setAccessible(true);
+				if (field.isAnnotationPresent(CallSid.class)) {
+					Object value = field.get(instance);
+					// System.out.println("FIELD BY REFLECTION: " + value);
+					// return (String) value;
+				}
+			}
+			fields = instance.getClass().getDeclaredFields();
+			// for (Field field : fields) {
+			// field.setAccessible(true);
+			// if (field.isAnnotationPresent(CallSid.class)) {
+			// Object value = field.get(instance);
+			// // System.out.println("FIELD BY REFLECTION: " + value);
+			// // return (String) value;
+			// }
+			// }
 			if (TwilioScoped.class.isAssignableFrom(instance.getClass())) {
 				TwilioScoped twScoped = (TwilioScoped) instance;
 				if (twScoped != null && twScoped.getCallSid() != null) {
