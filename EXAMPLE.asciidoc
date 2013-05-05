@@ -168,16 +168,142 @@ Se From non corrisponde al numero che conosciamo, generiamo una voce che richied
 registriamo il messaggio vocale (usando il verbo Record), infine salutiamo il nuovo registrato.
 Se invece corrisponde ad un numero noto, generiamo un hangup.
 
-pagina jsf che decide cosa fare:
+pagina index.jsf che in base al numero del chiamante stabilisce cosa fare:
 
 ----
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<f:event type="preRenderView" listener="#{userController.log}" />
+	<c:choose>
+		<c:when test="#{userController.newUser}">
+			<ui:include src="new-user.xhtml" />
+		</c:when>
+		<c:otherwise>
+			<ui:include src="hangup.xhtml" />
+		</c:otherwise>
+	</c:choose>
+</f:view>
+----
+vediamo il codice dei due file da includere, new-user.xhtml:
 
+----
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<tf:response>
+		<tf:say voice="woman" language="it">Ciao, non ti conosco, come ti chiami?</tf:say>
+		<tf:record method="POST" maxLength="5" finishOnKey="*"
+			action="./thanks.jsf"></tf:record>
+	</tf:response>
+</ui:composition>
+----
+e hangup.xhtml
+----
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<tf:response>
+		<tf:hangup />
+	</tf:response>
+</ui:composition>
 ----
 
 java controller che registra i chiamanti e decide cosa fare:
 
 ----
+package org.twiliofaces.test.twilioscope.controller;
 
+import java.io.Serializable;
+
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.twiliofaces.annotations.TwilioScope;
+import org.twiliofaces.annotations.notification.CallSid;
+import org.twiliofaces.annotations.notification.From;
+import org.twiliofaces.annotations.notification.RecordingUrl;
+import org.twiliofaces.extension.TwilioScoped;
+import org.twiliofaces.test.twilioscope.model.User;
+import org.twiliofaces.test.twilioscope.repository.UserRepository;
+
+@TwilioScope
+@Named
+public class UserController implements TwilioScoped, Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	UserRepository userRepository;
+
+	@Inject
+	@CallSid
+	Instance<String> callSid;
+
+	@Inject
+	@From
+	Instance<String> from;
+
+	@Inject
+	@RecordingUrl
+	Instance<String> recordingUrl;
+
+	private User user;
+
+	int count = 0;
+
+	public UserController() {
+	}
+
+	public boolean isNewUser() {
+		System.out.println(getFrom() + " " + getCallSid());
+		if (getFrom() != null && userRepository.exist(getFrom())) {
+			return false;
+		} else {
+			this.user = new User(getFrom());
+			return true;
+		}
+
+	}
+
+	public String getCallSid() {
+		return callSid.get();
+	}
+
+	public String getFrom() {
+		return from.get();
+	}
+
+	public String getRecordingUrl() {
+		return recordingUrl.get();
+	}
+
+	public void saveUser() {
+		getUser().setMsgUrl(getRecordingUrl());
+		userRepository.save(getUser());
+		log();
+	}
+
+	public void log() {
+		count++;
+		System.out.println("CALL SID: " + getCallSid() + " count: " + count);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+}
 ----
 
 
