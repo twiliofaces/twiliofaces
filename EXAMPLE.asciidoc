@@ -98,8 +98,7 @@ Di seguito vedremo quali vantaggi si hanno nell'utilizzare twiliofaces, invece d
 
 == Come generare twiml usando twilio-sdk ed usando twiliofaces tramite tag jsf
 
-*caso d'uso1: hangup*
-
+*Per mostrare la semplicita' d'uso di twiliofaces rispetto alle api standard twilio, gestiamo un semplice hangup*.
 Immaginiamo di aver configurato il nostro numero per rifiutare tutte le chiamate che riceviamo.
 Usando twilio-sdk, generiamo la index.jsp:
 
@@ -130,9 +129,24 @@ public class TwimlGenerator {
 }
 ----
 
-Bene utilizzando twiliofaces, basta:
+Bene utilizzando twiliofaces, basta creare un progetto web contenente:
 
-- aggiungere un file faces-config.xml
+- aggiungere un file *WEB-INF/beans.xml*:
+
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+      http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
+   <alternatives/>
+   <decorators/>
+   <interceptors/>
+</beans>
+
+----
+
+- aggiungere un file *WEB-INF/faces-config.xml*:
 
 ----
 <?xml version="1.0" encoding="UTF-8"?>
@@ -144,7 +158,7 @@ Bene utilizzando twiliofaces, basta:
 </faces-config>
 ----
 
-- creare la pagina index.xhtml:
+e infine creare la pagina *index.xhtml*:
 
 ----
 
@@ -159,9 +173,11 @@ Bene utilizzando twiliofaces, basta:
 
 ----
 
-Non e' piu' semplice?
+Non e' piu' semplice? Facciamo qualche esempio piu' complesso.
 
-*caso d'uso2: riconosciamo il chiamante e richiediamo nome/cognome la prima volta, altrimenti rifiutiamo la chiamata*
+*Caso d'uso: riconosciamo il chiamante e richiediamo nome/cognome la prima volta, altrimenti rifiutiamo la chiamata*
+
+https://github.com/twiliofaces/twilioscope-example[vedi esempio completo]
 
 Con twiliofaces, creiamo un controller con scope di request e iniettiamoci il parametro From. 
 Se From non corrisponde al numero che conosciamo, generiamo una voce che richiede nome e cognome (usando il verbo Say),
@@ -305,9 +321,26 @@ public class UserController implements TwilioScoped, Serializable {
 
 }
 ----
+Vediamo le caratteristiche principali di questo controller:
+
+. +@TwilioScope+: rappresenta lo scope del nostro controller che ha un ciclo di vita dipendente dalle informazioni 
+che ci trasmette twilio: nasce appena viene effettuata la telefonata, 
+con l'identificativo di chiamata (e' il @CallSid - parametro trasmesso da twilio alla prima interazione)
+finisce appena twilio invoca il ns callbackUrl (sempre con il callSid andiamo a distruggere gli oggetti a lui agganciati
+- ovvero 1 controller)
+
+. +@Inject @CallSid Instance<String> callSid+: non ci iniettiamo la variabile come String ma come Instance<String> (
+abbiamo bisogno di conoscere il suo valore aggiornato in tutto il ciclo di vita del ns controller) - se avessimo
+usato @Inject @CallSid String callSid, per tutto il ciclo di vita del Controller, avremmo usato il valore del 
+parametro CallSid assunto durante la costruzione del controller.
+
+. +UserController implements TwilioScoped+: l'interfaccia è obbligatoria (in questa release di twiliofaces) per permettere
+alla estensione di gestire il ciclo di vita del controller (è il metodo public String getCallSid() che viene invocato per 
+determinare se il controller in uso è nuovo o è già gestito)
 
 
-*caso d'uso3: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere*
+*Caso d'uso: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere 
+o da inviare come sms*
 
 pagina jsf per raccolta informazioni:
 
