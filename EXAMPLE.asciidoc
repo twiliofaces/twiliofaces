@@ -377,4 +377,5 @@ java timer che schedula la chiamata (quello che invia sms è simile):
 - https://github.com/twiliofaces/twiliofaces/[twiliofaces source code]
 - https://github.com/twilio/twilio-java[twilio-sdk source]
 
-* http://asciidoctor.org/[tutorial generato usando asciidoc/asciidoctor]*
+
+*http://asciidoctor.org/[tutorial generato usando asciidoc/asciidoctor]*
