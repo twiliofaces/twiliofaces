@@ -173,8 +173,8 @@ e infine creare la pagina *index.xhtml*:
 
 ----
 
-Non e' piu' semplice?
-Facciamo qualche esempio piu' complesso.
+Non e' piu' semplice? Facciamo qualche esempio piu' complesso.
+
 *Caso d'uso: riconosciamo il chiamante e richiediamo nome/cognome la prima volta, altrimenti rifiutiamo la chiamata*
 
 https://github.com/twiliofaces/twilioscope-example[vedi esempio completo]
@@ -321,9 +321,26 @@ public class UserController implements TwilioScoped, Serializable {
 
 }
 ----
+Vediamo le caratteristiche principali di questo controller:
+
+. +@TwilioScope+: rappresenta lo scope del nostro controller che ha un ciclo di vita dipendente dalle informazioni 
+che ci trasmette twilio: nasce appena viene effettuata la telefonata, 
+con l'identificativo di chiamata (e' il @CallSid - parametro trasmesso da twilio alla prima interazione)
+finisce appena twilio invoca il ns callbackUrl (sempre con il callSid andiamo a distruggere gli oggetti a lui agganciati
+- ovvero 1 controller)
+
+. +@Inject @CallSid Instance<String> callSid+: non ci iniettiamo la variabile come String ma come Instance<String> (
+abbiamo bisogno di conoscere il suo valore aggiornato in tutto il ciclo di vita del ns controller) - se avessimo
+usato @Inject @CallSid String callSid, per tutto il ciclo di vita del Controller, avremmo usato il valore del 
+parametro CallSid assunto durante la costruzione del controller.
+
+. +UserController implements TwilioScoped+: l'interfaccia è obbligatoria (in questa release di twiliofaces) per permettere
+alla estensione di gestire il ciclo di vita del controller (è il metodo public String getCallSid() che viene invocato per 
+determinare se il controller in uso è nuovo o è già gestito)
 
 
-*Caso d'uso: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere*
+*Caso d'uso: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere 
+o da inviare come sms*
 
 pagina jsf per raccolta informazioni:
 
