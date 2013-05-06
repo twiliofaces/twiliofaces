@@ -34,28 +34,22 @@ public class TwilioCaller {
 	private Map<String, String> callParams;
 
 	public String simpleCall(String from, String to, String accountSid,
-			String authToken, String endpoint) {
+			String authToken, String endpoint) throws TwilioRestException {
 		setFrom(from).setTo(to).setAuthToken(authToken)
 				.setAccountSid(accountSid);
 		return call();
 	}
 
-	public String call() {
-		try {
-			TwilioRestClient client = new TwilioRestClient(getAccountSid(),
-					getAuthToken());
-			Account mainAccount = client.getAccount();
-			CallFactory callFactory = mainAccount.getCallFactory();
-			getCallParams().put("To", getTo());
-			getCallParams().put("From", getFrom());// twilioNumber
-			getCallParams().put("Url", getEndpoint());
-			Call call = callFactory.create(callParams);
-			return call.getSid();
-		} catch (TwilioRestException e) {
-			e.printStackTrace();
-		}
-		return null;
-
+	public String call() throws TwilioRestException {
+		TwilioRestClient client = new TwilioRestClient(getAccountSid(),
+				getAuthToken());
+		Account mainAccount = client.getAccount();
+		CallFactory callFactory = mainAccount.getCallFactory();
+		getCallParams().put("To", getTo());
+		getCallParams().put("From", getFrom());// twilioNumber
+		getCallParams().put("Url", getEndpoint());
+		Call call = callFactory.create(callParams);
+		return call.getSid();
 	}
 
 	public Call call(String accountSid, String authToken,
