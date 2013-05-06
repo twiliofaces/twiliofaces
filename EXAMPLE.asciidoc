@@ -339,8 +339,10 @@ alla estensione di gestire il ciclo di vita del controller (è il metodo public 
 determinare se il controller in uso è nuovo o è già gestito)
 
 
-*Caso d'uso: richiediamo un numero di telefono da chiamare (tramite form web) ed un messaggio testuale da leggere 
-o da inviare come sms*
+*Caso d'uso: tramite form web, richiediamo un numero di cellulare, la tipologia di azione da eseguire (sms o chiamata), 
+la data in cui effettuare tale azione ed un messaggio testuale da leggere o da inviare come sms*
+
+https://github.com/twiliofaces/twilioform-example[vedi esempio completo]
 
 pagina jsf per raccolta informazioni:
 
@@ -348,7 +350,14 @@ pagina jsf per raccolta informazioni:
 
 ----
 
-java controller che effettua la chiamata:
+java controller che effettua la chiamata o invia sms:
+
+----
+
+----
+
+
+java timer che schedula la chiamata (quello che invia sms è simile):
 
 ----
 
@@ -358,13 +367,14 @@ java controller che effettua la chiamata:
 
 == Conclusioni
 
-- twilio pompa di brutto!!
-- con twiliofaces l'integrazione e' semplice!
+- twilio rende semplice integrazione telefonica.
+- con twiliofaces l'integrazione in java ee diventa molto piu' semplice!
 
 
 ==  Riferimenti
-- twilio signup
-- twilio tutorial/howto's
-- twiliofaces source code
+- https://www.twilio.com/try-twilio[twilio signup]
+- http://www.twilio.com/docs[twilio tutorial/howto's]
+- https://github.com/twiliofaces/twiliofaces/[twiliofaces source code]
+- https://github.com/twilio/twilio-java[twilio-sdk source]
 
-*tutorial generato usando asciidoc/asciidoctor*
+* http://asciidoctor.org/[tutorial generato usando asciidoc/asciidoctor]*
