@@ -337,30 +337,255 @@ la data in cui effettuare tale azione ed un messaggio testuale da leggere o da i
 
 https://github.com/twiliofaces/twilioform-example[vedi esempio completo]
 
-pagina jsf per raccolta informazioni:
+L'applicazione di esempio mostra come schedulare delle chiamate o degli sms, specificando nella pagina index.xhtml:
+
+. il tipo di schedulazione (sms o chiamata)
+. il numero di cellulare a cui inviare un sms o il numero di telefono da chiamare
+. quando effettuare la schedulazione (immediatamente o in quale data)
+. il testo che dovrà essere scritto nel msg sms o da leggere al chiamato
+
+Tutte le schedulazioni verranno registrate in una mappa contenuta in un service con scopo di Applicazione 
+(in un esempio reale si utilizzerebbe un database).
+
+Per effettuare una chiamata verra' utilizzato il +@TwilioCaller+ che richiede come parametri:
+
+. +accountSid+ e +twilioToken+ (parametri obbligatori per identificarsi presso twlio), +from+ (numero in dotazione)
+. l'+url+ che twilio invochera' per leggere il twiml da eseguire - nel nostro caso questo url conterra' l'uid della
+scedulazione effettuata, permettendo di recuperare il testo che dovrà essere letto.
+Il +@TwilioSmsSender+ gestisce l'invio di sms e richiede accountSid e twilioToken, numero in dotazione.
+Entrambi sono classi con scope di request sviluppate in twiliofaces per incapsulare le funzioni di chiamata/invio sms 
+rese disponibili dalla libreria twilio-java-sdk.
+
+Alcune note:
+
+. purtoppo i numeri italiani in vendita su twilio non consentono di inviare/ricevere sms (per fare i test abbiamo
+comprato un numero americano)
+. non abbiamo gestito il caso di mancata risposta/rifiuto della chiamata - un ulteriore sviluppo potrebbe prevdere di
+stabilire cosa fare in caso di mancata risposta, ad esempio l'invio di una email con il testo, oppure la rischedulazione
+della chiamata dopo x minuti.
+
+Passiamo in rassegna alcuni interessanti estratti dell'aaplicazione.
+
++SenderController+: java controller che gestisce la chiamata/invio sms immediatamente o effettua la schedulazione:
 
 ----
 
+@Named
+@SessionScoped
+public class SenderController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	TwilioSmsSender twilioSmsSender;
+
+	@Inject
+	TwilioCaller twilioCaller;
+
+	@Inject
+	@TwilioSid
+	String accountSid;
+
+	@Inject
+	@TwilioToken
+	String twilioToken;
+
+	@Inject
+	@TwilioNumber
+	String from;
+
+	@Inject
+	CallerTimerService callerTimerService;
+
+	@Inject
+	SmsTimerService smsTimerService;
+
+	@Inject
+	CallRepository callRepository;
+
+	@Inject
+	SmsRepository smsRepository;
+
+	static String URL = "https://xxx.twiliofaces.org/twilioform-example-0.0.1/say.jsf";
+
+        ....
+
+        public String schedule() {
+		if (sms) {
+			if (now) {
+				try {
+					System.out.println(getSmsToSend());
+					String smsId = twilioSmsSender.setAccountSid(accountSid)
+							.setAuthToken(twilioToken).setFrom(from)
+							.setTo(getSmsToSend().getTo())
+							.setBody(getSmsToSend().getText()).send();
+					smsRepository.save(getSmsToSend());
+					System.out.println("sms id: " + smsId);
+				} catch (TwilioRestException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				smsTimerService.createTimer(getSmsToSend());
+				smsRepository.save(getSmsToSend());
+			}
+		} else {
+			System.out.println(getCallToMake());
+			getCallToMake().setUrl(URL + "?uid=" + getCallToMake().getUid());
+			if (now) {
+				try {
+					String callId = twilioCaller.setAccountSid(accountSid)
+							.setAuthToken(twilioToken).setFrom(from)
+							.setTo(getCallToMake().getTo())
+							.setEndpoint(getCallToMake().getUrl()).call();
+					callRepository.save(getCallToMake());
+					System.out.println("call id: " + callId);
+				} catch (TwilioRestException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				callerTimerService.createTimer(getCallToMake());
+				callRepository.save(getCallToMake());
+			}
+		}
+		reset();
+		return "sms_call.xhtml";
+	}
+
 ----
 
-java controller che effettua la chiamata o invia sms:
+
++CallerTimerService+ è il timer ejb che schedula la chiamata (il timer che schedula sms è molto simile):
 
 ----
 
+@Stateless
+@Startup
+public class CallerTimerService {
+
+	@Inject
+	TwilioCaller twilioCaller;
+
+	@Resource
+	TimerService timerService;
+
+	public void createTimer(CallToMake callToMake) {
+		System.out.println(callToMake);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(callToMake.getWhen());
+		timerService.createCalendarTimer(
+				new ScheduleExpression()
+						.hour(calendar.get(Calendar.HOUR_OF_DAY))
+						.minute(calendar.get(Calendar.MINUTE))
+						.second(calendar.get(Calendar.SECOND)),
+				new TimerConfig(callToMake, true));
+	}
+
+	@Timeout
+	public void timeout(Timer timer) {
+		System.out.println(getClass().getName() + ": " + new Date());
+		CallToMake callToMake = (CallToMake) timer.getInfo();
+		try {
+			String callId = twilioCaller
+					.setAccountSid(callToMake.getAccountSid())
+					.setAuthToken(callToMake.getTwilioToken())
+					.setFrom(callToMake.getFrom()).setTo(callToMake.getTo())
+					.setEndpoint(callToMake.getUrl()).call();
+			System.out.println("call id: " + callId);
+		} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}
+
+----
+Passiamo ora alla parte che serve a gestire la chiamata.
++CallController+ è Il controller che viene invocato dalla pagina say.xhtml (ovvero la pagina che genera il twiml) per 
+recuperare il msg da leggere. 
+Si sfrutta il parametro UID che viene passato nell'invocazione, per recuperare l'oggetto schedulato (sms o call).
 ----
 
+@TwilioScope
+@Named
+public class CallController implements TwilioScoped, Serializable {
 
-java timer che schedula la chiamata (quello che invia sms è simile):
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	CallRepository callRepository;
+
+	@Inject
+	@CallSid
+	Instance<String> callSid;
+
+	@Inject
+	@From
+	Instance<String> from;
+
+	private CallToMake callToMake;
+
+	@Inject
+	@Uid
+	Instance<String> uid;
+
+	int count = 0;
+
+	public CallController() {
+	}
+
+	public String getCallSid() {
+		return callSid.get();
+	}
+
+	public String getFrom() {
+		return from.get();
+	}
+
+	public void log() {
+		count++;
+		System.out.println("CALL SID: " + getCallSid() + " count: " + count);
+		CallToMake callToMake = callRepository.find(getUid());
+		setCallToMake(callToMake);
+	}
+
+	public CallToMake getCallToMake() {
+		return callToMake;
+	}
+
+	public void setCallToMake(CallToMake callToMake) {
+		this.callToMake = callToMake;
+	}
+
+	public String getUid() {
+		return uid.get();
+	}
+
+}
+
+----
+Infine la pagina +say.xhtml+ che genera il twiml:
 
 ----
 
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tf="http://twiliofaces.org/twiliofaces">
+	<f:event type="preRenderView" listener="#{callController.log}" />
+	<tf:response>
+		<tf:say voice="woman" language="it">#{callController.callToMake.text}</tf:say>
+	</tf:response>
+</f:view>
+
 ----
-
-
 
 == Conclusioni
 
-- twilio rende semplice integrazione telefonica.
+- twilio rende semplice l'integrazione tra applicazioni e servizi di telefonia.
 - con twiliofaces l'integrazione in java ee diventa molto piu' semplice!
 
 
