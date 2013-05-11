@@ -77,25 +77,15 @@ public class TwilioContext implements Context {
 			// System.out.println("class: " + instance.getClass());
 			// System.out.println("superclass: "
 			// + instance.getClass().getSuperclass());
-			Field[] fields = instance.getClass().getSuperclass()
-					.getDeclaredFields();
+			Field[] fields = instance.getClass().getDeclaredFields();
 			for (Field field : fields) {
 				field.setAccessible(true);
 				if (field.isAnnotationPresent(CallSid.class)) {
 					Object value = field.get(instance);
-					// System.out.println("FIELD BY REFLECTION: " + value);
-					// return (String) value;
+					System.out.println("FIELD BY REFLECTION: " + value);
+					return (String) value;
 				}
 			}
-			fields = instance.getClass().getDeclaredFields();
-			// for (Field field : fields) {
-			// field.setAccessible(true);
-			// if (field.isAnnotationPresent(CallSid.class)) {
-			// Object value = field.get(instance);
-			// // System.out.println("FIELD BY REFLECTION: " + value);
-			// // return (String) value;
-			// }
-			// }
 			if (TwilioScoped.class.isAssignableFrom(instance.getClass())) {
 				TwilioScoped twScoped = (TwilioScoped) instance;
 				if (twScoped != null && twScoped.getCallSid() != null) {
