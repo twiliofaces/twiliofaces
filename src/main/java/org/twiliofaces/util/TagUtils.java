@@ -3,7 +3,7 @@
  *
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
- */ 
+ */
 package org.twiliofaces.util;
 
 import java.io.IOException;
@@ -21,11 +21,30 @@ public class TagUtils {
 			context.getResponseWriter().writeAttribute(key, value, null);
 	}
 
+	public static void addSingleAttribute(FacesContext context, String key,
+			String value) throws IOException {
+		if (value != null && !value.isEmpty())
+			context.getResponseWriter().writeAttribute(key, value, null);
+	}
+
+	public static String getAttribute(FacesContext context,
+			Map<String, Object> attributes, String key) throws IOException {
+		String value = (String) attributes.get(key);
+		if (value != null && !value.isEmpty())
+			return value;
+		return null;
+	}
+
 	public static void addText(FacesContext context,
 			Map<String, Object> attributes, String key) throws IOException {
 		String value = (String) attributes.get(key);
 		if (value != null && !value.isEmpty())
 			context.getResponseWriter().writeText(value, null);
+	}
+
+	public static void addSimpleText(FacesContext context, String text)
+			throws IOException {
+		context.getResponseWriter().writeText(text, null);
 	}
 
 	public static void start(FacesContext context, String tag)

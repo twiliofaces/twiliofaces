@@ -8,7 +8,7 @@ package org.twiliofaces.util;
 
 public enum Verbs {
 
-	Client, Conference, Dial, Enqueue, Gather, Hangup, Leave, Number, Pause, Play, Queue, Record, Redirect, Reject, Response, Say, Sip, Sms;
+	Client, Conference, Dial, Enqueue, Gather, Hangup, JsClient, Leave, Number, Pause, Play, Queue, Record, Redirect, Reject, Response, Say, Sip, Sms;
 
 	public static final String client = "client";
 	public static final String conference = "conference";
@@ -16,6 +16,7 @@ public enum Verbs {
 	public static final String enqueue = "enqueue";
 	public static final String gather = "gather";
 	public static final String hangup = "hangup";
+	public static final String jsClient = "jsClient";
 	public static final String leave = "leave";
 	public static final String number = "number";
 	public static final String pause = "pause";
