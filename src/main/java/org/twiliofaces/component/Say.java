@@ -6,16 +6,16 @@
  */ 
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.language;
-import static org.twiliofaces.util.NounAttributes.value;
-import static org.twiliofaces.util.NounAttributes.voice;
-import static org.twiliofaces.util.NounAttributes.loop;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.addText;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Say;
-import static org.twiliofaces.util.Verbs.say;
+import static org.twiliofaces.component.api.util.NounAttributes.language;
+import static org.twiliofaces.component.api.util.NounAttributes.loop;
+import static org.twiliofaces.component.api.util.NounAttributes.value;
+import static org.twiliofaces.component.api.util.NounAttributes.voice;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.addText;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Say;
+import static org.twiliofaces.component.api.util.Verbs.say;
 
 import java.io.IOException;
 

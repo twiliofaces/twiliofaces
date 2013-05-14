@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.twiliofaces.annotations.TwilioRequestParams;
-import org.twiliofaces.enums.TwilioRequestParamsEnum;
+import org.twiliofaces.api.enums.TwilioRequestParamsEnum;
 import org.twiliofaces.request.TwilioRequestParamsMap;
 
 public class TwilioRequestParamsProducer implements Serializable {

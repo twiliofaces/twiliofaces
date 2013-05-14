@@ -4,11 +4,13 @@
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.twiliofaces.util;
+package org.twiliofaces.component.api.util;
 
 import java.io.IOException;
 import java.util.Map;
 
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -56,5 +58,12 @@ public class TagUtils {
 	public static void end(FacesContext context, String tag) throws IOException {
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.endElement(tag);
+	}
+
+	public static void addFacet(FacesContext context, UIOutput uiOutput,
+			String facetName) throws IOException {
+		UIComponent facet = uiOutput.getFacet(facetName);
+		if (facet != null)
+			facet.encodeAll(context);
 	}
 }

@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 twiliofaces.org.
+ *
+ * Licensed under the Eclipse Public License version 1.0, available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.twiliofaces.extension;
 
 import java.io.Serializable;
@@ -5,7 +11,7 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 
-import org.twiliofaces.event.StatusCallbackEvent;
+import org.twiliofaces.api.event.StatusCallbackEvent;
 
 @ApplicationScoped
 public class TwilioManager implements Serializable {

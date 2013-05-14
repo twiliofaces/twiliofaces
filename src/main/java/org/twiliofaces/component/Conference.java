@@ -6,20 +6,20 @@
  */
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.beep;
-import static org.twiliofaces.util.NounAttributes.endConferenceOnExit;
-import static org.twiliofaces.util.NounAttributes.maxParticipants;
-import static org.twiliofaces.util.NounAttributes.muted;
-import static org.twiliofaces.util.NounAttributes.startConferenceOnEnter;
-import static org.twiliofaces.util.NounAttributes.value;
-import static org.twiliofaces.util.NounAttributes.waitMethod;
-import static org.twiliofaces.util.NounAttributes.waitUrl;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.addText;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Conference;
-import static org.twiliofaces.util.Verbs.conference;
+import static org.twiliofaces.component.api.util.NounAttributes.beep;
+import static org.twiliofaces.component.api.util.NounAttributes.endConferenceOnExit;
+import static org.twiliofaces.component.api.util.NounAttributes.maxParticipants;
+import static org.twiliofaces.component.api.util.NounAttributes.muted;
+import static org.twiliofaces.component.api.util.NounAttributes.startConferenceOnEnter;
+import static org.twiliofaces.component.api.util.NounAttributes.value;
+import static org.twiliofaces.component.api.util.NounAttributes.waitMethod;
+import static org.twiliofaces.component.api.util.NounAttributes.waitUrl;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.addText;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Conference;
+import static org.twiliofaces.component.api.util.Verbs.conference;
 
 import java.io.IOException;
 

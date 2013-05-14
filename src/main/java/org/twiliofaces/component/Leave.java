@@ -6,10 +6,10 @@
  */ 
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Leave;
-import static org.twiliofaces.util.Verbs.leave;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Leave;
+import static org.twiliofaces.component.api.util.Verbs.leave;
 
 import java.io.IOException;
 

@@ -5,12 +5,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  */ package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.length;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Pause;
-import static org.twiliofaces.util.Verbs.pause;
+import static org.twiliofaces.component.api.util.NounAttributes.length;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Pause;
+import static org.twiliofaces.component.api.util.Verbs.pause;
 
 import java.io.IOException;
 

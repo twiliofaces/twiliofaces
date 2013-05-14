@@ -44,7 +44,7 @@ import org.twiliofaces.annotations.sip.DialSipHeader_;
 import org.twiliofaces.annotations.sip.DialSipResponseCode;
 import org.twiliofaces.annotations.sip.SipCallId;
 import org.twiliofaces.annotations.sip.SipHeader;
-import org.twiliofaces.enums.TwilioRequestParamsEnum;
+import org.twiliofaces.api.enums.TwilioRequestParamsEnum;
 
 public class TwilioRequestParamProducer implements Serializable {
 

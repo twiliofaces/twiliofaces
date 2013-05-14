@@ -6,17 +6,17 @@
  */
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.method;
-import static org.twiliofaces.util.NounAttributes.password;
-import static org.twiliofaces.util.NounAttributes.url;
-import static org.twiliofaces.util.NounAttributes.username;
-import static org.twiliofaces.util.NounAttributes.value;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.addText;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Sip;
-import static org.twiliofaces.util.Verbs.sip;
+import static org.twiliofaces.component.api.util.NounAttributes.method;
+import static org.twiliofaces.component.api.util.NounAttributes.password;
+import static org.twiliofaces.component.api.util.NounAttributes.url;
+import static org.twiliofaces.component.api.util.NounAttributes.username;
+import static org.twiliofaces.component.api.util.NounAttributes.value;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.addText;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Sip;
+import static org.twiliofaces.component.api.util.Verbs.sip;
 
 import java.io.IOException;
 

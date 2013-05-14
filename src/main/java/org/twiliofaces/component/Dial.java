@@ -6,20 +6,20 @@
  */ 
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.action;
-import static org.twiliofaces.util.NounAttributes.callerId;
-import static org.twiliofaces.util.NounAttributes.hangupOnStar;
-import static org.twiliofaces.util.NounAttributes.method;
-import static org.twiliofaces.util.NounAttributes.record;
-import static org.twiliofaces.util.NounAttributes.timeLimit;
-import static org.twiliofaces.util.NounAttributes.timeout;
-import static org.twiliofaces.util.NounAttributes.value;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.addText;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Dial;
-import static org.twiliofaces.util.Verbs.dial;
+import static org.twiliofaces.component.api.util.NounAttributes.action;
+import static org.twiliofaces.component.api.util.NounAttributes.callerId;
+import static org.twiliofaces.component.api.util.NounAttributes.hangupOnStar;
+import static org.twiliofaces.component.api.util.NounAttributes.method;
+import static org.twiliofaces.component.api.util.NounAttributes.record;
+import static org.twiliofaces.component.api.util.NounAttributes.timeLimit;
+import static org.twiliofaces.component.api.util.NounAttributes.timeout;
+import static org.twiliofaces.component.api.util.NounAttributes.value;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.addText;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Dial;
+import static org.twiliofaces.component.api.util.Verbs.dial;
 
 import java.io.IOException;
 

@@ -6,14 +6,14 @@
  */ 
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.method;
-import static org.twiliofaces.util.NounAttributes.value;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.addText;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Redirect;
-import static org.twiliofaces.util.Verbs.redirect;
+import static org.twiliofaces.component.api.util.NounAttributes.method;
+import static org.twiliofaces.component.api.util.NounAttributes.value;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.addText;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Redirect;
+import static org.twiliofaces.component.api.util.Verbs.redirect;
 
 import java.io.IOException;
 

@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 twiliofaces.org.
+ *
+ * Licensed under the Eclipse Public License version 1.0, available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.twiliofaces.controller;
 
 import java.io.Serializable;
@@ -17,8 +23,8 @@ import org.twiliofaces.annotations.notification.Direction;
 import org.twiliofaces.annotations.notification.ForwardedFrom;
 import org.twiliofaces.annotations.notification.From;
 import org.twiliofaces.annotations.notification.To;
-import org.twiliofaces.enums.TwilioRequestParamsEnum;
-import org.twiliofaces.event.StatusCallbackEvent;
+import org.twiliofaces.api.enums.TwilioRequestParamsEnum;
+import org.twiliofaces.api.event.StatusCallbackEvent;
 
 @RequestScoped
 @Named

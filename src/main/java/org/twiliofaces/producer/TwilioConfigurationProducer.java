@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 twiliofaces.org.
+ *
+ * Licensed under the Eclipse Public License version 1.0, available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.twiliofaces.producer;
 
 import java.io.Serializable;
@@ -10,7 +16,7 @@ import org.twiliofaces.annotations.configuration.ApplicationSid;
 import org.twiliofaces.annotations.configuration.TwilioNumber;
 import org.twiliofaces.annotations.configuration.TwilioSid;
 import org.twiliofaces.annotations.configuration.TwilioToken;
-import org.twiliofaces.enums.TwilioConfigurationEnum;
+import org.twiliofaces.api.enums.TwilioConfigurationEnum;
 
 public class TwilioConfigurationProducer implements Serializable {
 

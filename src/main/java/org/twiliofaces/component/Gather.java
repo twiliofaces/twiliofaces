@@ -6,16 +6,16 @@
  */ 
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.action;
-import static org.twiliofaces.util.NounAttributes.finishOnKey;
-import static org.twiliofaces.util.NounAttributes.method;
-import static org.twiliofaces.util.NounAttributes.numDigits;
-import static org.twiliofaces.util.NounAttributes.timeout;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Gather;
-import static org.twiliofaces.util.Verbs.gather;
+import static org.twiliofaces.component.api.util.NounAttributes.action;
+import static org.twiliofaces.component.api.util.NounAttributes.finishOnKey;
+import static org.twiliofaces.component.api.util.NounAttributes.method;
+import static org.twiliofaces.component.api.util.NounAttributes.numDigits;
+import static org.twiliofaces.component.api.util.NounAttributes.timeout;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Gather;
+import static org.twiliofaces.component.api.util.Verbs.gather;
 
 import java.io.IOException;
 

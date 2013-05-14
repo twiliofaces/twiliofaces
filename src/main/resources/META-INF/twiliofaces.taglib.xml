@@ -222,6 +222,37 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 		</component>
 	</tag>
 	<tag>
+		<tag-name>jsClient</tag-name>
+		<description>Twilio.js allows you to establish audio connections between a web browser and a Twilio Application.</description>
+		<component>
+			<component-type>jsClient</component-type>
+		</component>
+		<attribute>
+			<name>token</name>
+			<required>true</required>
+			<description>Initialize Twilio.Device with a capability token</description>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>debug</name>
+			<description>Allowed Values:true, false. Default Value:false</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>rtc</name>
+			<description>Allowed Values:true, false. Default Value:false</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>params</name>
+			<description>The optional params argument is a JavaScript object where configuration settings can be passed in to .setup. Use the format: key1:value1,key2:value2..</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
 		<tag-name>leave</tag-name>
 		<description>The Leave verb transfers control of a call that is in a queue so that the caller exits the queue and execution continues with the next verb after the original Enqueue</description>
 		<component>

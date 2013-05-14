@@ -6,17 +6,17 @@
  */ 
 package org.twiliofaces.component;
 
-import static org.twiliofaces.util.NounAttributes.action;
-import static org.twiliofaces.util.NounAttributes.method;
-import static org.twiliofaces.util.NounAttributes.value;
-import static org.twiliofaces.util.NounAttributes.waitUrl;
-import static org.twiliofaces.util.NounAttributes.waitUrlMethod;
-import static org.twiliofaces.util.TagUtils.addAttribute;
-import static org.twiliofaces.util.TagUtils.addText;
-import static org.twiliofaces.util.TagUtils.end;
-import static org.twiliofaces.util.TagUtils.start;
-import static org.twiliofaces.util.Verbs.Enqueue;
-import static org.twiliofaces.util.Verbs.enqueue;
+import static org.twiliofaces.component.api.util.NounAttributes.action;
+import static org.twiliofaces.component.api.util.NounAttributes.method;
+import static org.twiliofaces.component.api.util.NounAttributes.value;
+import static org.twiliofaces.component.api.util.NounAttributes.waitUrl;
+import static org.twiliofaces.component.api.util.NounAttributes.waitUrlMethod;
+import static org.twiliofaces.component.api.util.TagUtils.addAttribute;
+import static org.twiliofaces.component.api.util.TagUtils.addText;
+import static org.twiliofaces.component.api.util.TagUtils.end;
+import static org.twiliofaces.component.api.util.TagUtils.start;
+import static org.twiliofaces.component.api.util.Verbs.Enqueue;
+import static org.twiliofaces.component.api.util.Verbs.enqueue;
 
 import java.io.IOException;
 

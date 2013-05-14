@@ -6,8 +6,8 @@
  */ 
 package org.twiliofaces.component.api;
 
-import static org.twiliofaces.util.Constants.FAMILY;
-import static org.twiliofaces.util.Constants.RENDER_TYPE;
+import static org.twiliofaces.component.api.util.Constants.FAMILY;
+import static org.twiliofaces.component.api.util.Constants.RENDER_TYPE;
 
 import javax.faces.component.UIOutput;
 

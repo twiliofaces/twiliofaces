@@ -1,3 +1,9 @@
+/*
+ * Copyright 2013 twiliofaces.org.
+ *
+ * Licensed under the Eclipse Public License version 1.0, available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.twiliofaces.filter;
 
 import java.io.IOException;
@@ -13,7 +19,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-import org.twiliofaces.event.TwimlEvent;
+import org.twiliofaces.api.event.TwimlEvent;
 
 @WebFilter(filterName = "TwimlFilter", urlPatterns = "*.jsf")
 public class TwimlFilter implements Filter {
