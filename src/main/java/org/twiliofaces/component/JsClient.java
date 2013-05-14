@@ -28,6 +28,8 @@ import org.twiliofaces.component.api.Component;
 		@ResourceDependency(name = "js/twiliojs/1.1/twilio.min.js", target = "head") })
 public class JsClient extends Component {
 
+	static String NEW_LINE = "\n";
+
 	@Override
 	public void encodeEnd(FacesContext context) throws IOException {
 		start(context, "script");
@@ -49,7 +51,7 @@ public class JsClient extends Component {
 		// .setup( token, [params] )
 		StringBuffer options = new StringBuffer();
 		String token = (String) getAttributes().get("token");
-		options.append("\"" + token + "\")");
+		options.append("\"" + token + "\" ");
 		// , {debug: true}
 		boolean withParameters = false;
 		String debug = (String) getAttributes().get("debug");
@@ -83,30 +85,31 @@ public class JsClient extends Component {
 		}
 		if (withParameters)
 			options.append(" } ");
-		addSimpleText(context, "Twilio.Device.setup(" + options.toString()
-				+ ")");
+		addSimpleText(context, NEW_LINE + "Twilio.Device.setup(" + NEW_LINE
+				+ options.toString() + NEW_LINE + ");" + NEW_LINE);
 	}
 
 	public void ready(FacesContext context) throws IOException {
-		addSimpleText(context, "Twilio.Device.ready(function() {");
+		addSimpleText(context, "Twilio.Device.ready(function() {" + NEW_LINE);
 		addFacet(context, this, "ready");
 		// Could be called multiple times if network drops and comes back.
 		// When the TOKEN allows incoming connections, this is called when
 		// the incoming channel is open.
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void offline(FacesContext context) throws IOException {
-		addSimpleText(context, "Twilio.Device.offline(function() {");
+		addSimpleText(context, "Twilio.Device.offline(function() {" + NEW_LINE);
 		addFacet(context, this, "offline");
 		// Twilio.Device.offline(function() {
 		// // Called on network connection lost.
 		// });
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void incoming(FacesContext context) throws IOException {
-		addSimpleText(context, "Twilio.Device.incoming(function(conn) {");
+		addSimpleText(context, "Twilio.Device.incoming(function(conn) {"
+				+ NEW_LINE);
 		// Twilio.Device.incoming(function(conn) {
 		// console.log(conn.parameters.From); // who is calling
 		// conn.status // => "pending"
@@ -114,42 +117,45 @@ public class JsClient extends Component {
 		// conn.status // => "connecting"
 		// });
 		addFacet(context, this, "incoming");
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void cancel(FacesContext context) throws IOException {
-		addSimpleText(context, "Twilio.Device.cancel(function(conn) {");
+		addSimpleText(context, "Twilio.Device.cancel(function(conn) {"
+				+ NEW_LINE);
 		// Twilio.Device.cancel(function(conn) {
 		// console.log(conn.parameters.From); // who canceled the call
 		// conn.status // => "closed"
 		// });
 		addFacet(context, this, "cancel");
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void connect(FacesContext context) throws IOException {
-		addSimpleText(context, "Twilio.Device.connect(function (conn) {");
+		addSimpleText(context, "Twilio.Device.connect(function (conn) {"
+				+ NEW_LINE);
 		// Twilio.Device.connect(function (conn) {
 		// // Called for all new connections
 		// console.log(conn.status);
 		// });
 		addFacet(context, this, "connect");
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void disconnect(FacesContext context) throws IOException {
-		addSimpleText(context, "Twilio.Device.disconnect(function (conn) {");
+		addSimpleText(context, "Twilio.Device.disconnect(function (conn) {"
+				+ NEW_LINE);
 		// Twilio.Device.disconnect(function (conn) {
 		// // Called for all disconnections
 		// console.log(conn.status);
 		// });
 		addFacet(context, this, "disconnect");
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void presence(FacesContext context) throws IOException {
 		addSimpleText(context,
-				"Twilio.Device.presence(function (presenceEvent) {");
+				"Twilio.Device.presence(function (presenceEvent) {" + NEW_LINE);
 		// Twilio.Device.presence(function (presenceEvent) {
 		// // Called for each available client when this device becomes ready
 		// // and every time another client's availability changes.
@@ -157,16 +163,16 @@ public class JsClient extends Component {
 		// presenceEvent.available // => true or false
 		// });
 		addFacet(context, this, "presence");
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void error(FacesContext context) throws IOException {
-		addSimpleText(context, "Twilio.Device.error(function (e) {");
+		addSimpleText(context, "Twilio.Device.error(function (e) {" + NEW_LINE);
 		// Twilio.Device.error(function (e) {
 		// console.log(e.message + " for " + e.connection);
 		// });
 		addFacet(context, this, "error");
-		addSimpleText(context, " });");
+		addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
 	}
 
 	public void javascript(FacesContext context) throws IOException {
