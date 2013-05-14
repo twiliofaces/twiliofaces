@@ -24,8 +24,8 @@ import org.twiliofaces.component.api.Component;
 
 @FacesComponent(jsClient)
 @ResourceDependencies({
-		@ResourceDependency(name = "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", target = "head"),
-		@ResourceDependency(name = "http://static.twilio.com/libs/twiliojs/1.1/twilio.min.js", target = "head") })
+		@ResourceDependency(name = "js/jquery/1.7.2/jquery.min.js", target = "head"),
+		@ResourceDependency(name = "js/twiliojs/1.1/twilio.min.js", target = "head") })
 public class JsClient extends Component {
 
 	@Override
@@ -41,6 +41,7 @@ public class JsClient extends Component {
 		disconnect(context);
 		presence(context);
 		error(context);
+		javascript(context);
 		end(context, "script");
 	}
 
@@ -166,6 +167,10 @@ public class JsClient extends Component {
 		// });
 		addFacet(context, this, "error");
 		addSimpleText(context, " });");
+	}
+
+	public void javascript(FacesContext context) throws IOException {
+		addFacet(context, this, "javascript");
 	}
 
 }
