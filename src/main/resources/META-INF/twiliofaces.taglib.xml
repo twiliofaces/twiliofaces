@@ -251,6 +251,12 @@ http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
 			<required>false</required>
 			<type>java.lang.String</type>
 		</attribute>
+		<attribute>
+			<name>withoutJs</name>
+			<description>Use withoutJs attribute for not writing twilio.js and jquery.js. Allowed Values:true, false. Default Value:false</description>
+			<required>false</required>
+			<type>java.lang.String</type>
+		</attribute>
 	</tag>
 	<tag>
 		<tag-name>leave</tag-name>
