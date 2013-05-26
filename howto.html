@@ -241,6 +241,30 @@ body {
 					<div class="page-header">
 						<h1>JSF tags</h1>
 					</div>
+					<h3>all jsf tags</h3>
+					<p>Client</p>
+					<pre></pre>
+					<p>Conference</p>
+					<p>Dial</p>
+					<p>Enqueue</p>
+					<p>Gather</p>
+					<p>Hangup</p>
+					<p>
+					<p>JsClient</p>
+					<p>Leave</p>
+					<p>Number</p>
+					<p>Pause</p>
+					<p>Play</p>
+					<p>
+					<p>Queue</p>
+					<p>Record</p>
+					<p>Redirect</p>
+					<p>Reject</p>
+					<p>Response</p>
+					<p>
+					<p>Say</p>
+					<p>Sip</p>
+					<p>Sms</p>
 
 
 				</section>
@@ -250,13 +274,65 @@ body {
 						<h1>@Inject parameters</h1>
 					</div>
 					<h3>@Inject parameters</h3>
-
+					<p>AccountSid</p>
+					<pre></pre>
+					<p>CallerName</p>
+					<pre></pre>
+					<p>CallSid</p>
+					<pre></pre>
+					<p>CallStatus</p>
+					<pre></pre>
+					<p>Digits</p>
+					<pre></pre>
+					<p>Direction</p>
+					<pre></pre>
+					<p>ForwardedFrom</p>
+					<pre></pre>
+					<p>From</p>
+					<pre></pre>
+					<p>FromCity</p>
+					<pre></pre>
+					<p>FromCountry</p>
+					<pre></pre>
+					<p>FromState</p>
+					<pre></pre>
+					<p>FromZip</p>
+					<pre></pre>
+					<p>RecordingDuration</p>
+					<pre></pre>
+					<p>RecordingSid</p>
+					<pre></pre>
+					<p>RecordingUrl</p>
+					<pre></pre>
+					<p>SmsStatus</p>
+					<pre></pre>
+					<p>To</p>
+					<pre></pre>
+					<p>ToCity</p>
+					<pre></pre>
+					<p>ToCountry</p>
+					<pre></pre>
+					<p>ToState</p>
+					<pre></pre>
+					<p>ToZip</p>
+					<pre></pre>
+					<p>TranscriptionSid</p>
+					<pre></pre>
+					<p>TranscriptionStatus</p>
+					<pre></pre>
+					<p>TranscriptionText</p>
+					<pre></pre>
+					<p>TranscriptionUrl</p>
+					<pre></pre>
+					<p>TwilioSignature</p>
+					<pre></pre>
 				</section>
 				<section id="injectParameters">
 					<div class="page-header">
 						<h1>@TwilioScope</h1>
 					</div>
-					<h3>Requires HTML5 doctype</h3>
+					<h3>@TwilioScope = cdi scope to track a complete call using
+						the same cdi controller</h3>
 
 				</section>
 
@@ -277,6 +353,33 @@ body {
 						<h1>Test your app</h1>
 					</div>
 					<h3>Test your app</h3>
+					<p>
+						You should evaluate your twiml using <a
+							href="../twiliofaces/twiml.xsd">twiml.xsd</a> using somethink
+						like:
+					</p>
+					<pre>
+					public static boolean validateAgainstXSD(String xml, String xsd) {
+						InputStream xmlIs = new ByteArrayInputStream(xml.getBytes());
+						InputStream xsdIs = new ByteArrayInputStream(xsd.getBytes());
+						return validateAgainstXSD(xmlIs, xsdIs);
+					}
+
+					public static boolean validateAgainstXSD(InputStream xml, InputStream xsd) {
+						try {
+							SchemaFactory factory = SchemaFactory
+									.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+							Schema schema = factory.newSchema(new StreamSource(xsd));
+							Validator validator = schema.newValidator();
+							validator.validate(new StreamSource(xml));
+							return true;
+						} catch (Exception ex) {
+							ex.printStackTrace();
+							return false;
+						}
+					}
+					
+					</pre>
 				</section>
 				<section id="moreExamples">
 					<div class="page-header">
