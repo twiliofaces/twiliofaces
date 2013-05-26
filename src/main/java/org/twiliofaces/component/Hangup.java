@@ -22,7 +22,7 @@ import org.twiliofaces.component.api.Component;
 public class Hangup extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeAll(FacesContext context) throws IOException {
 		start(context, Hangup.name());
 		end(context, Hangup.name());
 	}

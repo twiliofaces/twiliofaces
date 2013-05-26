@@ -31,7 +31,7 @@ import org.twiliofaces.component.api.Component;
 public class Record extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeAll(FacesContext context) throws IOException {
 		start(context, Record.name());
 		addAttribute(context, getAttributes(), action.name());
 		addAttribute(context, getAttributes(), method.name());

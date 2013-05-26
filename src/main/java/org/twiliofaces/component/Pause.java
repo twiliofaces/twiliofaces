@@ -23,7 +23,7 @@ import org.twiliofaces.component.api.Component;
 public class Pause extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeAll(FacesContext context) throws IOException {
 		start(context, Pause.name());
 		addAttribute(context, getAttributes(), length.name());
 		end(context, Pause.name());

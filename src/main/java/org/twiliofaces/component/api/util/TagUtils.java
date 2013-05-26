@@ -63,7 +63,10 @@ public class TagUtils {
 	public static void addFacet(FacesContext context, UIOutput uiOutput,
 			String facetName) throws IOException {
 		UIComponent facet = uiOutput.getFacet(facetName);
-		if (facet != null)
-			facet.encodeAll(context);
+		if (facet != null) {
+			// facet.encodeAll(context);
+			ResponseWriter responseWriter = context.getResponseWriter();
+			responseWriter.writeText(facet, null);
+		}
 	}
 }

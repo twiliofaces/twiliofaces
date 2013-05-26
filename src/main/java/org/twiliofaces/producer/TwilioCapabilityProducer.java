@@ -6,6 +6,8 @@
  */
 package org.twiliofaces.producer;
 
+import java.io.Serializable;
+
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
@@ -23,7 +25,9 @@ import org.twiliofaces.annotations.configuration.TwilioToken;
 import com.twilio.sdk.client.TwilioCapability;
 import com.twilio.sdk.client.TwilioCapability.DomainException;
 
-public class TwilioCapabilityProducer {
+public class TwilioCapabilityProducer implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	FacesContext facesContext;

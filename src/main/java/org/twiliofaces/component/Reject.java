@@ -23,7 +23,7 @@ import org.twiliofaces.component.api.Component;
 public class Reject extends Component {
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException {
+	public void encodeAll(FacesContext context) throws IOException {
 		start(context, Reject.name());
 		addAttribute(context, getAttributes(), reason.name());
 		end(context, Reject.name());
