@@ -9,6 +9,7 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
+
     <style type="text/css">
       body {
         padding-top: 20px;
@@ -79,8 +80,50 @@
         border-right: 0;
         border-radius: 0 3px 3px 0;
       }
+	/* Sidenav for Docs
+-------------------------------------------------- */
+
+.bs-docs-sidenav {
+  width: 228px;
+  margin: 30px 0 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.bs-docs-sidenav > li > a {
+  display: block;
+  width: 190px \9;
+  margin: 0 0 -1px;
+  padding: 8px 14px;
+  border: 1px solid #e5e5e5;
+}
+.bs-docs-sidenav > li:first-child > a {
+  -webkit-border-radius: 6px 6px 0 0;
+     -moz-border-radius: 6px 6px 0 0;
+          border-radius: 6px 6px 0 0;
+}
+.bs-docs-sidenav > li:last-child > a {
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+}
+.bs-docs-sidenav > .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 9px 15px;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
     </style>
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -105,9 +148,9 @@
           <div class="navbar-inner">
             <div class="container">
               <ul class="nav">
-                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="howto.html">How to</a></li>
-                <li><a href="docs.html">Docs</a></li>
+                <li class="active"><a href="docs.html">Docs</a></li>
                 <li><a href="downloads.html">Downloads</a></li>
                 <li><a href="about.html">About</a></li>
               </ul>
@@ -116,32 +159,23 @@
         </div><!-- /.navbar -->
       </div>
 
-      <!-- Jumbotron -->
-      <div class="jumbotron">
-        <h1>Twilio+ Java EE 6</h1>
-        <p class="lead"> how use twilio services with Java EE 6 Technologies (jsf, cdi).</p>
-        <a class="btn btn-large btn-success" href="https://github.com/twiliofaces">Fork on GitHub</a>
-      </div>
-
-      <hr>
-
       <!-- Example row of columns -->
       <div class="row-fluid">
-        <div class="span4">
-          <h2>jsf make TwiML</h2>
-          <p>Using jsf tags you can quickly generate the twiml verbs. You can controll all conversation from jsf pages, using cdi controller with request scope or <b>TwilioScope</b>. </p>
-          <p><a class="btn" href="howto.html#jsfTags">View details &raquo;</a></p>
-        </div>
-        <div class="span4">
-          <h2>@inject</h2>
-          <p>All interactions between twilio server and your app became using post or get parameters. With twiliofaces you can inject directly where you want.</p>
-          <p><a class="btn" href="howto.html#injectParameters">View details &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h2>api simplified</h2>
-          <p>If you want start a call conversation, or send a sms, with twiliofaces, you can use simpliefied wrapper of the ufficial java twilio-sdk.</p>
-          <p><a class="btn" href="howto.html#simplifiedApi">View details &raquo;</a></p>
-        </div>
+	
+        <div class="span12">
+<section id="global">
+          <div class="page-header">
+            <h1>Documentation</h1>
+          </div>
+
+          <h3>TODO</h3>
+          <p>TODO</p>
+
+
+        </section>
+	</div>
+	
+	
       </div>
 
       <hr>
