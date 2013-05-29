@@ -25,57 +25,64 @@ import org.twiliofaces.annotations.configuration.TwilioToken;
 import com.twilio.sdk.client.TwilioCapability;
 import com.twilio.sdk.client.TwilioCapability.DomainException;
 
-public class TwilioCapabilityProducer implements Serializable {
+public class TwilioCapabilityProducer implements Serializable
+{
 
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
 
-	@Inject
-	FacesContext facesContext;
+   @Inject
+   FacesContext facesContext;
 
-	@Inject
-	@TwilioSid
-	String twilioSid;
+   @Inject
+   @TwilioSid
+   String twilioSid;
 
-	@Inject
-	@TwilioToken
-	String twilioToken;
+   @Inject
+   @TwilioToken
+   String twilioToken;
 
-	@Inject
-	@ApplicationSid
-	String applicationSid;
+   @Inject
+   @ApplicationSid
+   String applicationSid;
 
-	// @TwilioClientToken(client = "#{loginController.username}")
-	// String flowerToken;
-	// oppure
-	// @TwilioClientToken(client = "client")
-	// String flowerToken;
+   @Produces
+   @TwilioClientToken
+   /**
+    * 
+    * @param injectionPoint: you can use a resolvable expression like #{loginController.username}" or simple string like 'client'
+    * @return
+    */
+   public String getTwilioClientToken(InjectionPoint injectionPoint)
+   {
+      TwilioCapability capability = new TwilioCapability(twilioSid,
+               twilioToken);
+      if (applicationSid != null && !applicationSid.isEmpty())
+         capability.allowClientOutgoing(applicationSid);
 
-	@Produces
-	@TwilioClientToken
-	public String getTwilioClientToken(InjectionPoint injectionPoint) {
-		TwilioCapability capability = new TwilioCapability(twilioSid,
-				twilioToken);
-		if (applicationSid != null && !applicationSid.isEmpty())
-			capability.allowClientOutgoing(applicationSid);
+      String client = injectionPoint.getAnnotated()
+               .getAnnotation(TwilioClientToken.class).client();
+      if (client == null)
+         return "";
+      if (client != null && client.trim().startsWith("#{") && client.trim().endsWith("}"))
+      {
+         Application app = facesContext.getApplication();
+         facesContext.getViewRoot();
+         ExpressionFactory exprFactory = app.getExpressionFactory();
+         ELContext elContext = facesContext.getELContext();
+         ValueExpression valExpr = exprFactory.createValueExpression(
+                  elContext, client, Object.class);
+         client = (String) valExpr.getValue(elContext);
+      }
+      capability.allowClientIncoming(client);
 
-		String client = injectionPoint.getAnnotated()
-				.getAnnotation(TwilioClientToken.class).client();
-		if (client.contains("#{") && client.contains("}")) {
-			Application app = facesContext.getApplication();
-			facesContext.getViewRoot();
-			ExpressionFactory exprFactory = app.getExpressionFactory();
-			ELContext elContext = facesContext.getELContext();
-			ValueExpression valExpr = exprFactory.createValueExpression(
-					elContext, client, Object.class);
-			client = (String) valExpr.getValue(elContext);
-		}
-		capability.allowClientIncoming(client);
-
-		try {
-			return capability.generateToken();
-		} catch (DomainException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+      try
+      {
+         return capability.generateToken();
+      }
+      catch (DomainException e)
+      {
+         e.printStackTrace();
+      }
+      return null;
+   }
 }

@@ -143,13 +143,13 @@ public class JsClient extends Component
 
    public void incoming(FacesContext context) throws IOException
    {
-      addSimpleText(context, "Twilio.Device.incoming(function(conn) {"
+      addSimpleText(context, "Twilio.Device.incoming(function(incoming) {"
                + NEW_LINE);
-      // Twilio.Device.incoming(function(conn) {
+      // Twilio.Device.incoming(function(incoming) {
       // console.log(conn.parameters.From); // who is calling
-      // conn.status // => "pending"
-      // conn.accept();
-      // conn.status // => "connecting"
+      // incoming.status // => "pending"
+      // incoming.accept();
+      // incoming.status // => "connecting"
       // });
       addFacet(context, this, INCOMING);
       addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
@@ -157,11 +157,11 @@ public class JsClient extends Component
 
    public void cancel(FacesContext context) throws IOException
    {
-      addSimpleText(context, "Twilio.Device.cancel(function(conn) {"
+      addSimpleText(context, "Twilio.Device.cancel(function(cancel) {"
                + NEW_LINE);
-      // Twilio.Device.cancel(function(conn) {
-      // console.log(conn.parameters.From); // who canceled the call
-      // conn.status // => "closed"
+      // Twilio.Device.cancel(function(cancel) {
+      // console.log(cancel.parameters.From); // who canceled the call
+      // cancel.status // => "closed"
       // });
       addFacet(context, this, CANCEL);
       addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
@@ -169,11 +169,11 @@ public class JsClient extends Component
 
    public void connect(FacesContext context) throws IOException
    {
-      addSimpleText(context, "Twilio.Device.connect(function (conn) {"
+      addSimpleText(context, "Twilio.Device.connect(function (connect) {"
                + NEW_LINE);
-      // Twilio.Device.connect(function (conn) {
+      // Twilio.Device.connect(function (connect) {
       // // Called for all new connections
-      // console.log(conn.status);
+      // console.log(connect.status);
       // });
       addFacet(context, this, CONNECT);
       addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
@@ -181,11 +181,11 @@ public class JsClient extends Component
 
    public void disconnect(FacesContext context) throws IOException
    {
-      addSimpleText(context, "Twilio.Device.disconnect(function (conn) {"
+      addSimpleText(context, "Twilio.Device.disconnect(function (disconnect) {"
                + NEW_LINE);
-      // Twilio.Device.disconnect(function (conn) {
+      // Twilio.Device.disconnect(function (disconnect) {
       // // Called for all disconnections
-      // console.log(conn.status);
+      // console.log(disconnect.status);
       // });
       addFacet(context, this, DISCONNECT);
       addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
@@ -194,12 +194,12 @@ public class JsClient extends Component
    public void presence(FacesContext context) throws IOException
    {
       addSimpleText(context,
-               "Twilio.Device.presence(function (presenceEvent) {" + NEW_LINE);
-      // Twilio.Device.presence(function (presenceEvent) {
+               "Twilio.Device.presence(function (presence) {" + NEW_LINE);
+      // Twilio.Device.presence(function (presence) {
       // // Called for each available client when this device becomes ready
       // // and every time another client's availability changes.
-      // presenceEvent.from // => name of client whose availablity changed
-      // presenceEvent.available // => true or false
+      // presence.from // => name of client whose availablity changed
+      // presence.available // => true or false
       // });
       addFacet(context, this, PRESENCE);
       addSimpleText(context, NEW_LINE + " });" + NEW_LINE);
@@ -207,9 +207,9 @@ public class JsClient extends Component
 
    public void error(FacesContext context) throws IOException
    {
-      addSimpleText(context, "Twilio.Device.error(function (e) {" + NEW_LINE);
-      // Twilio.Device.error(function (e) {
-      // console.log(e.message + " for " + e.connection);
+      addSimpleText(context, "Twilio.Device.error(function (error) {" + NEW_LINE);
+      // Twilio.Device.error(function (error) {
+      // console.log(error.message + " for " + error.connection);
       // });
       addFacet(context, this, ERROR);
       addSimpleText(context, NEW_LINE + " });" + NEW_LINE);

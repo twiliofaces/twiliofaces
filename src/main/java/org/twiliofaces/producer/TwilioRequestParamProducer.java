@@ -12,6 +12,7 @@ import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.twiliofaces.annotations.TwilioRequestParams;
 import org.twiliofaces.annotations.configuration.ApiVersion;
 import org.twiliofaces.annotations.notification.AccountSid;
 import org.twiliofaces.annotations.notification.CallSid;
@@ -45,236 +46,448 @@ import org.twiliofaces.annotations.sip.DialSipResponseCode;
 import org.twiliofaces.annotations.sip.SipCallId;
 import org.twiliofaces.annotations.sip.SipHeader;
 import org.twiliofaces.api.enums.TwilioRequestParamsEnum;
+import org.twiliofaces.request.TwilioRequestMap;
 
-public class TwilioRequestParamProducer implements Serializable {
+public class TwilioRequestParamProducer implements Serializable
+{
 
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
 
-	@Inject
-	FacesContext facesContext;
+   @Inject
+   FacesContext facesContext;
 
-	@Produces
-	@AccountSid
-	public String getAccountSid() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.AccountSid.name());
-	}
+   @Produces
+   @TwilioRequestParams
+   public TwilioRequestMap getTwilioRequestParams()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null)
+      {
+         TwilioRequestMap twilioRequestParamsMap = new TwilioRequestMap();
+         for (TwilioRequestParamsEnum twilio : TwilioRequestParamsEnum.values())
+         {
+            String value = facesContext.getExternalContext()
+                     .getRequestParameterMap().get(twilio.name());
+            twilioRequestParamsMap.setValue(twilio.toProperty(), value);
+         }
+         return twilioRequestParamsMap;
+      }
+      return null;
+   }
 
-	@Produces
-	@ApiVersion
-	public String getApiVersion() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.ApiVersion.name());
-	}
+   @Produces
+   @AccountSid
+   public String getAccountSid()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.AccountSid.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@CallerName
-	public String getCallerName() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.CallerName.name());
-	}
+   @Produces
+   @ApiVersion
+   public String getApiVersion()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.ApiVersion.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@CallSid
-	public String getCallSid() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.CallSid.name());
-	}
+   @Produces
+   @CallerName
+   public String getCallerName()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.CallerName.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@CallStatus
-	public String getCallStatus() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.CallStatus.name());
-	}
+   @Produces
+   @CallSid
+   public String getCallSid()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.CallSid.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@DialSipCallId
-	public String getDialSipCallId() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.DialSipCallId.name());
-	}
+   @Produces
+   @CallStatus
+   public String getCallStatus()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.CallStatus.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@DialSipHeader
-	public String getDialSipHeader() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.DialSipHeader.name());
-	}
+   @Produces
+   @DialSipCallId
+   public String getDialSipCallId()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.DialSipCallId.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@DialSipHeader_
-	public String getDialSipHeader_() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.DialSipHeader_.name());
-	}
+   @Produces
+   @DialSipHeader
+   public String getDialSipHeader()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.DialSipHeader.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@DialSipResponseCode
-	public String getDialSipResponseCode() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.DialSipResponseCode.name());
-	}
+   @Produces
+   @DialSipHeader_
+   public String getDialSipHeader_()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.DialSipHeader_.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@Digits
-	public String getDigits() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.Digits.name());
-	}
+   @Produces
+   @DialSipResponseCode
+   public String getDialSipResponseCode()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.DialSipResponseCode.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@Direction
-	public String getDirection() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.Direction.name());
-	}
+   @Produces
+   @Digits
+   public String getDigits()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.Digits.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@ForwardedFrom
-	public String getForwardedFrom() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.ForwardedFrom.name());
-	}
+   @Produces
+   @Direction
+   public String getDirection()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.Direction.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@From
-	public String getFrom() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.From.name());
-	}
+   @Produces
+   @ForwardedFrom
+   public String getForwardedFrom()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.ForwardedFrom.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@FromCity
-	public String getFromCity() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.FromCity.name());
-	}
+   @Produces
+   @From
+   public String getFrom()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.From.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@FromCountry
-	public String getFromCountry() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.FromCountry.name());
-	}
+   @Produces
+   @FromCity
+   public String getFromCity()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.FromCity.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@FromState
-	public String getFromState() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.FromState.name());
-	}
+   @Produces
+   @FromCountry
+   public String getFromCountry()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.FromCountry.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@RecordingDuration
-	public String getRecordingDuration() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.RecordingDuration.name());
-	}
+   @Produces
+   @FromState
+   public String getFromState()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.FromState.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@RecordingSid
-	public String getRecordingSid() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.RecordingSid.name());
-	}
+   @Produces
+   @RecordingDuration
+   public String getRecordingDuration()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.RecordingDuration.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@RecordingUrl
-	public String getRecordingUrl() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.RecordingUrl.name());
-	}
+   @Produces
+   @RecordingSid
+   public String getRecordingSid()
+   {
 
-	@Produces
-	@SipCallId
-	public String getSipCallId() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.SipCallId.name());
-	}
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.RecordingSid.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@SipHeader
-	public String getSipHeader() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.SipHeader.name());
-	}
+   @Produces
+   @RecordingUrl
+   public String getRecordingUrl()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.RecordingUrl.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@SmsStatus
-	public String getSmsStatus() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.SmsStatus.name());
-	}
+   @Produces
+   @SipCallId
+   public String getSipCallId()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.SipCallId.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@To
-	public String getTo() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.To.name());
-	}
+   @Produces
+   @SipHeader
+   public String getSipHeader()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.SipHeader.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@ToCity
-	public String getToCity() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.ToCity.name());
-	}
+   @Produces
+   @SmsStatus
+   public String getSmsStatus()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.SmsStatus.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@ToCountry
-	public String getToCountry() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.ToCountry.name());
-	}
+   @Produces
+   @To
+   public String getTo()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.To.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@ToState
-	public String getToState() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.ToState.name());
-	}
+   @Produces
+   @ToCity
+   public String getToCity()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.ToCity.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@ToZip
-	public String getToZip() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.ToZip.name());
-	}
+   @Produces
+   @ToCountry
+   public String getToCountry()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.ToCountry.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@TranscriptionSid
-	public String getTranscriptionSid() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.TranscriptionSid.name());
-	}
+   @Produces
+   @ToState
+   public String getToState()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.ToState.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@TranscriptionStatus
-	public String getTranscriptionStatus() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.TranscriptionStatus.name());
-	}
+   @Produces
+   @ToZip
+   public String getToZip()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.ToZip.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@TranscriptionText
-	public String getTranscriptionText() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.TranscriptionText.name());
-	}
+   @Produces
+   @TranscriptionSid
+   public String getTranscriptionSid()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.TranscriptionSid.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@TranscriptionUrl
-	public String getTranscriptionUrl() {
-		return facesContext.getExternalContext().getRequestParameterMap()
-				.get(TwilioRequestParamsEnum.TranscriptionUrl.name());
-	}
+   @Produces
+   @TranscriptionStatus
+   public String getTranscriptionStatus()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.TranscriptionStatus.name());
+      }
+      return null;
+   }
 
-	@Produces
-	@TwilioSignature
-	public String getTwilioSignature() {
-		return facesContext.getExternalContext().getRequestHeaderMap()
-				.get("X-Twilio-Signature");
-	}
+   @Produces
+   @TranscriptionText
+   public String getTranscriptionText()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.TranscriptionText.name());
+      }
+      return null;
+   }
 
+   @Produces
+   @TranscriptionUrl
+   public String getTranscriptionUrl()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.TranscriptionUrl.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @TwilioSignature
+   public String getTwilioSignature()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestHeaderMap()
+                  .get("X-Twilio-Signature");
+      }
+      return null;
+   }
 }

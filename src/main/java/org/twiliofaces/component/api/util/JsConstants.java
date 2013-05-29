@@ -9,8 +9,8 @@ package org.twiliofaces.component.api.util;
 public class JsConstants
 {
    public static String NEW_LINE = "\n";
-   public static String TWILIO_JS_1_1 = "http://static.twilio.com/libs/twiliojs/1.1/twilio.min.js";
-   public static String JQUERY_JS_1_6_2 = "http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js";
+   public static String TWILIO_JS_1_1 = "//static.twilio.com/libs/twiliojs/1.1/twilio.min.js";
+   public static String JQUERY_JS_1_6_2 = "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js";
 
    public static String WITHOUT_JS = "withoutJs";
    public static String FALSE = "false";

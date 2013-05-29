@@ -21,28 +21,35 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.twiliofaces.api.event.TwimlEvent;
 
-@WebFilter(filterName = "TwimlFilter", urlPatterns = "*.jsf")
-public class TwimlFilter implements Filter {
+@WebFilter(filterName = "TwimlFilter", urlPatterns = "*.twiml")
+public class TwimlFilter implements Filter
+{
 
-	@Inject
-	Event<TwimlEvent> twimlEventProducer;
+   @Inject
+   Event<TwimlEvent> twimlEventProducer;
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+   public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException
+   {
 
-		TwimlWrapper twimlWrapper = new TwimlWrapper(
-				(HttpServletResponse) response);
-		chain.doFilter(request, twimlWrapper);
+      TwimlWrapper twimlWrapper = new TwimlWrapper(
+               (HttpServletResponse) response);
+      chain.doFilter(request, twimlWrapper);
 
-		response.getWriter().write(twimlWrapper.getTwiml());
-		twimlEventProducer.fire(new TwimlEvent(twimlWrapper.getTwiml()));
-	}
+      response.getWriter().write(twimlWrapper.getTwiml());
+      twimlEventProducer.fire(new TwimlEvent(twimlWrapper.getTwiml()));
+   }
 
-	public void destroy() {
+   @Override
+   public void destroy()
+   {
 
-	}
+   }
 
-	public void init(FilterConfig filterConfig) throws ServletException {
+   @Override
+   public void init(FilterConfig arg0) throws ServletException
+   {
 
-	}
+   }
+
 }
