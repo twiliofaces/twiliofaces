@@ -40,8 +40,8 @@ public class StatusCallbackEvent
    @Override
    public String toString()
    {
-      return "StatusCallbackEvent: " +
-               ((callSid != null && !callSid.isEmpty()) ? " [callSid=" + callSid : "")
+      return "StatusCallbackEvent: [" +
+               ((callSid != null && !callSid.isEmpty()) ? " callSid=" + callSid : "")
               +((accountSid != null && !accountSid.isEmpty()) ? " accountSid=" + accountSid : "") 
               +((from != null && !from.isEmpty()) ? " from=" + from : "") 
               +((to != null && !to.isEmpty()) ? " to=" + to : "") 
@@ -49,7 +49,8 @@ public class StatusCallbackEvent
               +((apiVersion != null && !apiVersion.isEmpty()) ?" apiVersion=" + apiVersion : "") 
               +((direction != null && !direction.isEmpty()) ? " direction=" + direction : "") 
               +((forwardedFrom != null && !forwardedFrom.isEmpty()) ? " forwardedFrom=" + forwardedFrom : "") 
-              +((callerName != null && !callerName.isEmpty()) ? " callerName=" + callerName + "]" : "") ;
+              +((callerName != null && !callerName.isEmpty()) ? " callerName=" + callerName : "")
+              +"]";
    }
 
    public String getCallSid()

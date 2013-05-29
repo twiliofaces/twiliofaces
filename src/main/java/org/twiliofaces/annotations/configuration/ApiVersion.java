@@ -22,14 +22,10 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-/**
- * 
- * @author fiorenzo
- * 
- */
 @Qualifier
 @Retention(RUNTIME)
 @Target({ METHOD, FIELD, PARAMETER })
-public @interface ApiVersion {
+public @interface ApiVersion
+{
 
 }
