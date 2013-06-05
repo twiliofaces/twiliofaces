@@ -13,6 +13,7 @@ import javax.inject.Named;
 import org.twiliofaces.annotations.configuration.TwilioNumber;
 import org.twiliofaces.annotations.configuration.TwilioSid;
 import org.twiliofaces.annotations.configuration.TwilioToken;
+import org.twiliofaces.request.simple.SimpleTwilioSmsSender;
 
 @Named
 @RequestScoped

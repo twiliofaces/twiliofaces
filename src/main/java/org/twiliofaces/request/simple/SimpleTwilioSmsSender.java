@@ -4,7 +4,7 @@
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.twiliofaces.request;
+package org.twiliofaces.request.simple;
 
 import java.util.ArrayList;
 import java.util.HashMap;

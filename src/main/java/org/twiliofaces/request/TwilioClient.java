@@ -10,26 +10,26 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.annotations.configuration.TwilioNumber;
+import org.twiliofaces.annotations.configuration.ApplicationSid;
 import org.twiliofaces.annotations.configuration.TwilioSid;
 import org.twiliofaces.annotations.configuration.TwilioToken;
-import org.twiliofaces.request.simple.SimpleTwilioCaller;
+import org.twiliofaces.request.simple.SimpleTwilioClient;
 
 @Named
 @RequestScoped
-public class TwilioCaller extends SimpleTwilioCaller
+public class TwilioClient extends SimpleTwilioClient
 {
-
    @Inject
-   public TwilioCaller(@TwilioNumber String from,
-            @TwilioSid String accountSid, @TwilioToken String authToken)
+   public TwilioClient(@TwilioSid String twilioSid,
+            @TwilioToken String twilioToken,
+            @ApplicationSid String applicationSid)
    {
-      super.setFrom(from);
-      super.setAuthToken(authToken);
-      super.setAccountSid(accountSid);
+      super.setTwilioSid(twilioSid);
+      super.setTwilioToken(twilioToken);
+      super.setApplicationSid(applicationSid);
    }
 
-   public TwilioCaller()
+   public TwilioClient()
    {
    }
 }

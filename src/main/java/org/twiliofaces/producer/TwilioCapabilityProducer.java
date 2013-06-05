@@ -7,43 +7,32 @@
 package org.twiliofaces.producer;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import org.twiliofaces.annotations.configuration.ApplicationSid;
 import org.twiliofaces.annotations.configuration.TwilioClientToken;
-import org.twiliofaces.annotations.configuration.TwilioSid;
-import org.twiliofaces.annotations.configuration.TwilioToken;
+import org.twiliofaces.request.TwilioClient;
 
-import com.twilio.sdk.client.TwilioCapability;
-import com.twilio.sdk.client.TwilioCapability.DomainException;
-
+@RequestScoped
 public class TwilioCapabilityProducer implements Serializable
 {
-
+   Logger logger = Logger.getLogger(getClass().getName());
    private static final long serialVersionUID = 1L;
 
    @Inject
    FacesContext facesContext;
 
    @Inject
-   @TwilioSid
-   String twilioSid;
-
-   @Inject
-   @TwilioToken
-   String twilioToken;
-
-   @Inject
-   @ApplicationSid
-   String applicationSid;
+   TwilioClient twilioClient;
 
    @Produces
    @TwilioClientToken
@@ -54,11 +43,6 @@ public class TwilioCapabilityProducer implements Serializable
     */
    public String getTwilioClientToken(InjectionPoint injectionPoint)
    {
-      TwilioCapability capability = new TwilioCapability(twilioSid,
-               twilioToken);
-      if (applicationSid != null && !applicationSid.isEmpty())
-         capability.allowClientOutgoing(applicationSid);
-
       String client = injectionPoint.getAnnotated()
                .getAnnotation(TwilioClientToken.class).client();
       if (client == null)
@@ -66,23 +50,14 @@ public class TwilioCapabilityProducer implements Serializable
       if (client != null && client.trim().startsWith("#{") && client.trim().endsWith("}"))
       {
          Application app = facesContext.getApplication();
-         facesContext.getViewRoot();
-         ExpressionFactory exprFactory = app.getExpressionFactory();
          ELContext elContext = facesContext.getELContext();
+         logger.info("BEFORE: " + client);
+         ExpressionFactory exprFactory = app.getExpressionFactory();
          ValueExpression valExpr = exprFactory.createValueExpression(
                   elContext, client, Object.class);
          client = (String) valExpr.getValue(elContext);
+         logger.info("AFTER: " + client);
       }
-      capability.allowClientIncoming(client);
-
-      try
-      {
-         return capability.generateToken();
-      }
-      catch (DomainException e)
-      {
-         e.printStackTrace();
-      }
-      return null;
+      return twilioClient.generateToken(client);
    }
 }
