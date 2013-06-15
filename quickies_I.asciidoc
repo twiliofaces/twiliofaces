@@ -1,5 +1,7 @@
 = Quickies:startup
 Fiorenzo PiZza<fiorenzo.pizza@gmail.com>
+
+
 == create maven war project
 
 create war project, add some dependecies: java-e web api, twilio-sdk, twiliofaces
@@ -7,7 +9,7 @@ create war project, add some dependecies: java-e web api, twilio-sdk, twilioface
 
 ---
 
-== create a twilioscoped controller' some twiml pages
+== create a twilioscoped controler' some twiml pages
 
 
 l
