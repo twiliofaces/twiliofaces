@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.faces.application.Application;
@@ -22,7 +21,6 @@ import javax.inject.Inject;
 import org.twiliofaces.annotations.configuration.TwilioClientToken;
 import org.twiliofaces.request.TwilioClient;
 
-@RequestScoped
 public class TwilioCapabilityProducer implements Serializable
 {
    Logger logger = Logger.getLogger(getClass().getName());
@@ -34,13 +32,14 @@ public class TwilioCapabilityProducer implements Serializable
    @Inject
    TwilioClient twilioClient;
 
-   @Produces
-   @TwilioClientToken
    /**
     * 
-    * @param injectionPoint: you can use a resolvable expression like #{loginController.username}" or simple string like 'client'
+    * @param injectionPoint: you can use a resolvable expression like #{loginController.username}" or simple string like
+    *           'client'
     * @return
     */
+   @Produces
+   @TwilioClientToken
    public String getTwilioClientToken(InjectionPoint injectionPoint)
    {
       String client = injectionPoint.getAnnotated()

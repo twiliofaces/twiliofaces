@@ -24,9 +24,7 @@ public class TwilioClient extends SimpleTwilioClient
             @TwilioToken String twilioToken,
             @ApplicationSid String applicationSid)
    {
-      super.setTwilioSid(twilioSid);
-      super.setTwilioToken(twilioToken);
-      super.setApplicationSid(applicationSid);
+      super(twilioSid, twilioToken, applicationSid);
    }
 
    public TwilioClient()

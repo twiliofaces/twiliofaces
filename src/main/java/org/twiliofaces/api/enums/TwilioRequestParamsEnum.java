@@ -10,9 +10,12 @@ package org.twiliofaces.api.enums;
 public enum TwilioRequestParamsEnum {
 	AccountSid, 
 	ApiVersion, 
+	ApplicationSid,
+	Caller,
 	CallerName,
 	CallSid, 
 	CallStatus, 
+	
 	
 	DialSipCallId,
 	DialSipResponseCode,
@@ -26,6 +29,7 @@ public enum TwilioRequestParamsEnum {
 	FromCountry,
 	FromState, 
 	FromZip, 
+	PhoneNumber,
 	 
 	
 	RecordingDuration,

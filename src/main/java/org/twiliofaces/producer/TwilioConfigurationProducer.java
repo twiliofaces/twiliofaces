@@ -12,11 +12,14 @@ import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.twiliofaces.annotations.configuration.ApiVersion;
 import org.twiliofaces.annotations.configuration.ApplicationSid;
 import org.twiliofaces.annotations.configuration.TwilioNumber;
 import org.twiliofaces.annotations.configuration.TwilioSid;
 import org.twiliofaces.annotations.configuration.TwilioToken;
+import org.twiliofaces.annotations.notification.AccountSid;
 import org.twiliofaces.api.enums.TwilioConfigurationEnum;
+import org.twiliofaces.api.enums.TwilioRequestParamsEnum;
 
 public class TwilioConfigurationProducer implements Serializable
 {
@@ -24,6 +27,42 @@ public class TwilioConfigurationProducer implements Serializable
    private static final long serialVersionUID = 1L;
    @Inject
    FacesContext facesContext;
+
+   @Produces
+   @AccountSid
+   public String getAccountSid()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.AccountSid.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @ApiVersion
+   public String getApiVersion()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.ApiVersion.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @ApplicationSid
+   public String getApplicationSid()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null)
+         return facesContext.getExternalContext().getInitParameter(
+                  TwilioConfigurationEnum.APPLICATION_SID.name());
+      return null;
+   }
 
    @Produces
    @TwilioNumber
@@ -55,13 +94,4 @@ public class TwilioConfigurationProducer implements Serializable
       return null;
    }
 
-   @Produces
-   @ApplicationSid
-   public String getApplicationSid()
-   {
-      if (facesContext != null && facesContext.getExternalContext() != null)
-         return facesContext.getExternalContext().getInitParameter(
-                  TwilioConfigurationEnum.APPLICATION_SID.name());
-      return null;
-   }
 }

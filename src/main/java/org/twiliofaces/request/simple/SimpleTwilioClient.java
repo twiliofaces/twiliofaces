@@ -23,6 +23,13 @@ public class SimpleTwilioClient
    {
    }
 
+   public SimpleTwilioClient(String twilioSid, String twilioToken, String applicationSid)
+   {
+      this.twilioSid = twilioSid;
+      this.twilioToken = twilioToken;
+      this.applicationSid = applicationSid;
+   }
+
    public String generateToken(String client)
    {
       return setClient(client).generateToken();

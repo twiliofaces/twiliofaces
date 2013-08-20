@@ -17,17 +17,18 @@ import org.twiliofaces.request.simple.SimpleTwilioSmsSender;
 
 @Named
 @RequestScoped
-public class TwilioSmsSender extends SimpleTwilioSmsSender {
+public class TwilioSmsSender extends SimpleTwilioSmsSender
+{
 
-	@Inject
-	public TwilioSmsSender(@TwilioNumber String from,
-			@TwilioSid String accountSid, @TwilioToken String authToken) {
-		super.setFrom(from);
-		super.setAuthToken(authToken);
-		super.setAccountSid(accountSid);
-	}
+   @Inject
+   public TwilioSmsSender(@TwilioNumber String from,
+            @TwilioSid String accountSid, @TwilioToken String authToken)
+   {
+      super(from, accountSid, authToken);
+   }
 
-	public TwilioSmsSender() {
-	}
+   public TwilioSmsSender()
+   {
+   }
 
 }

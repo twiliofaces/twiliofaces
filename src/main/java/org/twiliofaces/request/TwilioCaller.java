@@ -24,9 +24,7 @@ public class TwilioCaller extends SimpleTwilioCaller
    public TwilioCaller(@TwilioNumber String from,
             @TwilioSid String accountSid, @TwilioToken String authToken)
    {
-      super.setFrom(from);
-      super.setAuthToken(authToken);
-      super.setAccountSid(accountSid);
+      super(from, accountSid, authToken);
    }
 
    public TwilioCaller()

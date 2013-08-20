@@ -10,6 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.twiliofaces.annotations.configuration.TwilioNumber;
+import org.twiliofaces.annotations.configuration.TwilioSid;
+import org.twiliofaces.annotations.configuration.TwilioToken;
+
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.CallFactory;
@@ -32,7 +36,14 @@ public class SimpleTwilioCaller
 
    public SimpleTwilioCaller()
    {
+   }
 
+   public SimpleTwilioCaller(String from,
+            String accountSid, String authToken)
+   {
+      this.from = from;
+      this.authToken = authToken;
+      this.accountSid = accountSid;
    }
 
    public String simpleCall(String from, String to, String accountSid,

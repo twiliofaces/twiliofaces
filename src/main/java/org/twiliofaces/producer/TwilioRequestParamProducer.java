@@ -13,10 +13,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.twiliofaces.annotations.TwilioRequestParams;
-import org.twiliofaces.annotations.configuration.ApiVersion;
-import org.twiliofaces.annotations.notification.AccountSid;
 import org.twiliofaces.annotations.notification.CallSid;
 import org.twiliofaces.annotations.notification.CallStatus;
+import org.twiliofaces.annotations.notification.Caller;
 import org.twiliofaces.annotations.notification.CallerName;
 import org.twiliofaces.annotations.notification.Digits;
 import org.twiliofaces.annotations.notification.Direction;
@@ -25,6 +24,8 @@ import org.twiliofaces.annotations.notification.From;
 import org.twiliofaces.annotations.notification.FromCity;
 import org.twiliofaces.annotations.notification.FromCountry;
 import org.twiliofaces.annotations.notification.FromState;
+import org.twiliofaces.annotations.notification.FromZip;
+import org.twiliofaces.annotations.notification.PhoneNumber;
 import org.twiliofaces.annotations.notification.RecordingDuration;
 import org.twiliofaces.annotations.notification.RecordingSid;
 import org.twiliofaces.annotations.notification.RecordingUrl;
@@ -75,27 +76,14 @@ public class TwilioRequestParamProducer implements Serializable
    }
 
    @Produces
-   @AccountSid
-   public String getAccountSid()
+   @Caller
+   public String getCaller()
    {
       if (facesContext != null && facesContext.getExternalContext() != null
                && facesContext.getExternalContext().getRequestParameterMap() != null)
       {
          return facesContext.getExternalContext().getRequestParameterMap()
-                  .get(TwilioRequestParamsEnum.AccountSid.name());
-      }
-      return null;
-   }
-
-   @Produces
-   @ApiVersion
-   public String getApiVersion()
-   {
-      if (facesContext != null && facesContext.getExternalContext() != null
-               && facesContext.getExternalContext().getRequestParameterMap() != null)
-      {
-         return facesContext.getExternalContext().getRequestParameterMap()
-                  .get(TwilioRequestParamsEnum.ApiVersion.name());
+                  .get(TwilioRequestParamsEnum.Caller.name());
       }
       return null;
    }
@@ -278,6 +266,32 @@ public class TwilioRequestParamProducer implements Serializable
       {
          return facesContext.getExternalContext().getRequestParameterMap()
                   .get(TwilioRequestParamsEnum.FromState.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @FromZip
+   public String getFromZip()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.FromZip.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @PhoneNumber
+   public String getPhoneNumber()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.PhoneNumber.name());
       }
       return null;
    }
