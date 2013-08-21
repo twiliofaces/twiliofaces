@@ -10,5 +10,6 @@ public class Constants
 {
    public static final String FAMILY = "twiliofaces";
    public static final String RENDER_TYPE = "customComponent.twiliofaces";
+   public static final Object VERSION = "1.2.4";
 
 }

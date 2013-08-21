@@ -18,8 +18,8 @@ import org.twiliofaces.annotations.configuration.TwilioNumber;
 import org.twiliofaces.annotations.configuration.TwilioSid;
 import org.twiliofaces.annotations.configuration.TwilioToken;
 import org.twiliofaces.annotations.notification.AccountSid;
-import org.twiliofaces.api.enums.TwilioConfigurationEnum;
 import org.twiliofaces.api.enums.TwilioRequestParamsEnum;
+import org.twiliofaces.extension.TwilioManager;
 
 public class TwilioConfigurationProducer implements Serializable
 {
@@ -27,6 +27,9 @@ public class TwilioConfigurationProducer implements Serializable
    private static final long serialVersionUID = 1L;
    @Inject
    FacesContext facesContext;
+
+   @Inject
+   TwilioManager twilioManager;
 
    @Produces
    @AccountSid
@@ -58,9 +61,8 @@ public class TwilioConfigurationProducer implements Serializable
    @ApplicationSid
    public String getApplicationSid()
    {
-      if (facesContext != null && facesContext.getExternalContext() != null)
-         return facesContext.getExternalContext().getInitParameter(
-                  TwilioConfigurationEnum.APPLICATION_SID.name());
+      if (twilioManager != null)
+         return twilioManager.getApplicationSid();
       return null;
    }
 
@@ -68,9 +70,8 @@ public class TwilioConfigurationProducer implements Serializable
    @TwilioNumber
    public String getTwilioNumber()
    {
-      if (facesContext != null && facesContext.getExternalContext() != null)
-         return facesContext.getExternalContext().getInitParameter(
-                  TwilioConfigurationEnum.TWILIO_NUMBER.name());
+      if (twilioManager != null)
+         return twilioManager.getTwilioNumber();
       return null;
    }
 
@@ -78,9 +79,8 @@ public class TwilioConfigurationProducer implements Serializable
    @TwilioSid
    public String getTwilioSid()
    {
-      if (facesContext != null && facesContext.getExternalContext() != null)
-         return facesContext.getExternalContext().getInitParameter(
-                  TwilioConfigurationEnum.TWILIO_SID.name());
+      if (twilioManager != null)
+         return twilioManager.getTwilioSid();
       return null;
    }
 
@@ -88,9 +88,8 @@ public class TwilioConfigurationProducer implements Serializable
    @TwilioToken
    public String getTwilioToken()
    {
-      if (facesContext != null && facesContext.getExternalContext() != null)
-         return facesContext.getExternalContext().getInitParameter(
-                  TwilioConfigurationEnum.TWILIO_TOKEN.name());
+      if (twilioManager != null)
+         return twilioManager.getTwilioToken();
       return null;
    }
 
