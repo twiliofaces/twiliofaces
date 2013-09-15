@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.twiliofaces.annotations.configuration.TwilioClientToken;
+import org.twiliofaces.component.api.util.ELUtils;
 import org.twiliofaces.request.TwilioClient;
 
 public class TwilioCapabilityProducer implements Serializable
@@ -46,16 +47,18 @@ public class TwilioCapabilityProducer implements Serializable
                .getAnnotation(TwilioClientToken.class).client();
       if (client == null)
          return "";
-      if (client != null && client.trim().startsWith("#{") && client.trim().endsWith("}"))
+      // if (client != null && client.trim().startsWith("#{") && client.trim().endsWith("}"))
+      if (ELUtils.isElExpression(client))
       {
-         Application app = facesContext.getApplication();
-         ELContext elContext = facesContext.getELContext();
-         logger.info("BEFORE: " + client);
-         ExpressionFactory exprFactory = app.getExpressionFactory();
-         ValueExpression valExpr = exprFactory.createValueExpression(
-                  elContext, client, Object.class);
-         client = (String) valExpr.getValue(elContext);
-         logger.info("AFTER: " + client);
+         client = ELUtils.resolveElExpression(client, facesContext);
+         // Application app = facesContext.getApplication();
+         // ELContext elContext = facesContext.getELContext();
+         // logger.info("BEFORE: " + client);
+         // ExpressionFactory exprFactory = app.getExpressionFactory();
+         // ValueExpression valExpr = exprFactory.createValueExpression(
+         // elContext, client, Object.class);
+         // client = (String) valExpr.getValue(elContext);
+         // logger.info("AFTER: " + client);
       }
       return twilioClient.generateToken(client);
    }

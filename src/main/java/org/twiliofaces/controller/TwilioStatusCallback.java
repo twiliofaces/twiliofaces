@@ -14,8 +14,8 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.annotations.configuration.ApiVersion;
 import org.twiliofaces.annotations.notification.AccountSid;
+import org.twiliofaces.annotations.notification.ApiVersion;
 import org.twiliofaces.annotations.notification.CallSid;
 import org.twiliofaces.annotations.notification.CallStatus;
 import org.twiliofaces.annotations.notification.CallerName;

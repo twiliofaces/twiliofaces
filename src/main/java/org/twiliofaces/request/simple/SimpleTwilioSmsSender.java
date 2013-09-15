@@ -12,10 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.twiliofaces.annotations.configuration.TwilioNumber;
-import org.twiliofaces.annotations.configuration.TwilioSid;
-import org.twiliofaces.annotations.configuration.TwilioToken;
-
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.factory.SmsFactory;

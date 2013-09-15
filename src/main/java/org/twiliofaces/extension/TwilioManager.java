@@ -7,10 +7,13 @@
 package org.twiliofaces.extension;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 
+import org.twiliofaces.api.configuration.TwilioAccount;
 import org.twiliofaces.api.event.StatusCallbackEvent;
 
 @ApplicationScoped
@@ -18,13 +21,9 @@ public class TwilioManager implements Serializable
 {
 
    private static final long serialVersionUID = 1L;
-   
-   private TwilioScopedMap twilioScopedMap;
 
-   private String applicationSid;
-   private String twilioNumber;
-   private String twilioSid;
-   private String twilioToken;
+   private TwilioScopedMap twilioScopedMap;
+   private Map<String, TwilioAccount> twilioAccounts;
 
    public TwilioManager()
    {
@@ -85,46 +84,68 @@ public class TwilioManager implements Serializable
 
    public String getApplicationSid()
    {
-      return applicationSid;
+      return getDefaultAccount().getApplicationSid();
    }
 
    public void setApplicationSid(String applicationSid)
    {
-      this.applicationSid = applicationSid;
+      getDefaultAccount().setApplicationSid(applicationSid);
    }
 
    public String getTwilioNumber()
    {
-      return twilioNumber;
+      return getDefaultAccount().getTwilioNumber();
    }
 
    public void setTwilioNumber(String twilioNumber)
    {
-      this.twilioNumber = twilioNumber;
+      getDefaultAccount().setTwilioNumber(twilioNumber);
    }
 
    public String getTwilioSid()
    {
-      return twilioSid;
+      return getDefaultAccount().getTwilioSid();
    }
 
    public void setTwilioSid(String twilioSid)
    {
-      this.twilioSid = twilioSid;
+      getDefaultAccount().setTwilioSid(twilioSid);
    }
 
    public String getTwilioToken()
    {
-      return twilioToken;
+      return getDefaultAccount().getTwilioToken();
    }
 
    public void setTwilioToken(String twilioToken)
    {
-      this.twilioToken = twilioToken;
+      getDefaultAccount().setTwilioToken(twilioToken);
    }
 
    public void setTwilioScopedMap(TwilioScopedMap twilioScopedMap)
    {
       this.twilioScopedMap = twilioScopedMap;
+   }
+
+   public Map<String, TwilioAccount> getTwilioAccounts()
+   {
+      if (twilioAccounts == null)
+         this.twilioAccounts = new HashMap<String, TwilioAccount>();
+      return twilioAccounts;
+   }
+
+   public TwilioAccount getDefaultAccount()
+   {
+      return getTwilioAccounts().get("default");
+   }
+
+   public TwilioAccount getAccount(String account)
+   {
+      return getTwilioAccounts().get(account);
+   }
+
+   public void setTwilioAccounts(Map<String, TwilioAccount> twilioAccounts)
+   {
+      this.twilioAccounts = twilioAccounts;
    }
 }

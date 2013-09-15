@@ -38,37 +38,52 @@ public class StartupListener implements ServletContextListener
    public void contextInitialized(ServletContextEvent sce)
    {
       logger.info("context Initialized");
-      setApplicationSid(sce.getServletContext());
-      setTwilioNumber(sce.getServletContext());
-      setTwilioSid(sce.getServletContext());
-      setTwilioToken(sce.getServletContext());
+      if (twilioManager.getDefaultAccount() == null)
+      {
+         setApplicationSid(sce.getServletContext());
+         setTwilioNumber(sce.getServletContext());
+         setTwilioSid(sce.getServletContext());
+         setTwilioToken(sce.getServletContext());
+      }
+      else
+      {
+         logger.info("twilio default account is already configired");
+      }
       logger.log(Level.INFO, "Twiliofaces {0} is on!", Constants.VERSION);
    }
 
    public void setApplicationSid(ServletContext sc)
    {
-      if (sc != null)
+      if (sc != null && sc.getInitParameter(
+               TwilioConfigurationEnum.APPLICATION_SID.name()) != null && !sc.getInitParameter(
+               TwilioConfigurationEnum.APPLICATION_SID.name()).isEmpty())
          twilioManager.setApplicationSid(sc.getInitParameter(
                   TwilioConfigurationEnum.APPLICATION_SID.name()));
    }
 
    public void setTwilioNumber(ServletContext sc)
    {
-      if (sc != null)
+      if (sc != null && sc.getInitParameter(
+               TwilioConfigurationEnum.TWILIO_NUMBER.name()) != null && !sc.getInitParameter(
+               TwilioConfigurationEnum.TWILIO_NUMBER.name()).isEmpty())
          twilioManager.setTwilioNumber(sc.getInitParameter(
                   TwilioConfigurationEnum.TWILIO_NUMBER.name()));
    }
 
    public void setTwilioSid(ServletContext sc)
    {
-      if (sc != null)
+      if (sc != null && sc.getInitParameter(
+               TwilioConfigurationEnum.TWILIO_SID.name()) != null && !sc.getInitParameter(
+               TwilioConfigurationEnum.TWILIO_SID.name()).isEmpty())
          twilioManager.setTwilioSid(sc.getInitParameter(
                   TwilioConfigurationEnum.TWILIO_SID.name()));
    }
 
    public void setTwilioToken(ServletContext sc)
    {
-      if (sc != null)
+      if (sc != null && sc.getInitParameter(
+               TwilioConfigurationEnum.TWILIO_TOKEN.name()) != null && !sc.getInitParameter(
+               TwilioConfigurationEnum.TWILIO_TOKEN.name()).isEmpty())
          twilioManager.setTwilioToken(sc.getInitParameter(
                   TwilioConfigurationEnum.TWILIO_TOKEN.name()));
    }

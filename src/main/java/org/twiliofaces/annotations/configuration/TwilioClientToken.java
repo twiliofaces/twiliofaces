@@ -26,8 +26,9 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target({ METHOD, FIELD, PARAMETER })
-public @interface TwilioClientToken {
+public @interface TwilioClientToken
+{
 
-	@Nonbinding
-	String client() default "";
+   @Nonbinding
+   String client() default "";
 }
