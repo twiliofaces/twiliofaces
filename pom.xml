@@ -16,11 +16,9 @@
 	<version>1.2.4-SNAPSHOT</version>
 	<name>twiliofaces</name>
 	<url>http://twiliofaces.org</url>
-	<description>Twiliofaces - how to use twilio services with Java EE 6 Technologies (jsf, cdi)</description>
+	<description>Twiliofaces - how to use twilio services with Java EE Technologies (jsf, cdi, ejb, jms)</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+
 
 
 	<licenses>
@@ -42,6 +40,7 @@
 			<email>samuele.pasini@gmail.com</email>
 		</developer>
 	</developers>
+
 	<prerequisites>
 		<maven>3.0</maven>
 	</prerequisites>
@@ -51,22 +50,28 @@
 		<developerConnection>scm:git:git@github.com:twiliofaces/twiliofaces.git</developerConnection>
 		<url>http://github.com/twiliofaces/twiliofaces</url>
 	</scm>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javaee-api.version>6.0</javaee-api.version>
+		<twilio-java-sdk.version>3.3.16</twilio-java-sdk.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>6.0</version>
+			<version>${javaee-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.twilio.sdk</groupId>
 			<artifactId>twilio-java-sdk</artifactId>
-			<version>3.3.15</version>
+			<version>${twilio-java-sdk.version}</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+	
 	<distributionManagement>
 		<snapshotRepository>
 			<id>sonatype-nexus-snapshots</id>
