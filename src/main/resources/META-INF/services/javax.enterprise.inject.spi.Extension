@@ -1,2 +1,2 @@
-org.twiliofaces.extension.TwilioContextExtension
-org.twiliofaces.extension.TwilioConfigExtension
+org.twiliofaces.cdi.extension.TwilioContextExtension
+org.twiliofaces.cdi.extension.TwilioConfigExtension
