@@ -4,7 +4,7 @@
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.twiliofaces.controller.request;
+package org.twiliofaces.web.callback;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
@@ -27,7 +27,7 @@ import org.twiliofaces.inject.notification.To;
 
 @RequestScoped
 @Named
-public class TwilioStatusCallback implements Serializable
+public class StatusCallback implements Serializable
 {
 
    Logger logger = Logger.getLogger(getClass().getName());

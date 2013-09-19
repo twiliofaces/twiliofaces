@@ -14,8 +14,8 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.twiliofaces.cdi.doers.Client;
 import org.twiliofaces.cdi.producer.util.ELUtils;
-import org.twiliofaces.controller.request.TwilioClient;
 import org.twiliofaces.inject.configuration.TwilioCapabilityToken;
 
 public class TwilioCapabilityProducer implements Serializable
@@ -27,13 +27,13 @@ public class TwilioCapabilityProducer implements Serializable
    FacesContext facesContext;
 
    @Inject
-   TwilioClient twilioClient;
+   Client twilioClient;
 
    /**
     * 
     * @param injectionPoint: you can use a resolvable expression like #{loginController.username}" or simple string like
     *           'client'
-    * @return
+    * @return the token usable in javascript code
     */
    @Produces
    @TwilioCapabilityToken

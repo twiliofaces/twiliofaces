@@ -4,14 +4,14 @@
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.twiliofaces.cdi.request.simple;
+package org.twiliofaces.cdi.doers.simple;
 
 import java.util.logging.Logger;
 
 import com.twilio.sdk.client.TwilioCapability;
 import com.twilio.sdk.client.TwilioCapability.DomainException;
 
-public class SimpleTwilioClient
+public class SimpleClient
 {
    Logger logger = Logger.getLogger(getClass().getName());
    private String twilioSid;
@@ -19,11 +19,11 @@ public class SimpleTwilioClient
    private String applicationSid;
    private String client;
 
-   public SimpleTwilioClient()
+   public SimpleClient()
    {
    }
 
-   public SimpleTwilioClient(String twilioSid, String twilioToken, String applicationSid)
+   public SimpleClient(String twilioSid, String twilioToken, String applicationSid)
    {
       this.twilioSid = twilioSid;
       this.twilioToken = twilioToken;
@@ -61,7 +61,7 @@ public class SimpleTwilioClient
       return twilioSid;
    }
 
-   public SimpleTwilioClient setTwilioSid(String twilioSid)
+   public SimpleClient setTwilioSid(String twilioSid)
    {
       this.twilioSid = twilioSid;
       return this;
@@ -72,7 +72,7 @@ public class SimpleTwilioClient
       return twilioToken;
    }
 
-   public SimpleTwilioClient setTwilioToken(String twilioToken)
+   public SimpleClient setTwilioToken(String twilioToken)
    {
       this.twilioToken = twilioToken;
       return this;
@@ -83,7 +83,7 @@ public class SimpleTwilioClient
       return applicationSid;
    }
 
-   public SimpleTwilioClient setApplicationSid(String applicationSid)
+   public SimpleClient setApplicationSid(String applicationSid)
    {
       this.applicationSid = applicationSid;
       return this;
@@ -94,7 +94,7 @@ public class SimpleTwilioClient
       return client;
    }
 
-   public SimpleTwilioClient setClient(String client)
+   public SimpleClient setClient(String client)
    {
       this.client = client;
       return this;

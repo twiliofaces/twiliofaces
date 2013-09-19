@@ -4,7 +4,7 @@
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.twiliofaces.cdi.request.simple;
+package org.twiliofaces.cdi.doers.simple;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +16,10 @@ import com.twilio.sdk.resource.factory.CallFactory;
 import com.twilio.sdk.resource.instance.Account;
 import com.twilio.sdk.resource.instance.Call;
 
-public class SimpleTwilioCaller
+public class SimpleCaller
 {
 
    Logger logger = Logger.getLogger(getClass().getName());
-
    private String from;
    private String accountSid;
    private String authToken;
@@ -30,11 +29,11 @@ public class SimpleTwilioCaller
 
    private Map<String, String> callParams;
 
-   public SimpleTwilioCaller()
+   public SimpleCaller()
    {
    }
 
-   public SimpleTwilioCaller(String from,
+   public SimpleCaller(String from,
             String accountSid, String authToken)
    {
       this.from = from;
@@ -80,13 +79,13 @@ public class SimpleTwilioCaller
       return callParams;
    }
 
-   public SimpleTwilioCaller setCallParams(Map<String, String> callParams)
+   public SimpleCaller setCallParams(Map<String, String> callParams)
    {
       this.callParams = callParams;
       return this;
    }
 
-   public SimpleTwilioCaller addCallParam(String key, String value)
+   public SimpleCaller addCallParam(String key, String value)
    {
       getCallParams().put(key, value);
       return this;
@@ -97,7 +96,7 @@ public class SimpleTwilioCaller
       return from;
    }
 
-   public SimpleTwilioCaller setFrom(String from)
+   public SimpleCaller setFrom(String from)
    {
       getCallParams().put("From", from);
       return this;
@@ -108,7 +107,7 @@ public class SimpleTwilioCaller
       return to;
    }
 
-   public SimpleTwilioCaller setTo(String to)
+   public SimpleCaller setTo(String to)
    {
       getCallParams().put("To", to);
       return this;
@@ -119,7 +118,7 @@ public class SimpleTwilioCaller
       return accountSid;
    }
 
-   public SimpleTwilioCaller setAccountSid(String accountSid)
+   public SimpleCaller setAccountSid(String accountSid)
    {
       this.accountSid = accountSid;
       return this;
@@ -130,7 +129,7 @@ public class SimpleTwilioCaller
       return authToken;
    }
 
-   public SimpleTwilioCaller setAuthToken(String authToken)
+   public SimpleCaller setAuthToken(String authToken)
    {
       this.authToken = authToken;
       return this;
@@ -141,7 +140,7 @@ public class SimpleTwilioCaller
       return endpoint;
    }
 
-   public SimpleTwilioCaller setEndpoint(String endpoint)
+   public SimpleCaller setEndpoint(String endpoint)
    {
       getCallParams().put("Url", endpoint);
       return this;
@@ -150,32 +149,32 @@ public class SimpleTwilioCaller
    /*
     * FAST METHODS
     */
-   public SimpleTwilioCaller from(String from)
+   public SimpleCaller from(String from)
    {
       return setFrom(from);
    }
 
-   public SimpleTwilioCaller to(String to)
+   public SimpleCaller to(String to)
    {
       return setTo(to);
    }
 
-   public SimpleTwilioCaller accountSid(String accountSid)
+   public SimpleCaller accountSid(String accountSid)
    {
       return setAccountSid(accountSid);
    }
 
-   public SimpleTwilioCaller authToken(String authToken)
+   public SimpleCaller authToken(String authToken)
    {
       return setAuthToken(authToken);
    }
 
-   public SimpleTwilioCaller endpoint(String endpoint)
+   public SimpleCaller endpoint(String endpoint)
    {
       return setEndpoint(endpoint);
    }
 
-   public SimpleTwilioCaller param(String key, String value)
+   public SimpleCaller param(String key, String value)
    {
       return addCallParam(key, value);
    }

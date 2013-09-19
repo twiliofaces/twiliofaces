@@ -4,7 +4,7 @@
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.twiliofaces.controller.request.pojo;
+package org.twiliofaces.cdi.producer.util;
 
 import java.io.Serializable;
 import java.util.HashMap;

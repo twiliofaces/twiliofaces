@@ -4,7 +4,7 @@
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.twiliofaces.cdi.request.simple;
+package org.twiliofaces.cdi.doers.simple;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,11 +18,10 @@ import com.twilio.sdk.resource.factory.SmsFactory;
 import com.twilio.sdk.resource.instance.Account;
 import com.twilio.sdk.resource.instance.Sms;
 
-public class SimpleTwilioSmsSender
+public class SimpleSender
 {
 
    Logger logger = Logger.getLogger(getClass().getName());
-
    private String accountSid;
    private String authToken;
    private String from;
@@ -31,11 +30,11 @@ public class SimpleTwilioSmsSender
    private String body;
    private Map<String, String> smsParams;
 
-   public SimpleTwilioSmsSender()
+   public SimpleSender()
    {
    }
 
-   public SimpleTwilioSmsSender(String from,
+   public SimpleSender(String from,
             String accountSid, String authToken)
    {
       this.accountSid = accountSid;
@@ -98,13 +97,13 @@ public class SimpleTwilioSmsSender
       return smsParams;
    }
 
-   public SimpleTwilioSmsSender setSmsParams(Map<String, String> smsParams)
+   public SimpleSender setSmsParams(Map<String, String> smsParams)
    {
       this.smsParams = smsParams;
       return this;
    }
 
-   public SimpleTwilioSmsSender addSmsParam(String key, String value)
+   public SimpleSender addSmsParam(String key, String value)
    {
       getSmsParams().put(key, value);
       return this;
@@ -115,7 +114,7 @@ public class SimpleTwilioSmsSender
       return from;
    }
 
-   public SimpleTwilioSmsSender setFrom(String from)
+   public SimpleSender setFrom(String from)
    {
       this.from = from;
       return this;
@@ -126,7 +125,7 @@ public class SimpleTwilioSmsSender
       return to;
    }
 
-   public SimpleTwilioSmsSender setTo(String to)
+   public SimpleSender setTo(String to)
    {
       this.to = to;
       return this;
@@ -137,7 +136,7 @@ public class SimpleTwilioSmsSender
       return accountSid;
    }
 
-   public SimpleTwilioSmsSender setAccountSid(String accountSid)
+   public SimpleSender setAccountSid(String accountSid)
    {
       this.accountSid = accountSid;
       return this;
@@ -148,7 +147,7 @@ public class SimpleTwilioSmsSender
       return authToken;
    }
 
-   public SimpleTwilioSmsSender setAuthToken(String authToken)
+   public SimpleSender setAuthToken(String authToken)
    {
       this.authToken = authToken;
       return this;
@@ -159,7 +158,7 @@ public class SimpleTwilioSmsSender
       return body;
    }
 
-   public SimpleTwilioSmsSender setBody(String body)
+   public SimpleSender setBody(String body)
    {
       this.body = body;
       return this;
@@ -172,13 +171,13 @@ public class SimpleTwilioSmsSender
       return recipients;
    }
 
-   public SimpleTwilioSmsSender setRecipients(List<String> recipients)
+   public SimpleSender setRecipients(List<String> recipients)
    {
       this.recipients = recipients;
       return this;
    }
 
-   public SimpleTwilioSmsSender addRecipient(String recipient)
+   public SimpleSender addRecipient(String recipient)
    {
       getRecipients().add(recipient);
       return this;
