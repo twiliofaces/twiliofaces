@@ -174,7 +174,8 @@ public class TwilioConfigurationProducer implements Serializable
       if (twilioManager != null)
       {
          if (accountName == null || accountName.isEmpty() || accountName.toLowerCase().equals("default"))
-            return new Caller();
+            return new Caller(twilioManager.getDefaultAccount().getTwilioNumber(), twilioManager.getDefaultAccount()
+                     .getTwilioSid(), twilioManager.getDefaultAccount().getTwilioToken());
          else
          {
             Account account;
@@ -186,7 +187,7 @@ public class TwilioConfigurationProducer implements Serializable
             {
                account = twilioManager.getAccount(accountName);
                if (account != null)
-                  new Caller(account.getTwilioNumber(), account
+                  return new Caller(account.getTwilioNumber(), account
                            .getTwilioSid(), account.getTwilioToken());
             }
          }
@@ -203,7 +204,8 @@ public class TwilioConfigurationProducer implements Serializable
       if (twilioManager != null)
       {
          if (accountName == null || accountName.isEmpty() || accountName.toLowerCase().equals("default"))
-            return new Sender();
+            return new Sender(twilioManager.getDefaultAccount().getTwilioNumber(), twilioManager.getDefaultAccount()
+                     .getTwilioSid(), twilioManager.getDefaultAccount().getTwilioToken());
          else
          {
             Account account;
@@ -215,7 +217,7 @@ public class TwilioConfigurationProducer implements Serializable
             {
                account = twilioManager.getAccount(accountName);
                if (account != null)
-                  new Sender(account.getTwilioNumber(), account
+                  return new Sender(account.getTwilioNumber(), account
                            .getTwilioSid(), account.getTwilioToken());
             }
          }

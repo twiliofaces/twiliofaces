@@ -32,7 +32,7 @@ public class SimpleClient
 
    public String generateToken(String client)
    {
-      return setClient(client).generateToken();
+      return client(client).generateToken();
    }
 
    public String generateToken()
@@ -97,6 +97,26 @@ public class SimpleClient
    public SimpleClient setClient(String client)
    {
       this.client = client;
+      return this;
+   }
+
+   // FAST METHODS
+
+   public SimpleClient twilioToken(String twilioToken)
+   {
+      setTwilioToken(twilioToken);
+      return this;
+   }
+
+   public SimpleClient applicationSid(String applicationSid)
+   {
+      setApplicationSid(applicationSid);
+      return this;
+   }
+
+   public SimpleClient client(String client)
+   {
+      setClient(client);
       return this;
    }
 }

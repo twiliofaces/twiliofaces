@@ -27,7 +27,7 @@ public class SimpleCaller
    private String to;
    private String endpoint;
 
-   private Map<String, String> callParams;
+   private Map<String, String> params;
 
    public SimpleCaller()
    {
@@ -56,38 +56,38 @@ public class SimpleCaller
       Account mainAccount = client.getAccount();
       CallFactory callFactory = mainAccount.getCallFactory();
 
-      Call call = callFactory.create(getCallParams());
+      Call call = callFactory.create(getParams());
       return call.getSid();
    }
 
    public Call call(String accountSid, String authToken,
-            Map<String, String> callParams) throws TwilioRestException
+            Map<String, String> params) throws TwilioRestException
    {
-      authToken(authToken).accountSid(accountSid).setCallParams(
-               callParams);
+      authToken(authToken).accountSid(accountSid).setParams(
+               params);
       TwilioRestClient client = new TwilioRestClient(getAccountSid(),
                getAuthToken());
       Account mainAccount = client.getAccount();
       CallFactory callFactory = mainAccount.getCallFactory();
-      return callFactory.create(getCallParams());
+      return callFactory.create(getParams());
    }
 
-   public Map<String, String> getCallParams()
+   public Map<String, String> getParams()
    {
-      if (callParams == null)
-         this.callParams = new HashMap<String, String>();
-      return callParams;
+      if (params == null)
+         this.params = new HashMap<String, String>();
+      return params;
    }
 
-   public SimpleCaller setCallParams(Map<String, String> callParams)
+   public SimpleCaller setParams(Map<String, String> params)
    {
-      this.callParams = callParams;
+      this.params = params;
       return this;
    }
 
-   public SimpleCaller addCallParam(String key, String value)
+   public SimpleCaller addParam(String key, String value)
    {
-      getCallParams().put(key, value);
+      getParams().put(key, value);
       return this;
    }
 
@@ -98,7 +98,7 @@ public class SimpleCaller
 
    public SimpleCaller setFrom(String from)
    {
-      getCallParams().put("From", from);
+      getParams().put("From", from);
       return this;
    }
 
@@ -109,7 +109,7 @@ public class SimpleCaller
 
    public SimpleCaller setTo(String to)
    {
-      getCallParams().put("To", to);
+      getParams().put("To", to);
       return this;
    }
 
@@ -142,7 +142,7 @@ public class SimpleCaller
 
    public SimpleCaller setEndpoint(String endpoint)
    {
-      getCallParams().put("Url", endpoint);
+      getParams().put("Url", endpoint);
       return this;
    }
 
@@ -176,7 +176,7 @@ public class SimpleCaller
 
    public SimpleCaller param(String key, String value)
    {
-      return addCallParam(key, value);
+      return addParam(key, value);
    }
 
 }

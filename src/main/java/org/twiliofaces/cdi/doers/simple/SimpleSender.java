@@ -48,17 +48,14 @@ public class SimpleSender
                getAuthToken());
       Account account = client.getAccount();
       SmsFactory smsFactory = account.getSmsFactory();
-      getSmsParams().put("To", getTo());
-      getSmsParams().put("From", getFrom());
-      getSmsParams().put("Body", getBody());
-      return smsFactory.create(smsParams).getSid();
+      return smsFactory.create(getSmsParams()).getSid();
    }
 
    public String simpleSend(String from, String to, String body,
             String accountSid, String authToken) throws TwilioRestException
    {
-      setAccountSid(accountSid).setAuthToken(authToken).setTo(to)
-               .setFrom(from).setBody(body);
+      accountSid(accountSid).authToken(authToken).to(to)
+               .from(from).body(body);
       return send();
    }
 
@@ -77,8 +74,6 @@ public class SimpleSender
 
    public List<Sms> multimpleSend() throws TwilioRestException
    {
-      getSmsParams().put("From", getFrom());
-      getSmsParams().put("Body", getBody());
       List<Sms> results = new ArrayList<Sms>();
       for (String recipient : getRecipients())
       {
@@ -116,7 +111,7 @@ public class SimpleSender
 
    public SimpleSender setFrom(String from)
    {
-      this.from = from;
+      getSmsParams().put("From", from);
       return this;
    }
 
@@ -127,7 +122,7 @@ public class SimpleSender
 
    public SimpleSender setTo(String to)
    {
-      this.to = to;
+      getSmsParams().put("To", to);
       return this;
    }
 
@@ -160,7 +155,7 @@ public class SimpleSender
 
    public SimpleSender setBody(String body)
    {
-      this.body = body;
+      getSmsParams().put("Body", body);
       return this;
    }
 
@@ -182,4 +177,33 @@ public class SimpleSender
       getRecipients().add(recipient);
       return this;
    }
+
+   /*
+    * FAST METHODS
+    */
+   public SimpleSender from(String from)
+   {
+      return setFrom(from);
+   }
+
+   public SimpleSender to(String to)
+   {
+      return setTo(to);
+   }
+
+   public SimpleSender accountSid(String accountSid)
+   {
+      return setAccountSid(accountSid);
+   }
+
+   public SimpleSender authToken(String authToken)
+   {
+      return setAuthToken(authToken);
+   }
+
+   public SimpleSender body(String body)
+   {
+      return setBody(body);
+   }
+
 }
