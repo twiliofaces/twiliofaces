@@ -26,6 +26,7 @@ public class SimpleSender
    private String authToken;
    private String from;
    private String to;
+   private String media;
    private List<String> recipients;
    private String body;
    private Map<String, String> smsParams;
@@ -178,6 +179,19 @@ public class SimpleSender
       return this;
    }
 
+   public String getMedia()
+   {
+      return media;
+   }
+
+   public SimpleSender setMedia(String media)
+   {
+      // smsParams.put("MediaUrl", "http://demo.twilio.com/owl.png")
+      getSmsParams().put("MediaUrl", media);
+      this.media = media;
+      return this;
+   }
+
    /*
     * FAST METHODS
     */
@@ -204,6 +218,11 @@ public class SimpleSender
    public SimpleSender body(String body)
    {
       return setBody(body);
+   }
+
+   public SimpleSender media(String media)
+   {
+      return setMedia(media);
    }
 
 }
