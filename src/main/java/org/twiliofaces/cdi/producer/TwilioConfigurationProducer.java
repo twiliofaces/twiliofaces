@@ -13,7 +13,9 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.twiliofaces.cdi.doers.CallReporter;
 import org.twiliofaces.cdi.doers.Caller;
+import org.twiliofaces.cdi.doers.MsgReporter;
 import org.twiliofaces.cdi.doers.Sender;
 import org.twiliofaces.cdi.extension.TwilioManager;
 import org.twiliofaces.cdi.extension.util.Account;
@@ -218,6 +220,68 @@ public class TwilioConfigurationProducer implements Serializable
                account = twilioManager.getAccount(accountName);
                if (account != null)
                   return new Sender(account.getTwilioNumber(), account
+                           .getTwilioSid(), account.getTwilioToken());
+            }
+         }
+      }
+      return null;
+   }
+
+   @Produces
+   @TwilioAccount
+   public MsgReporter getMsgReporter(InjectionPoint injectionPoint)
+   {
+      String accountName = injectionPoint.getAnnotated()
+               .getAnnotation(TwilioAccount.class).accountName();
+      if (twilioManager != null)
+      {
+         if (accountName == null || accountName.isEmpty() || accountName.toLowerCase().equals("default"))
+            return new MsgReporter(twilioManager
+                     .getDefaultAccount()
+                     .getTwilioSid(), twilioManager.getDefaultAccount().getTwilioToken());
+         else
+         {
+            Account account;
+            if (ELUtils.isElExpression(accountName))
+            {
+               accountName = ELUtils.resolveElExpression(accountName, facesContext);
+            }
+            if (accountName != null)
+            {
+               account = twilioManager.getAccount(accountName);
+               if (account != null)
+                  return new MsgReporter(account
+                           .getTwilioSid(), account.getTwilioToken());
+            }
+         }
+      }
+      return null;
+   }
+
+   @Produces
+   @TwilioAccount
+   public CallReporter getCallReporter(InjectionPoint injectionPoint)
+   {
+      String accountName = injectionPoint.getAnnotated()
+               .getAnnotation(TwilioAccount.class).accountName();
+      if (twilioManager != null)
+      {
+         if (accountName == null || accountName.isEmpty() || accountName.toLowerCase().equals("default"))
+            return new CallReporter(twilioManager
+                     .getDefaultAccount()
+                     .getTwilioSid(), twilioManager.getDefaultAccount().getTwilioToken());
+         else
+         {
+            Account account;
+            if (ELUtils.isElExpression(accountName))
+            {
+               accountName = ELUtils.resolveElExpression(accountName, facesContext);
+            }
+            if (accountName != null)
+            {
+               account = twilioManager.getAccount(accountName);
+               if (account != null)
+                  return new CallReporter(account
                            .getTwilioSid(), account.getTwilioToken());
             }
          }
