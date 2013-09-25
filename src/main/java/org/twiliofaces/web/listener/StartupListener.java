@@ -16,7 +16,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import org.twiliofaces.cdi.extension.TwilioManager;
-import org.twiliofaces.jsf.component.api.util.Constants;
+import org.twiliofaces.faces.component.api.util.Constants;
 import org.twiliofaces.web.listener.util.TwilioConfigurationEnum;
 
 @WebListener
