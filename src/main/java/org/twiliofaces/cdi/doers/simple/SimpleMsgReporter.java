@@ -14,7 +14,7 @@ import com.twilio.sdk.resource.list.MessageList;
 public class SimpleMsgReporter
 {
    Logger logger = Logger.getLogger(getClass().getName());
-   DateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+   DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
    private String from;
    private String accountSid;
    private String authToken;

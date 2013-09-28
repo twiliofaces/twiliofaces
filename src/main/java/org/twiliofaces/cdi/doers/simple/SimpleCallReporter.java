@@ -14,7 +14,7 @@ import com.twilio.sdk.resource.list.CallList;
 public class SimpleCallReporter
 {
    Logger logger = Logger.getLogger(getClass().getName());
-   DateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+   DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
    private String from;
    private String accountSid;
    private String authToken;
