@@ -14,7 +14,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.twiliofaces.api.event.StatusCallbackEvent;
+import org.twiliofaces.cdi.event.StatusCallbackEvent;
 import org.twiliofaces.inject.notification.AccountSid;
 import org.twiliofaces.inject.notification.ApiVersion;
 import org.twiliofaces.inject.notification.CallSid;

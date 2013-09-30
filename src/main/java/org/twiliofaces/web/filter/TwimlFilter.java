@@ -19,7 +19,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-import org.twiliofaces.api.event.TwimlEvent;
+import org.twiliofaces.cdi.event.TwimlEvent;
+import org.twiliofaces.web.filter.util.TwimlWrapper;
 
 @WebFilter(filterName = "TwimlFilter", urlPatterns = "*.twiml")
 public class TwimlFilter implements Filter

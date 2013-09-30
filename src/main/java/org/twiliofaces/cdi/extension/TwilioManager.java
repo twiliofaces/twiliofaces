@@ -13,7 +13,7 @@ import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 
-import org.twiliofaces.api.event.StatusCallbackEvent;
+import org.twiliofaces.cdi.event.StatusCallbackEvent;
 import org.twiliofaces.cdi.extension.util.Account;
 
 @ApplicationScoped
