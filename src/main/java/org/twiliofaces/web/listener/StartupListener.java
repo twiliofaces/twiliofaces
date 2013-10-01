@@ -38,6 +38,11 @@ public class StartupListener implements ServletContextListener
    public void contextInitialized(ServletContextEvent sce)
    {
       logger.info("context Initialized");
+      if (twilioManager == null)
+      {
+         logger.info("twilioManager is NULL!!!");
+         return;
+      }
       if (twilioManager.getDefaultAccount() == null)
       {
          setApplicationSid(sce.getServletContext());
@@ -47,7 +52,7 @@ public class StartupListener implements ServletContextListener
       }
       else
       {
-         logger.info("twilio default account is already configired");
+         logger.info("twilio default account is already configured");
       }
       logger.log(Level.INFO, "Twiliofaces {0} is on!", Constants.VERSION);
    }
