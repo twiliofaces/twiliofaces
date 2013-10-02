@@ -136,6 +136,12 @@ public class TwilioManager implements Serializable
 
    public Account getDefaultAccount()
    {
+      if (getTwilioAccounts().get("default") == null)
+      {
+         Account defaultAccount = new Account("deafult");
+         getTwilioAccounts().put("default", defaultAccount);
+         return defaultAccount;
+      }
       return getTwilioAccounts().get("default");
    }
 
