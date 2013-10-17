@@ -2,7 +2,8 @@ Twiliofaces - how to use  [twilio](http://www.twilio.com) services with Java EE 
 =============================
 
 
-This is a jsf library written to use twilio on jee6. This library produces TwiML (the [Twilio Markup Language](http://www.twilio.com/docs/api/twiml) ) in a simple way: using jsf tags. 
+This is a jsf library written to use twilio on java ee6 (just now we are testing on java ee7 using [wilfly 8] (http://www.wildfly.org/)). 
+This library produces TwiML (the [Twilio Markup Language](http://www.twilio.com/docs/api/twiml) ) in a simple way: using jsf tags. 
 
 This library is designed to be used in [Openshift](https://www.openshift.com) [JBoss AS 7 server] (http://www.jboss.org/jbossas).
 
