@@ -3,8 +3,7 @@
 <!-- ~ Copyright 2012twiliofaces.org. ~ ~ Licensed under the Eclipse Public 
 	License version 1.0, available at ~ http://www.eclipse.org/legal/epl-v10.html -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
@@ -13,7 +12,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.twiliofaces</groupId>
 	<artifactId>twiliofaces</artifactId>
-	<version>1.2.4-SNAPSHOT</version>
+	<version>1.2.4</version>
 	<name>twiliofaces</name>
 	<url>http://twiliofaces.org</url>
 	<description>Twiliofaces - how to use twilio services with Java EE Technologies (jsf, cdi, ejb, jms)</description>
