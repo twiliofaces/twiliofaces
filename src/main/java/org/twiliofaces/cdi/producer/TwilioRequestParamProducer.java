@@ -340,10 +340,10 @@ public class TwilioRequestParamProducer implements Serializable
                && facesContext.getExternalContext().getRequestParameterMap() != null)
       {
          List<String> mediaContentTypes = new ArrayList<String>();
-         String numMedia = getNumMedia();
-         if (numMedia != null && Integer.parseInt(numMedia) > 0)
+         Integer numMedia = getNumMedia();
+         if (numMedia != null && numMedia > 0)
          {
-            for (int i = 0; i <= Integer.parseInt(numMedia); i++)
+            for (int i = 0; i <= numMedia; i++)
             {
                String value = facesContext.getExternalContext().getRequestParameterMap()
                         .get(TwilioRequestParamsEnum.MediaContentType + "" + i);
@@ -364,10 +364,10 @@ public class TwilioRequestParamProducer implements Serializable
                && facesContext.getExternalContext().getRequestParameterMap() != null)
       {
          List<String> mediaUrls = new ArrayList<String>();
-         String numMedia = getNumMedia();
-         if (numMedia != null && Integer.parseInt(numMedia) > 0)
+         Integer numMedia = getNumMedia();
+         if (numMedia != null && numMedia > 0)
          {
-            for (int i = 0; i <= Integer.parseInt(numMedia); i++)
+            for (int i = 0; i <= numMedia; i++)
             {
                String value = facesContext.getExternalContext().getRequestParameterMap()
                         .get(TwilioRequestParamsEnum.MediaUrl + "" + i);
@@ -395,13 +395,15 @@ public class TwilioRequestParamProducer implements Serializable
 
    @Produces
    @NumMedia
-   public String getNumMedia()
+   public Integer getNumMedia()
    {
       if (facesContext != null && facesContext.getExternalContext() != null
                && facesContext.getExternalContext().getRequestParameterMap() != null)
       {
-         return facesContext.getExternalContext().getRequestParameterMap()
+         String numMedia = facesContext.getExternalContext().getRequestParameterMap()
                   .get(TwilioRequestParamsEnum.NumMedia.name());
+         if (numMedia != null)
+            return Integer.parseInt(numMedia);
       }
       return null;
    }
