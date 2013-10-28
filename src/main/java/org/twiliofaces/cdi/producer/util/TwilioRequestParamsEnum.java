@@ -3,57 +3,65 @@
  *
  * Licensed under the Eclipse Public License version 1.0, available at
  * http://www.eclipse.org/legal/epl-v10.html
- */ 
+ */
 package org.twiliofaces.cdi.producer.util;
 
+public enum TwilioRequestParamsEnum
+{
+   AccountSid,
+   ApiVersion,
+   ApplicationSid,
+   Body,
+   Caller,
+   CallerName,
+   CallSid,
+   CallStatus,
 
-public enum TwilioRequestParamsEnum {
-	AccountSid, 
-	ApiVersion, 
-	ApplicationSid,
-	Caller,
-	CallerName,
-	CallSid, 
-	CallStatus, 
-	
-	
-	DialSipCallId,
-	DialSipResponseCode,
-	DialSipHeader,
-	DialSipHeader_,
-	Digits,
-	Direction, 
-	ForwardedFrom, 
-	From, 
-	FromCity, 
-	FromCountry,
-	FromState, 
-	FromZip, 
-	PhoneNumber,
-	 
-	
-	RecordingDuration,
-	RecordingSid,
-	RecordingUrl,
-	
-	SipCallId,
-	SipHeader,
-	
-	SmsStatus,
+   DialSipCallId,
+   DialSipResponseCode,
+   DialSipHeader,
+   DialSipHeader_,
+   Digits,
+   Direction,
+   ForwardedFrom,
+   From,
+   FromCity,
+   FromCountry,
+   FromState,
+   FromZip,
 
-	To, 
-	ToCountry,
-	ToCity, 
-	ToState, 
-	ToZip, 
-	TranscriptionSid,
-	TranscriptionText,
-	TranscriptionStatus,
-	TranscriptionUrl;
-	
-	
-	public String toProperty(){
-		return Character.toLowerCase(
-				this.name().charAt(0)) + (this.name().length() > 1 ? this.name().substring(1) : "");
-	}
+   MediaContentType,
+   MediaContentTypes,
+   MediaUrl,
+   MediaUrls,
+   MessageSid,
+
+   NumMedia,
+
+   PhoneNumber,
+
+   RecordingDuration,
+   RecordingSid,
+   RecordingUrl,
+
+   SipCallId,
+   SipHeader,
+   SmsSid,
+   SmsStatus,
+
+   To,
+   ToCountry,
+   ToCity,
+   ToState,
+   ToZip,
+   TranscriptionSid,
+   TranscriptionText,
+   TranscriptionStatus,
+   TranscriptionUrl;
+
+   public String toProperty()
+   {
+      return Character.toLowerCase(
+               this.name().charAt(0)) + (this.name().length() > 1 ? this.name().substring(1) : "");
+   }
 }

@@ -7,6 +7,8 @@
 package org.twiliofaces.cdi.producer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
@@ -16,6 +18,7 @@ import org.twiliofaces.cdi.producer.util.TwilioRequestMap;
 import org.twiliofaces.cdi.producer.util.TwilioRequestParamsEnum;
 import org.twiliofaces.inject.notification.AccountSid;
 import org.twiliofaces.inject.notification.ApiVersion;
+import org.twiliofaces.inject.notification.Body;
 import org.twiliofaces.inject.notification.CallSid;
 import org.twiliofaces.inject.notification.CallStatus;
 import org.twiliofaces.inject.notification.Caller;
@@ -28,10 +31,15 @@ import org.twiliofaces.inject.notification.FromCity;
 import org.twiliofaces.inject.notification.FromCountry;
 import org.twiliofaces.inject.notification.FromState;
 import org.twiliofaces.inject.notification.FromZip;
+import org.twiliofaces.inject.notification.MediaContentTypes;
+import org.twiliofaces.inject.notification.MediaUrls;
+import org.twiliofaces.inject.notification.MessageSid;
+import org.twiliofaces.inject.notification.NumMedia;
 import org.twiliofaces.inject.notification.PhoneNumber;
 import org.twiliofaces.inject.notification.RecordingDuration;
 import org.twiliofaces.inject.notification.RecordingSid;
 import org.twiliofaces.inject.notification.RecordingUrl;
+import org.twiliofaces.inject.notification.SmsSid;
 import org.twiliofaces.inject.notification.SmsStatus;
 import org.twiliofaces.inject.notification.To;
 import org.twiliofaces.inject.notification.ToCity;
@@ -99,6 +107,19 @@ public class TwilioRequestParamProducer implements Serializable
       {
          return facesContext.getExternalContext().getRequestParameterMap()
                   .get(TwilioRequestParamsEnum.ApiVersion.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @Body
+   public String getBody()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.Body.name());
       }
       return null;
    }
@@ -312,6 +333,80 @@ public class TwilioRequestParamProducer implements Serializable
    }
 
    @Produces
+   @MediaContentTypes
+   public List<String> getMediaContentTypes()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         List<String> mediaContentTypes = new ArrayList<String>();
+         String numMedia = getNumMedia();
+         if (numMedia != null && Integer.parseInt(numMedia) > 0)
+         {
+            for (int i = 0; i <= Integer.parseInt(numMedia); i++)
+            {
+               String value = facesContext.getExternalContext().getRequestParameterMap()
+                        .get(TwilioRequestParamsEnum.MediaContentType + "" + i);
+               if (value != null && !value.isEmpty())
+                  mediaContentTypes.add(value);
+            }
+            return mediaContentTypes;
+         }
+      }
+      return null;
+   }
+
+   @Produces
+   @MediaUrls
+   public List<String> getMediaUrls()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         List<String> mediaUrls = new ArrayList<String>();
+         String numMedia = getNumMedia();
+         if (numMedia != null && Integer.parseInt(numMedia) > 0)
+         {
+            for (int i = 0; i <= Integer.parseInt(numMedia); i++)
+            {
+               String value = facesContext.getExternalContext().getRequestParameterMap()
+                        .get(TwilioRequestParamsEnum.MediaUrl + "" + i);
+               if (value != null && !value.isEmpty())
+                  mediaUrls.add(value);
+            }
+            return mediaUrls;
+         }
+      }
+      return null;
+   }
+
+   @Produces
+   @MessageSid
+   public String getMessageSid()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.MessageSid.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @NumMedia
+   public String getNumMedia()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.NumMedia.name());
+      }
+      return null;
+   }
+
+   @Produces
    @PhoneNumber
    public String getPhoneNumber()
    {
@@ -386,6 +481,19 @@ public class TwilioRequestParamProducer implements Serializable
       {
          return facesContext.getExternalContext().getRequestParameterMap()
                   .get(TwilioRequestParamsEnum.SipHeader.name());
+      }
+      return null;
+   }
+
+   @Produces
+   @SmsSid
+   public String getSmsSid()
+   {
+      if (facesContext != null && facesContext.getExternalContext() != null
+               && facesContext.getExternalContext().getRequestParameterMap() != null)
+      {
+         return facesContext.getExternalContext().getRequestParameterMap()
+                  .get(TwilioRequestParamsEnum.SmsSid.name());
       }
       return null;
    }
