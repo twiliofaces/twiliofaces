@@ -59,7 +59,7 @@ import org.twiliofaces.inject.notification.sip.DialSipResponseCode;
 import org.twiliofaces.inject.notification.sip.SipCallId;
 import org.twiliofaces.inject.notification.sip.SipHeader;
 
-public class TwilioRequestParamProducer implements Serializable
+public class TwilioNotificationProducer implements Serializable
 {
 
    private static final long serialVersionUID = 1L;

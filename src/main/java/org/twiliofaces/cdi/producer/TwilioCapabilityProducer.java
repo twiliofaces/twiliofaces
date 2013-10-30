@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import org.twiliofaces.cdi.doers.Client;
 import org.twiliofaces.cdi.producer.util.ELUtils;
-import org.twiliofaces.inject.configuration.TwilioCapabilityToken;
+import org.twiliofaces.inject.capability.TwilioCapabilityToken;
 
 public class TwilioCapabilityProducer implements Serializable
 {
