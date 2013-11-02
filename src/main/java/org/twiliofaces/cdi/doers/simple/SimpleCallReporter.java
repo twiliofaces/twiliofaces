@@ -1,6 +1,7 @@
 package org.twiliofaces.cdi.doers.simple;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,15 +16,8 @@ public class SimpleCallReporter
 {
    Logger logger = Logger.getLogger(getClass().getName());
    DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
-   private String from;
    private String accountSid;
    private String authToken;
-   private String to;
-   private String status;
-   private Date startTime;
-   private Date fromStartTime;
-   private Date toStartTime;
-   private String parentCallSid;
    private Map<String, String> params;
 
    public SimpleCallReporter()
@@ -51,7 +45,7 @@ public class SimpleCallReporter
 
    public String getStatus()
    {
-      return status;
+      return getParams().get("Status");
    }
 
    public SimpleCallReporter setStatus(String status)
@@ -62,7 +56,14 @@ public class SimpleCallReporter
 
    public Date getStartTime()
    {
-      return startTime;
+      try
+      {
+         return format.parse(getParams().get("StartTime"));
+      }
+      catch (ParseException e)
+      {
+         return null;
+      }
    }
 
    public SimpleCallReporter setStartTime(Date startTime)
@@ -73,7 +74,14 @@ public class SimpleCallReporter
 
    public Date getFromStartTime()
    {
-      return fromStartTime;
+      try
+      {
+         return format.parse(getParams().get("StartTime>"));
+      }
+      catch (ParseException e)
+      {
+         return null;
+      }
    }
 
    public SimpleCallReporter setFromStartTime(Date fromStartTime)
@@ -84,7 +92,14 @@ public class SimpleCallReporter
 
    public Date getToStartTime()
    {
-      return toStartTime;
+      try
+      {
+         return format.parse(getParams().get("StartTime<"));
+      }
+      catch (ParseException e)
+      {
+         return null;
+      }
    }
 
    public SimpleCallReporter setToStartTime(Date toStartTime)
@@ -95,7 +110,7 @@ public class SimpleCallReporter
 
    public String getParentCallSid()
    {
-      return parentCallSid;
+      return getParams().get("ParentCallSid");
    }
 
    public SimpleCallReporter setParentCallSid(String parentCallSid)
@@ -125,7 +140,7 @@ public class SimpleCallReporter
 
    public String getFrom()
    {
-      return from;
+      return getParams().get("From");
    }
 
    public SimpleCallReporter setFrom(String from)
@@ -136,7 +151,7 @@ public class SimpleCallReporter
 
    public String getTo()
    {
-      return to;
+      return getParams().get("To");
    }
 
    public SimpleCallReporter setTo(String to)

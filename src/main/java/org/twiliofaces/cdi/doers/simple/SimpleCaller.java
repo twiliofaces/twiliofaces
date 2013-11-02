@@ -20,12 +20,8 @@ public class SimpleCaller
 {
 
    Logger logger = Logger.getLogger(getClass().getName());
-   private String from;
    private String accountSid;
    private String authToken;
-
-   private String to;
-   private String endpoint;
 
    private Map<String, String> params;
 
@@ -36,7 +32,7 @@ public class SimpleCaller
    public SimpleCaller(String from,
             String accountSid, String authToken)
    {
-      this.from = from;
+      setFrom(from);
       this.authToken = authToken;
       this.accountSid = accountSid;
    }
@@ -93,7 +89,7 @@ public class SimpleCaller
 
    public String getFrom()
    {
-      return from;
+      return getParams().get("From");
    }
 
    public SimpleCaller setFrom(String from)
@@ -104,7 +100,7 @@ public class SimpleCaller
 
    public String getTo()
    {
-      return to;
+      return getParams().get("To");
    }
 
    public SimpleCaller setTo(String to)
@@ -137,12 +133,12 @@ public class SimpleCaller
 
    public String getEndpoint()
    {
-      return endpoint;
+      return getParams().get("Endpoint");
    }
 
    public SimpleCaller setEndpoint(String endpoint)
    {
-      getParams().put("Url", endpoint);
+      getParams().put("Endpoint", endpoint);
       return this;
    }
 

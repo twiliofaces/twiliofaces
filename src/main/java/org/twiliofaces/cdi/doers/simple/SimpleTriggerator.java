@@ -18,14 +18,6 @@ public class SimpleTriggerator
    DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
    private String accountSid;
    private String authToken;
-   private String usageCategory;
-   private String triggerValue;
-   private String callbackUrl;
-   private String friendlyName;
-
-   private String recurring;
-   private String triggerBy;
-   private String callbackMethod;
 
    private Map<String, String> params;
 
@@ -69,7 +61,7 @@ public class SimpleTriggerator
 
    public String getUsageCategory()
    {
-      return usageCategory;
+      return getParams().get("UsageCategory");
    }
 
    public SimpleTriggerator setUsageCategory(String usageCategory)
@@ -80,7 +72,7 @@ public class SimpleTriggerator
 
    public String getTriggerValue()
    {
-      return triggerValue;
+      return getParams().get("TriggerValue");
    }
 
    public SimpleTriggerator setTriggerValue(String triggerValue)
@@ -91,7 +83,7 @@ public class SimpleTriggerator
 
    public String getCallbackUrl()
    {
-      return callbackUrl;
+      return getParams().get("CallbackUrl");
    }
 
    public SimpleTriggerator setCallbackUrl(String callbackUrl)
@@ -102,7 +94,7 @@ public class SimpleTriggerator
 
    public String getFriendlyName()
    {
-      return friendlyName;
+      return getParams().get("FriendlyName");
    }
 
    public SimpleTriggerator setFriendlyName(String friendlyName)
@@ -113,7 +105,7 @@ public class SimpleTriggerator
 
    public String getRecurring()
    {
-      return recurring;
+      return getParams().get("Recurring");
    }
 
    public SimpleTriggerator setRecurring(String recurring)
@@ -124,7 +116,7 @@ public class SimpleTriggerator
 
    public String getTriggerBy()
    {
-      return triggerBy;
+      return getParams().get("TriggerBy");
    }
 
    public SimpleTriggerator setTriggerBy(String triggerBy)
@@ -135,7 +127,7 @@ public class SimpleTriggerator
 
    public String getCallbackMethod()
    {
-      return callbackMethod;
+      return getParams().get("CallbackMethod");
    }
 
    public SimpleTriggerator setCallbackMethod(String callbackMethod)

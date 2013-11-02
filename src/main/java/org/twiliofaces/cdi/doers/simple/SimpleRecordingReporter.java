@@ -1,6 +1,7 @@
 package org.twiliofaces.cdi.doers.simple;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,10 +18,6 @@ public class SimpleRecordingReporter
    DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
    private String accountSid;
    private String authToken;
-   private String log;
-   private Date dateCreated;
-   private Date fromDateCreated;
-   private Date toDateCreated;
    private Map<String, String> params;
 
    public SimpleRecordingReporter()
@@ -70,7 +67,7 @@ public class SimpleRecordingReporter
 
    public String getLog()
    {
-      return log;
+      return getParams().get("Log");
    }
 
    public SimpleRecordingReporter setLog(String log)
@@ -81,29 +78,53 @@ public class SimpleRecordingReporter
 
    public Date getDateCreated()
    {
-      return dateCreated;
+      try
+      {
+         return format.parse(getParams().get("DateCreated"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
-   public SimpleRecordingReporter setMessageDate(Date messageDate)
+   public SimpleRecordingReporter setDateCreated(Date dateCreated)
    {
-      getParams().put("DateCreated", format.format(messageDate));
+      getParams().put("DateCreated", format.format(dateCreated));
       return this;
    }
 
    public Date getFromDateCreated()
    {
-      return fromDateCreated;
+      try
+      {
+         return format.parse(getParams().get("DateCreated>"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleRecordingReporter setFromDateCreated(Date fromDateCreated)
    {
-      getParams().put("DateCreated>", format.format(dateCreated));
+      getParams().put("DateCreated>", format.format(fromDateCreated));
       return this;
    }
 
    public Date getToDateCreated()
    {
-      return toDateCreated;
+      try
+      {
+         return format.parse(getParams().get("DateCreated<"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleRecordingReporter setToDateCreated(Date toDateCreated)

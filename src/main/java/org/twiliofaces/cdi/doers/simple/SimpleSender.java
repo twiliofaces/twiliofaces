@@ -24,12 +24,8 @@ public class SimpleSender
    Logger logger = Logger.getLogger(getClass().getName());
    private String accountSid;
    private String authToken;
-   private String from;
-   private String to;
-   private String media;
    private List<String> recipients;
-   private String body;
-   private Map<String, String> smsParams;
+   private Map<String, String> params;
 
    public SimpleSender()
    {
@@ -40,16 +36,16 @@ public class SimpleSender
    {
       this.accountSid = accountSid;
       this.authToken = authToken;
-      this.from = from;
+      setFrom(from);
    }
 
-   public String send() throws TwilioRestException
+   public String simpleSend() throws TwilioRestException
    {
       TwilioRestClient client = new TwilioRestClient(getAccountSid(),
                getAuthToken());
       Account account = client.getAccount();
       SmsFactory smsFactory = account.getSmsFactory();
-      return smsFactory.create(getSmsParams()).getSid();
+      return smsFactory.create(getParams()).getSid();
    }
 
    public String simpleSend(String from, String to, String body,
@@ -57,73 +53,83 @@ public class SimpleSender
    {
       accountSid(accountSid).authToken(authToken).to(to)
                .from(from).body(body);
-      return send();
+      return simpleSend();
    }
 
    public Sms send(String accountSid, String authToken,
-            Map<String, String> smsParams) throws TwilioRestException
+            Map<String, String> params) throws TwilioRestException
    {
-      setAccountSid(accountSid).setAuthToken(authToken).setSmsParams(
-               smsParams);
+      setAccountSid(accountSid).setAuthToken(authToken).setParams(
+               params);
       TwilioRestClient client = new TwilioRestClient(getAccountSid(),
                getAuthToken());
       Account account = client.getAccount();
       SmsFactory smsFactory = account.getSmsFactory();
-      Sms sms = smsFactory.create(getSmsParams());
+      Sms sms = smsFactory.create(getParams());
       return sms;
    }
 
-   public List<Sms> multimpleSend() throws TwilioRestException
+   public Sms send() throws TwilioRestException
+   {
+      TwilioRestClient client = new TwilioRestClient(getAccountSid(),
+               getAuthToken());
+      Account account = client.getAccount();
+      SmsFactory smsFactory = account.getSmsFactory();
+      Sms sms = smsFactory.create(getParams());
+      return sms;
+   }
+
+   public List<Sms> multipleSend() throws TwilioRestException
    {
       List<Sms> results = new ArrayList<Sms>();
       for (String recipient : getRecipients())
       {
-         getSmsParams().put("To", getTo());
-         Sms sms = send(recipient, recipient, smsParams);
+         getParams().put("To", recipient);
+         Sms sms = send(getAccountSid(), getAuthToken(), params);
          results.add(sms);
       }
 
       return results;
    }
 
-   public Map<String, String> getSmsParams()
+   public Map<String, String> getParams()
    {
-      if (smsParams == null)
-         this.smsParams = new HashMap<String, String>();
-      return smsParams;
+      if (params == null)
+         this.params = new HashMap<String, String>();
+      return params;
    }
 
-   public SimpleSender setSmsParams(Map<String, String> smsParams)
+   public SimpleSender setParams(Map<String, String> params)
    {
-      this.smsParams = smsParams;
+      this.params = params;
       return this;
    }
 
    public SimpleSender addSmsParam(String key, String value)
    {
-      getSmsParams().put(key, value);
+      getParams().put(key, value);
       return this;
    }
 
    public String getFrom()
    {
-      return from;
+      return getParams().get("From");
    }
 
    public SimpleSender setFrom(String from)
    {
-      getSmsParams().put("From", from);
+      getParams().put("From", from);
       return this;
    }
 
    public String getTo()
    {
-      return to;
+      return getParams().get("To");
    }
 
    public SimpleSender setTo(String to)
    {
-      getSmsParams().put("To", to);
+      getParams().put("To", to);
       return this;
    }
 
@@ -151,12 +157,12 @@ public class SimpleSender
 
    public String getBody()
    {
-      return body;
+      return getParams().get("Body");
    }
 
    public SimpleSender setBody(String body)
    {
-      getSmsParams().put("Body", body);
+      getParams().put("Body", body);
       return this;
    }
 
@@ -179,16 +185,14 @@ public class SimpleSender
       return this;
    }
 
-   public String getMedia()
+   public String getMediaUrl()
    {
-      return media;
+      return getParams().get("MediaUrl");
    }
 
-   public SimpleSender setMedia(String media)
+   public SimpleSender setMediaUrl(String mediaUrl)
    {
-      // smsParams.put("MediaUrl", "http://demo.twilio.com/owl.png")
-      getSmsParams().put("MediaUrl", media);
-      this.media = media;
+      getParams().put("MediaUrl", mediaUrl);
       return this;
    }
 
@@ -220,9 +224,9 @@ public class SimpleSender
       return setBody(body);
    }
 
-   public SimpleSender media(String media)
+   public SimpleSender mediaUrl(String mediaUrl)
    {
-      return setMedia(media);
+      return setMediaUrl(mediaUrl);
    }
 
 }

@@ -1,6 +1,7 @@
 package org.twiliofaces.cdi.doers.simple;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,14 +16,8 @@ public class SimpleMsgReporter
 {
    Logger logger = Logger.getLogger(getClass().getName());
    DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
-   private String from;
    private String accountSid;
    private String authToken;
-   private String to;
-   private String status;
-   private Date dateSent;
-   private Date fromDateSent;
-   private Date toDateSent;
    private Map<String, String> params;
 
    public SimpleMsgReporter()
@@ -50,7 +45,7 @@ public class SimpleMsgReporter
 
    public String getStatus()
    {
-      return status;
+      return getParams().get("Status");
    }
 
    public SimpleMsgReporter setStatus(String status)
@@ -61,7 +56,15 @@ public class SimpleMsgReporter
 
    public Date getDateSent()
    {
-      return dateSent;
+      try
+      {
+         return format.parse(getParams().get("DateSent"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleMsgReporter setDateSent(Date dateSent)
@@ -72,7 +75,15 @@ public class SimpleMsgReporter
 
    public Date getFromDateSent()
    {
-      return fromDateSent;
+      try
+      {
+         return format.parse(getParams().get("DateSent>"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleMsgReporter setFromDateSent(Date fromDateSent)
@@ -83,7 +94,15 @@ public class SimpleMsgReporter
 
    public Date getToDateSent()
    {
-      return toDateSent;
+      try
+      {
+         return format.parse(getParams().get("DateSent<"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleMsgReporter setToDateSent(Date toDateSent)
@@ -113,7 +132,7 @@ public class SimpleMsgReporter
 
    public String getFrom()
    {
-      return from;
+      return getParams().get("From");
    }
 
    public SimpleMsgReporter setFrom(String from)
@@ -124,7 +143,7 @@ public class SimpleMsgReporter
 
    public String getTo()
    {
-      return to;
+      return getParams().get("To");
    }
 
    public SimpleMsgReporter setTo(String to)

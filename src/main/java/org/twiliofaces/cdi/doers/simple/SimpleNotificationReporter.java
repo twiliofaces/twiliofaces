@@ -1,6 +1,7 @@
 package org.twiliofaces.cdi.doers.simple;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,10 +18,6 @@ public class SimpleNotificationReporter
    DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
    private String accountSid;
    private String authToken;
-   private String log;
-   private Date messageDate;
-   private Date fromMessageDate;
-   private Date toMessageDate;
    private Map<String, String> params;
 
    public SimpleNotificationReporter()
@@ -70,7 +67,7 @@ public class SimpleNotificationReporter
 
    public String getLog()
    {
-      return log;
+      return getParams().get("Log");
    }
 
    public SimpleNotificationReporter setLog(String log)
@@ -81,7 +78,15 @@ public class SimpleNotificationReporter
 
    public Date getMessageDate()
    {
-      return messageDate;
+      try
+      {
+         return format.parse(getParams().get("MessageDate"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleNotificationReporter setMessageDate(Date messageDate)
@@ -92,23 +97,39 @@ public class SimpleNotificationReporter
 
    public Date getFromMessageDate()
    {
-      return fromMessageDate;
+      try
+      {
+         return format.parse(getParams().get("MessageDate>"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleNotificationReporter setFromMessageDate(Date fromMessageDate)
    {
-      getParams().put("MessageDate>", format.format(messageDate));
+      getParams().put("MessageDate>", format.format(fromMessageDate));
       return this;
    }
 
    public Date getToMessageDate()
    {
-      return toMessageDate;
+      try
+      {
+         return format.parse(getParams().get("MessageDate<"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleNotificationReporter setToMessageDate(Date toMessageDate)
    {
-      getParams().put("MessageDate<", format.format(messageDate));
+      getParams().put("MessageDate<", format.format(toMessageDate));
       return this;
    }
 

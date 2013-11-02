@@ -1,6 +1,7 @@
 package org.twiliofaces.cdi.doers.simple;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,9 +17,6 @@ public class SimpleUsageReporter
    DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
    private String accountSid;
    private String authToken;
-   private String category;
-   private Date startDate;
-   private Date endDate;
    private Map<String, String> params;
 
    public SimpleUsageReporter()
@@ -40,7 +38,7 @@ public class SimpleUsageReporter
 
    public String getCategory()
    {
-      return category;
+      return getParams().get("Category");
    }
 
    public SimpleUsageReporter setCategory(String category)
@@ -51,7 +49,15 @@ public class SimpleUsageReporter
 
    public Date getStartDate()
    {
-      return startDate;
+      try
+      {
+         return format.parse(getParams().get("StartDate"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleUsageReporter setStartDate(Date startDate)
@@ -62,7 +68,15 @@ public class SimpleUsageReporter
 
    public Date getEndDate()
    {
-      return endDate;
+      try
+      {
+         return format.parse(getParams().get("EndDate"));
+      }
+      catch (ParseException e)
+      {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    public SimpleUsageReporter setEndDate(Date endDate)
