@@ -170,6 +170,17 @@ public class SimpleCallController
       return this;
    }
 
+   public String getCallSid()
+   {
+      return callSid;
+   }
+
+   public SimpleCallController setCallSid(String callSid)
+   {
+      this.callSid = callSid;
+      return this;
+   }
+
    /*
     * FAST METHODS
     */
@@ -241,14 +252,9 @@ public class SimpleCallController
       return this;
    }
 
-   public String getCallSid()
+   public SimpleCallController callSid(String callSid)
    {
-      return callSid;
-   }
-
-   public void setCallSid(String callSid)
-   {
-      this.callSid = callSid;
+      return setCallSid(callSid);
    }
 
 }
