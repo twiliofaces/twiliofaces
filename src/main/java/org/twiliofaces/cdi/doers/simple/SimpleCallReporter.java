@@ -45,12 +45,12 @@ public class SimpleCallReporter
 
    public String getStatus()
    {
-      return getParams().get("Status");
+      return get("Status");
    }
 
    public SimpleCallReporter setStatus(String status)
    {
-      getParams().put("Status", status);
+      add("Status", status);
       return this;
    }
 
@@ -58,7 +58,7 @@ public class SimpleCallReporter
    {
       try
       {
-         return format.parse(getParams().get("StartTime"));
+         return format.parse(get("StartTime"));
       }
       catch (ParseException e)
       {
@@ -68,7 +68,7 @@ public class SimpleCallReporter
 
    public SimpleCallReporter setStartTime(Date startTime)
    {
-      getParams().put("StartTime", format.format(startTime));
+      add("StartTime", format.format(startTime));
       return this;
    }
 
@@ -76,7 +76,7 @@ public class SimpleCallReporter
    {
       try
       {
-         return format.parse(getParams().get("StartTime>"));
+         return format.parse(get("StartTime>"));
       }
       catch (ParseException e)
       {
@@ -86,7 +86,7 @@ public class SimpleCallReporter
 
    public SimpleCallReporter setFromStartTime(Date fromStartTime)
    {
-      getParams().put("StartTime>", format.format(fromStartTime));
+      add("StartTime>", format.format(fromStartTime));
       return this;
    }
 
@@ -94,7 +94,7 @@ public class SimpleCallReporter
    {
       try
       {
-         return format.parse(getParams().get("StartTime<"));
+         return format.parse(get("StartTime<"));
       }
       catch (ParseException e)
       {
@@ -104,18 +104,18 @@ public class SimpleCallReporter
 
    public SimpleCallReporter setToStartTime(Date toStartTime)
    {
-      getParams().put("StartTime<", format.format(toStartTime));
+      add("StartTime<", format.format(toStartTime));
       return this;
    }
 
    public String getParentCallSid()
    {
-      return getParams().get("ParentCallSid");
+      return get("ParentCallSid");
    }
 
    public SimpleCallReporter setParentCallSid(String parentCallSid)
    {
-      getParams().put("ParentCallSid", parentCallSid);
+      add("ParentCallSid", parentCallSid);
       return this;
    }
 
@@ -132,31 +132,36 @@ public class SimpleCallReporter
       return this;
    }
 
-   public SimpleCallReporter addParam(String key, String value)
+   public SimpleCallReporter add(String key, String value)
    {
       getParams().put(key, value);
       return this;
    }
 
+   public String get(String key)
+   {
+      return get(key);
+   }
+
    public String getFrom()
    {
-      return getParams().get("From");
+      return get("From");
    }
 
    public SimpleCallReporter setFrom(String from)
    {
-      getParams().put("From", from);
+      add("From", from);
       return this;
    }
 
    public String getTo()
    {
-      return getParams().get("To");
+      return get("To");
    }
 
    public SimpleCallReporter setTo(String to)
    {
-      getParams().put("To", to);
+      add("To", to);
       return this;
    }
 
@@ -207,7 +212,7 @@ public class SimpleCallReporter
 
    public SimpleCallReporter param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 
    public SimpleCallReporter status(String status)

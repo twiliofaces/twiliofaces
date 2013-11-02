@@ -81,31 +81,36 @@ public class SimpleCaller
       return this;
    }
 
-   public SimpleCaller addParam(String key, String value)
+   public SimpleCaller add(String key, String value)
    {
       getParams().put(key, value);
       return this;
    }
 
+   public String get(String key)
+   {
+      return get(key);
+   }
+
    public String getFrom()
    {
-      return getParams().get("From");
+      return get("From");
    }
 
    public SimpleCaller setFrom(String from)
    {
-      getParams().put("From", from);
+      add("From", from);
       return this;
    }
 
    public String getTo()
    {
-      return getParams().get("To");
+      return get("To");
    }
 
    public SimpleCaller setTo(String to)
    {
-      getParams().put("To", to);
+      add("To", to);
       return this;
    }
 
@@ -133,12 +138,12 @@ public class SimpleCaller
 
    public String getEndpoint()
    {
-      return getParams().get("Endpoint");
+      return get("Endpoint");
    }
 
    public SimpleCaller setEndpoint(String endpoint)
    {
-      getParams().put("Endpoint", endpoint);
+      add("Endpoint", endpoint);
       return this;
    }
 
@@ -172,7 +177,7 @@ public class SimpleCaller
 
    public SimpleCaller param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 
 }

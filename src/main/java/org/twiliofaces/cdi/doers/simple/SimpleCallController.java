@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.instance.Call;
-import com.twilio.sdk.resource.list.CallList;
 
 public class SimpleCallController
 {
@@ -14,12 +14,7 @@ public class SimpleCallController
    private String accountSid;
    private String authToken;
 
-   private String url;
-   private String method;
-   private String status;
-   private String fallbackUrl;
-   private String fallbackMethod;
-   private String statusCallback;
+   private String callSid;
    private String statusCallbackMethod;
 
    /*
@@ -38,27 +33,18 @@ public class SimpleCallController
       this.accountSid = accountSid;
    }
 
-   public CallList report()
+   public void update()
    {
       TwilioRestClient client = new TwilioRestClient(getAccountSid(), getAuthToken());
-      return client.getAccount().getCalls(getParams());
-   }
-
-   public Call report(String sid)
-   {
-      TwilioRestClient client = new TwilioRestClient(getAccountSid(), getAuthToken());
-      return client.getAccount().getCall(sid);
-   }
-
-   public String getStatus()
-   {
-      return status;
-   }
-
-   public SimpleCallController setStatus(String status)
-   {
-      getParams().put("Status", status);
-      return this;
+      Call call = client.getAccount().getCall(getCallSid());
+      try
+      {
+         call.update(getParams());
+      }
+      catch (TwilioRestException e)
+      {
+         e.printStackTrace();
+      }
    }
 
    public Map<String, String> getParams()
@@ -74,10 +60,15 @@ public class SimpleCallController
       return this;
    }
 
-   public SimpleCallController addParam(String key, String value)
+   public SimpleCallController add(String key, String value)
    {
       getParams().put(key, value);
       return this;
+   }
+
+   public String get(String key)
+   {
+      return getParams().get(key);
    }
 
    public String getAccountSid()
@@ -102,69 +93,80 @@ public class SimpleCallController
       return this;
    }
 
+   public String getStatus()
+   {
+      return get("Status");
+   }
+
+   public SimpleCallController setStatus(String status)
+   {
+      add("Status", status);
+      return this;
+   }
+
    public String getUrl()
    {
-      return url;
+      return get("Url");
    }
 
    public SimpleCallController setUrl(String url)
    {
-      addParam("Url", url);
+      add("Url", url);
       return this;
    }
 
    public String getMethod()
    {
-      return method;
+      return get("Method");
    }
 
    public SimpleCallController setMethod(String method)
    {
-      addParam("Method", method);
+      add("Method", method);
       return this;
    }
 
    public String getFallbackUrl()
    {
-      return fallbackUrl;
+      return get("FallbackUrl");
    }
 
    public SimpleCallController setFallbackUrl(String fallbackUrl)
    {
-      addParam("FallbackUrl", fallbackUrl);
+      add("FallbackUrl", fallbackUrl);
       return this;
    }
 
    public String getFallbackMethod()
    {
-      return fallbackMethod;
+      return get("FallbackMethod");
    }
 
    public SimpleCallController setFallbackMethod(String fallbackMethod)
    {
-      addParam("FallbackMethod", fallbackMethod);
+      add("FallbackMethod", fallbackMethod);
       return this;
    }
 
    public String getStatusCallbackMethod()
    {
-      return statusCallbackMethod;
+      return get("StatusCallbackMethod");
    }
 
    public SimpleCallController setStatusCallbackMethod(String statusCallbackMethod)
    {
-      addParam("StatusCallbackMethod", statusCallbackMethod);
+      add("StatusCallbackMethod", statusCallbackMethod);
       return this;
    }
 
    public String getStatusCallback()
    {
-      return statusCallback;
+      return get("StatusCallback");
    }
 
    public SimpleCallController setStatusCallback(String statusCallback)
    {
-      addParam("StatusCallback", statusCallback);
+      add("StatusCallback", statusCallback);
       return this;
    }
 
@@ -184,7 +186,7 @@ public class SimpleCallController
 
    public SimpleCallController param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 
    public SimpleCallController status(String status)
@@ -237,6 +239,16 @@ public class SimpleCallController
    {
       setStatusCallbackMethod(statusCallbackMethod);
       return this;
+   }
+
+   public String getCallSid()
+   {
+      return callSid;
+   }
+
+   public void setCallSid(String callSid)
+   {
+      this.callSid = callSid;
    }
 
 }

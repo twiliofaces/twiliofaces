@@ -45,12 +45,12 @@ public class SimpleMsgReporter
 
    public String getStatus()
    {
-      return getParams().get("Status");
+      return get("Status");
    }
 
    public SimpleMsgReporter setStatus(String status)
    {
-      getParams().put("Status", status);
+      add("Status", status);
       return this;
    }
 
@@ -58,7 +58,7 @@ public class SimpleMsgReporter
    {
       try
       {
-         return format.parse(getParams().get("DateSent"));
+         return format.parse(get("DateSent"));
       }
       catch (ParseException e)
       {
@@ -69,7 +69,7 @@ public class SimpleMsgReporter
 
    public SimpleMsgReporter setDateSent(Date dateSent)
    {
-      getParams().put("DateSent", format.format(dateSent));
+      add("DateSent", format.format(dateSent));
       return this;
    }
 
@@ -77,7 +77,7 @@ public class SimpleMsgReporter
    {
       try
       {
-         return format.parse(getParams().get("DateSent>"));
+         return format.parse(get("DateSent>"));
       }
       catch (ParseException e)
       {
@@ -88,7 +88,7 @@ public class SimpleMsgReporter
 
    public SimpleMsgReporter setFromDateSent(Date fromDateSent)
    {
-      getParams().put("DateSent>", format.format(fromDateSent));
+      add("DateSent>", format.format(fromDateSent));
       return this;
    }
 
@@ -96,7 +96,7 @@ public class SimpleMsgReporter
    {
       try
       {
-         return format.parse(getParams().get("DateSent<"));
+         return format.parse(get("DateSent<"));
       }
       catch (ParseException e)
       {
@@ -107,7 +107,7 @@ public class SimpleMsgReporter
 
    public SimpleMsgReporter setToDateSent(Date toDateSent)
    {
-      getParams().put("DateSent<", format.format(toDateSent));
+      add("DateSent<", format.format(toDateSent));
       return this;
    }
 
@@ -124,31 +124,36 @@ public class SimpleMsgReporter
       return this;
    }
 
-   public SimpleMsgReporter addParam(String key, String value)
+   public SimpleMsgReporter add(String key, String value)
    {
       getParams().put(key, value);
       return this;
    }
 
+   public String get(String key)
+   {
+      return get(key);
+   }
+
    public String getFrom()
    {
-      return getParams().get("From");
+      return get("From");
    }
 
    public SimpleMsgReporter setFrom(String from)
    {
-      getParams().put("From", from);
+      add("From", from);
       return this;
    }
 
    public String getTo()
    {
-      return getParams().get("To");
+      return get("To");
    }
 
    public SimpleMsgReporter setTo(String to)
    {
-      getParams().put("To", to);
+      add("To", to);
       return this;
    }
 
@@ -199,7 +204,7 @@ public class SimpleMsgReporter
 
    public SimpleMsgReporter param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 
    public SimpleMsgReporter status(String status)

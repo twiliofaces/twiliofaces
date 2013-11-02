@@ -67,12 +67,12 @@ public class SimpleRecordingReporter
 
    public String getLog()
    {
-      return getParams().get("Log");
+      return get("Log");
    }
 
    public SimpleRecordingReporter setLog(String log)
    {
-      getParams().put("Log", log);
+      add("Log", log);
       return this;
    }
 
@@ -80,7 +80,7 @@ public class SimpleRecordingReporter
    {
       try
       {
-         return format.parse(getParams().get("DateCreated"));
+         return format.parse(get("DateCreated"));
       }
       catch (ParseException e)
       {
@@ -91,7 +91,7 @@ public class SimpleRecordingReporter
 
    public SimpleRecordingReporter setDateCreated(Date dateCreated)
    {
-      getParams().put("DateCreated", format.format(dateCreated));
+      add("DateCreated", format.format(dateCreated));
       return this;
    }
 
@@ -99,7 +99,7 @@ public class SimpleRecordingReporter
    {
       try
       {
-         return format.parse(getParams().get("DateCreated>"));
+         return format.parse(get("DateCreated>"));
       }
       catch (ParseException e)
       {
@@ -110,7 +110,7 @@ public class SimpleRecordingReporter
 
    public SimpleRecordingReporter setFromDateCreated(Date fromDateCreated)
    {
-      getParams().put("DateCreated>", format.format(fromDateCreated));
+      add("DateCreated>", format.format(fromDateCreated));
       return this;
    }
 
@@ -118,7 +118,7 @@ public class SimpleRecordingReporter
    {
       try
       {
-         return format.parse(getParams().get("DateCreated<"));
+         return format.parse(get("DateCreated<"));
       }
       catch (ParseException e)
       {
@@ -129,7 +129,7 @@ public class SimpleRecordingReporter
 
    public SimpleRecordingReporter setToDateCreated(Date toDateCreated)
    {
-      getParams().put("DateCreated<", format.format(toDateCreated));
+      add("DateCreated<", format.format(toDateCreated));
       return this;
    }
 
@@ -146,10 +146,15 @@ public class SimpleRecordingReporter
       return this;
    }
 
-   public SimpleRecordingReporter addParam(String key, String value)
+   public SimpleRecordingReporter add(String key, String value)
    {
       getParams().put(key, value);
       return this;
+   }
+
+   public String get(String key)
+   {
+      return get(key);
    }
 
    // FAST METHODS
@@ -165,6 +170,6 @@ public class SimpleRecordingReporter
 
    public SimpleRecordingReporter param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 }

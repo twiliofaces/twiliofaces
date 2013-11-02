@@ -38,12 +38,12 @@ public class SimpleUsageReporter
 
    public String getCategory()
    {
-      return getParams().get("Category");
+      return get("Category");
    }
 
    public SimpleUsageReporter setCategory(String category)
    {
-      getParams().put("Category", category);
+      add("Category", category);
       return this;
    }
 
@@ -51,7 +51,7 @@ public class SimpleUsageReporter
    {
       try
       {
-         return format.parse(getParams().get("StartDate"));
+         return format.parse(get("StartDate"));
       }
       catch (ParseException e)
       {
@@ -62,7 +62,7 @@ public class SimpleUsageReporter
 
    public SimpleUsageReporter setStartDate(Date startDate)
    {
-      getParams().put("StartDate", format.format(startDate));
+      add("StartDate", format.format(startDate));
       return this;
    }
 
@@ -70,7 +70,7 @@ public class SimpleUsageReporter
    {
       try
       {
-         return format.parse(getParams().get("EndDate"));
+         return format.parse(get("EndDate"));
       }
       catch (ParseException e)
       {
@@ -81,7 +81,7 @@ public class SimpleUsageReporter
 
    public SimpleUsageReporter setEndDate(Date endDate)
    {
-      getParams().put("EndDate", format.format(endDate));
+      add("EndDate", format.format(endDate));
       return this;
    }
 
@@ -98,10 +98,15 @@ public class SimpleUsageReporter
       return this;
    }
 
-   public SimpleUsageReporter addParam(String key, String value)
+   public SimpleUsageReporter add(String key, String value)
    {
       getParams().put(key, value);
       return this;
+   }
+
+   public String get(String key)
+   {
+      return get(key);
    }
 
    public String getAccountSid()
@@ -141,7 +146,7 @@ public class SimpleUsageReporter
 
    public SimpleUsageReporter param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 
    public SimpleUsageReporter category(String category)

@@ -73,10 +73,15 @@ public class SimpleTranscriptionReporter
       return this;
    }
 
-   public SimpleTranscriptionReporter addParam(String key, String value)
+   public SimpleTranscriptionReporter add(String key, String value)
    {
       getParams().put(key, value);
       return this;
+   }
+   
+   public String get(String key)
+   {
+      return get(key);
    }
 
    // FAST METHODS
@@ -92,6 +97,6 @@ public class SimpleTranscriptionReporter
 
    public SimpleTranscriptionReporter param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 }

@@ -84,7 +84,7 @@ public class SimpleSender
       List<Sms> results = new ArrayList<Sms>();
       for (String recipient : getRecipients())
       {
-         getParams().put("To", recipient);
+         add("To", recipient);
          Sms sms = send(getAccountSid(), getAuthToken(), params);
          results.add(sms);
       }
@@ -105,31 +105,36 @@ public class SimpleSender
       return this;
    }
 
-   public SimpleSender addSmsParam(String key, String value)
+   public SimpleSender add(String key, String value)
    {
       getParams().put(key, value);
       return this;
    }
 
+   public String get(String key)
+   {
+      return get(key);
+   }
+
    public String getFrom()
    {
-      return getParams().get("From");
+      return get("From");
    }
 
    public SimpleSender setFrom(String from)
    {
-      getParams().put("From", from);
+      add("From", from);
       return this;
    }
 
    public String getTo()
    {
-      return getParams().get("To");
+      return get("To");
    }
 
    public SimpleSender setTo(String to)
    {
-      getParams().put("To", to);
+      add("To", to);
       return this;
    }
 
@@ -157,12 +162,12 @@ public class SimpleSender
 
    public String getBody()
    {
-      return getParams().get("Body");
+      return get("Body");
    }
 
    public SimpleSender setBody(String body)
    {
-      getParams().put("Body", body);
+      add("Body", body);
       return this;
    }
 
@@ -187,12 +192,12 @@ public class SimpleSender
 
    public String getMediaUrl()
    {
-      return getParams().get("MediaUrl");
+      return get("MediaUrl");
    }
 
    public SimpleSender setMediaUrl(String mediaUrl)
    {
-      getParams().put("MediaUrl", mediaUrl);
+      add("MediaUrl", mediaUrl);
       return this;
    }
 

@@ -23,7 +23,6 @@ public class SimpleTriggerator
 
    public SimpleTriggerator()
    {
-      // TODO Auto-generated constructor stub
    }
 
    public SimpleTriggerator(String accountSid, String authToken)
@@ -61,78 +60,78 @@ public class SimpleTriggerator
 
    public String getUsageCategory()
    {
-      return getParams().get("UsageCategory");
+      return get("UsageCategory");
    }
 
    public SimpleTriggerator setUsageCategory(String usageCategory)
    {
-      getParams().put("UsageCategory", usageCategory);
+      add("UsageCategory", usageCategory);
       return this;
    }
 
    public String getTriggerValue()
    {
-      return getParams().get("TriggerValue");
+      return get("TriggerValue");
    }
 
    public SimpleTriggerator setTriggerValue(String triggerValue)
    {
-      getParams().put("TriggerValue", triggerValue);
+      add("TriggerValue", triggerValue);
       return this;
    }
 
    public String getCallbackUrl()
    {
-      return getParams().get("CallbackUrl");
+      return get("CallbackUrl");
    }
 
    public SimpleTriggerator setCallbackUrl(String callbackUrl)
    {
-      getParams().put("CallbackUrl", callbackUrl);
+      add("CallbackUrl", callbackUrl);
       return this;
    }
 
    public String getFriendlyName()
    {
-      return getParams().get("FriendlyName");
+      return get("FriendlyName");
    }
 
    public SimpleTriggerator setFriendlyName(String friendlyName)
    {
-      getParams().put("FriendlyName", friendlyName);
+      add("FriendlyName", friendlyName);
       return this;
    }
 
    public String getRecurring()
    {
-      return getParams().get("Recurring");
+      return get("Recurring");
    }
 
    public SimpleTriggerator setRecurring(String recurring)
    {
-      getParams().put("Recurring", recurring);
+      add("Recurring", recurring);
       return this;
    }
 
    public String getTriggerBy()
    {
-      return getParams().get("TriggerBy");
+      return get("TriggerBy");
    }
 
    public SimpleTriggerator setTriggerBy(String triggerBy)
    {
-      getParams().put("TriggerBy", triggerBy);
+      add("TriggerBy", triggerBy);
       return this;
    }
 
    public String getCallbackMethod()
    {
-      return getParams().get("CallbackMethod");
+      return get("CallbackMethod");
    }
 
    public SimpleTriggerator setCallbackMethod(String callbackMethod)
    {
-      getParams().put("CallbackMethod", callbackMethod);
+      add("CallbackMethod", callbackMethod);
       return this;
    }
 
@@ -149,10 +148,15 @@ public class SimpleTriggerator
       return this;
    }
 
-   public SimpleTriggerator addParam(String key, String value)
+   public SimpleTriggerator add(String key, String value)
    {
       getParams().put(key, value);
       return this;
+   }
+
+   public String get(String key)
+   {
+      return get(key);
    }
 
    public String getAccountSid()
@@ -192,7 +196,7 @@ public class SimpleTriggerator
 
    public SimpleTriggerator param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 
    public SimpleTriggerator usageCategory(String category)

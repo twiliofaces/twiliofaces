@@ -67,7 +67,7 @@ public class SimpleNotificationReporter
 
    public String getLog()
    {
-      return getParams().get("Log");
+      return get("Log");
    }
 
    public SimpleNotificationReporter setLog(String log)
@@ -80,7 +80,7 @@ public class SimpleNotificationReporter
    {
       try
       {
-         return format.parse(getParams().get("MessageDate"));
+         return format.parse(get("MessageDate"));
       }
       catch (ParseException e)
       {
@@ -99,7 +99,7 @@ public class SimpleNotificationReporter
    {
       try
       {
-         return format.parse(getParams().get("MessageDate>"));
+         return format.parse(get("MessageDate>"));
       }
       catch (ParseException e)
       {
@@ -118,7 +118,7 @@ public class SimpleNotificationReporter
    {
       try
       {
-         return format.parse(getParams().get("MessageDate<"));
+         return format.parse(get("MessageDate<"));
       }
       catch (ParseException e)
       {
@@ -146,10 +146,15 @@ public class SimpleNotificationReporter
       return this;
    }
 
-   public SimpleNotificationReporter addParam(String key, String value)
+   public SimpleNotificationReporter add(String key, String value)
    {
       getParams().put(key, value);
       return this;
+   }
+
+   public String get(String key)
+   {
+      return get(key);
    }
 
    // FAST METHODS
@@ -165,7 +170,7 @@ public class SimpleNotificationReporter
 
    public SimpleNotificationReporter param(String key, String value)
    {
-      return addParam(key, value);
+      return add(key, value);
    }
 
 }
