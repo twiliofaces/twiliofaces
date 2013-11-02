@@ -13,9 +13,7 @@ public class SimpleCallController
    Logger logger = Logger.getLogger(getClass().getName());
    private String accountSid;
    private String authToken;
-
    private String callSid;
-   private String statusCallbackMethod;
 
    /*
     * Url Method Status FallbackUrl FallbackMethod StatusCallback StatusCallbackMethod
@@ -242,7 +240,7 @@ public class SimpleCallController
 
    public SimpleCallController statusCallback(String statusCallback)
    {
-      setStatusCallback(statusCallbackMethod);
+      setStatusCallback(statusCallback);
       return this;
    }
 
