@@ -33,17 +33,19 @@ public class SimpleCallController
       this.accountSid = accountSid;
    }
 
-   public void update()
+   public boolean update()
    {
       TwilioRestClient client = new TwilioRestClient(getAccountSid(), getAuthToken());
       Call call = client.getAccount().getCall(getCallSid());
       try
       {
          call.update(getParams());
+         return true;
       }
       catch (TwilioRestException e)
       {
          e.printStackTrace();
+         return false;
       }
    }
 
@@ -206,20 +208,24 @@ public class SimpleCallController
       return this;
    }
 
-   public SimpleCallController canceled()
+   public boolean canceled()
    {
-      return setStatus("canceled");
+      return setStatus("canceled").update();
    }
 
-   public SimpleCallController completed()
+   public boolean completed()
    {
-      return setStatus("completed");
+      return setStatus("completed").update();
    }
 
-   public SimpleCallController fallback(String fallbackUrl, String fallbackMethod)
+   public boolean fallback(String fallbackUrl, String fallbackMethod)
    {
-      setFallbackMethod(fallbackMethod).setFallbackUrl(fallbackUrl);
-      return this;
+      return setFallbackMethod(fallbackMethod).setFallbackUrl(fallbackUrl).update();
+   }
+
+   public boolean statusCallback(String statusCallback, String statusCallbackMethod)
+   {
+      return setStatusCallback(statusCallbackMethod).setStatusCallbackMethod(statusCallbackMethod).update();
    }
 
    public SimpleCallController fallbackUrl(String fallbackUrl)
@@ -231,12 +237,6 @@ public class SimpleCallController
    public SimpleCallController fallbackMethod(String fallbackMethod)
    {
       setFallbackMethod(fallbackMethod);
-      return this;
-   }
-
-   public SimpleCallController statusCallback(String statusCallback, String statusCallbackMethod)
-   {
-      setStatusCallback(statusCallbackMethod).setStatusCallbackMethod(statusCallbackMethod);
       return this;
    }
 
