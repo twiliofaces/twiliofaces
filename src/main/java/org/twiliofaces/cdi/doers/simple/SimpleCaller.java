@@ -136,14 +136,14 @@ public class SimpleCaller
       return this;
    }
 
-   public String getEndpoint()
+   public String getUrl()
    {
-      return get("Endpoint");
+      return get("Url");
    }
 
-   public SimpleCaller setEndpoint(String endpoint)
+   public SimpleCaller setUrl(String url)
    {
-      add("Endpoint", endpoint);
+      add("Url", url);
       return this;
    }
 
@@ -170,9 +170,9 @@ public class SimpleCaller
       return setAuthToken(authToken);
    }
 
-   public SimpleCaller endpoint(String endpoint)
+   public SimpleCaller url(String url)
    {
-      return setEndpoint(endpoint);
+      return setUrl(url);
    }
 
    public SimpleCaller param(String key, String value)
