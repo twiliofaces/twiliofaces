@@ -30,7 +30,7 @@ import org.twiliofaces.cdi.extension.util.KeyValue;
 public class TwilioConfigExtension
          implements Extension
 {
-   static String TWILIO_PROPERTIS_FILE = "accounts.properties";
+   static String TWILIO_PROPERTIES_FILE = "accounts.properties";
    static String TWILIO_ACCOUNT_KEY = "twilio.accounts";
    Logger logger = Logger.getLogger(getClass().getName());
 
@@ -38,7 +38,7 @@ public class TwilioConfigExtension
    {
       {
          logger.info("TwilioConfigExtension starting up");
-         InputStream stream = this.getClass().getClassLoader().getResourceAsStream(TWILIO_PROPERTIS_FILE);
+         InputStream stream = this.getClass().getClassLoader().getResourceAsStream(TWILIO_PROPERTIES_FILE);
          Map<String, Account> twilioAccounts = new HashMap<String, Account>();
          Properties props = new Properties();
          if (stream != null)

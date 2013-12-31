@@ -38,10 +38,10 @@ public class SimpleCaller
    }
 
    public String simpleCall(String from, String to, String accountSid,
-            String authToken, String endpoint) throws TwilioRestException
+            String authToken, String url) throws TwilioRestException
    {
       from(from).to(to).authToken(authToken)
-               .accountSid(accountSid);
+               .accountSid(accountSid).url(url);
       return call();
    }
 
